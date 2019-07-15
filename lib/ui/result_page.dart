@@ -3,17 +3,19 @@ import 'package:flutter/material.dart';
 
 class ResultPage extends StatefulWidget {
   final double etc;
+  final String stage;
 
-  ResultPage({this.etc});
+  ResultPage({this.etc, this.stage});
 
   @override
-  _ResultPageState createState() => _ResultPageState(etc2: etc);
+  _ResultPageState createState() => _ResultPageState(etc2: etc, stage: stage);
 }
 
 class _ResultPageState extends State<ResultPage> {
   double etc2;
+  String stage;
 
-  _ResultPageState({this.etc2});
+  _ResultPageState({this.etc2, this.stage});
 
   DataStuff ds = DataStuff();
 
@@ -23,6 +25,7 @@ class _ResultPageState extends State<ResultPage> {
     double eem = (ds.city.elementAt(0)["\"irrig\""]["\"Eem\""]) / 100;
     double el = (ds.city.elementAt(0)["\"irrig\""]["\"El\""]) / 100;
     double ep = (ds.city.elementAt(0)["\"cult\""]["\"Ep\""]) / 100;
+    String cult = ds.getCultName(ds.city.elementAt(0)["\"cult\""]["\"cultId\""]);
 
     int min = timeIrrig(etc2, el, ep, eem, q);
     String duration = formatTime(min);
@@ -63,6 +66,9 @@ class _ResultPageState extends State<ResultPage> {
             ),
             OutlineButton(
               onPressed: () {
+                Map entry = entryHistory(DateTime.now().toString(), cult, stage, min);
+                ds.history.add(entry);
+                ds.saveData(isHistory: true, listHistory: ds.history);
                 Navigator.popUntil(context, ModalRoute.withName("/"));
               },
               child: Text("Voltar à página inicial", style: TextStyle(color: Colors.white),),
@@ -109,5 +115,17 @@ class _ResultPageState extends State<ResultPage> {
     }
     return null;
   }
+
+  Map entryHistory(String data, String cult, String stage, int mins) {
+    Map<String, dynamic> mp2 = Map();
+
+    mp2["\"tmStamp\""] = data;
+    mp2["\"cult\""] = cult;
+    mp2["\"stage\""] = stage;
+    mp2["\"mins\""] = mins;
+
+    return mp2;
+  }
+
 }
 

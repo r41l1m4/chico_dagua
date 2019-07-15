@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/ui/eto_page.dart';
+import 'package:chico_dagua/ui/history_page.dart';
 import 'package:chico_dagua/ui/work_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -16,6 +17,7 @@ class _HomePageState extends State<HomePage> {
 
   static final DataStuff  ds = DataStuff();
 
+  static List hist = [];
   static List city = [];
   static int actCityId = 0;
 
@@ -48,6 +50,16 @@ class _HomePageState extends State<HomePage> {
         }
       });
 
+    });
+
+    ds.readData(isHistory: true).then((data) {
+      if(data.isEmpty) {
+        print("Tá vazio!");
+      }else {
+        print("Não tá vazio!");
+        hist = json.decode(data);
+        ds.initHist(hist);
+      }
     });
 
   }
@@ -133,6 +145,20 @@ class _HomePageState extends State<HomePage> {
               });
             },
           ),
+          ListTile(
+            title: Text("Histórico", style: TextStyle(
+              color: Colors.white,
+            ),),
+            onTap: () {
+              return Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                      new HistoryPage()
+                  )
+              );
+            },
+          ),
           Divider(
             color: Colors.white70,
             height: 2.0,
@@ -145,12 +171,14 @@ class _HomePageState extends State<HomePage> {
               showAboutDialog(
                 context: context,
                 applicationName: "Chico d'Água",
-                applicationVersion: "v1.0",
+                applicationVersion: "v1.1",
                 applicationIcon: Image.asset("imgs/cda.png", height: 55.0, width: 55.0,),
                 children: <Widget>[
                   Text("Este app é parte resultante do projeto de extensão \"Chico d'Água\" "
                       "desenvolvido na Universidade Federal de Alagoas (UFAL) - "
-                      "Campus Arapiraca."),
+                      "Campus Arapiraca.",
+                    textAlign: TextAlign.justify,
+                  ),
                 ],
               );
             },

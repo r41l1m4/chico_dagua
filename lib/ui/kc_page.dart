@@ -207,7 +207,7 @@ class _KcPageState extends State<KcPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                new ResultPage(etc: etc)
+                                new ResultPage(etc: etc, stage: dropdownValue == null ? "Kc Manual" : dropdownValue,)
                             )
                         );
                       }

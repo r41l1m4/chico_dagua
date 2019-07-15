@@ -127,9 +127,21 @@ class DataStuff {
   ];
 
   List city = [];
+  List history = [];
+  bool hasHistory = false;
 
   void init(List list) {
     city = list;
+  }
+
+  void initHist(List list) {
+    history = list;
+    hasHistory = true;
+  }
+
+  void clearHistory() {
+    history.clear();
+    saveData(isHistory: true, listHistory: history);
   }
 
   int getCityId(String city) {
@@ -189,13 +201,30 @@ class DataStuff {
     return _stages[stageName];
   }
 
+  String getStageName(int id) {
+    return _stages.keys.elementAt(id);
+  }
+
   //JSON manipulation
-  Future<File> getFile() async {
+  Future<File> getFile({bool isHistory}) async {
     final directory = await getApplicationDocumentsDirectory();
     try {
+      if(isHistory != null && isHistory) {
+        print("history - GF");
+        return File("${directory.path}/chicoHistory.json").create(recursive: true);
+      }
       return File("${directory.path}/chicoData.json").create(recursive: true);
     }on FileSystemException {
-      File file = File("${directory.path}/chicoData.json");
+      File file;
+      if(isHistory != null && isHistory) {
+        file = File("${directory.path}/chicoHistory.json");
+        file.create(recursive: true).then((File fl) {
+          file = fl;
+        });
+        file.open(mode: FileMode.write);
+        return file;
+      }
+      file = File("${directory.path}/chicoData.json");
       file.create(recursive: true).then((File fl) {
         file = fl;
       });
@@ -256,15 +285,28 @@ class DataStuff {
     return mapRoot;
   }
 
-  Future<File> saveData() async {
+  Future<File> saveData({bool isHistory, List listHistory}) async {
+    if(isHistory != null && isHistory) {
+      print("saveData $listHistory");
+      String data = json.encode(listHistory);
+      hasHistory = true;
+      final file = await getFile(isHistory: true);
+      return file.writeAsString(data);
+    }
     print("saveData $city");
     String data = json.encode(city);
     final file = await getFile();
     return file.writeAsString(data);
+
   }
 
-  Future<String> readData() async {
+  Future<String> readData({bool isHistory}) async {
     try {
+      if(isHistory != null && isHistory) {
+        print("history - RD");
+        final file = await getFile(isHistory: true);
+        return file.readAsString();
+      }
       final file = await getFile();
       return file.readAsString();
     } catch (e) {
