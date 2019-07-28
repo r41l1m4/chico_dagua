@@ -49,7 +49,6 @@ class _WorkPageState extends State<WorkPage> {
           ),
           OutlineButton(
             onPressed: () {
-              //Navigator.pushNamed(context, "calcETo");
               Navigator.push(context,
                 PageRouteBuilder(
                   pageBuilder: (context, animation, secondAnimation) => EToPage(),

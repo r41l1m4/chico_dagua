@@ -148,13 +148,6 @@ class _EToPageState extends State<EToPage> {
                               double.parse(tMaxController.text),
                               double.parse(tMinController.text)
                           );
-//                          return Navigator.push(
-//                              context,
-//                              MaterialPageRoute(
-//                                  builder: (BuildContext context) =>
-//                                  new KcPage(eto: et0)
-//                              )
-//                          );
                           return Navigator.pushReplacement(
                               this.context,
                               PageRouteBuilder(

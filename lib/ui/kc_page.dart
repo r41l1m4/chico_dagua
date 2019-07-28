@@ -202,13 +202,6 @@ class _KcPageState extends State<KcPage> {
                             : ds.getCultKc(
                                 cultId, ds.getStageId(dropdownValue));
                         double etc = getETc(evtrs, kc);
-//                        return Navigator.push(
-//                            context,
-//                            MaterialPageRoute(
-//                                builder: (BuildContext context) =>
-//                                new ResultPage(etc: etc, stage: dropdownValue == null ? "Kc Manual" : dropdownValue,)
-//                            )
-//                        );
                         return Navigator.pushReplacement(
                           context,
                             PageRouteBuilder(
