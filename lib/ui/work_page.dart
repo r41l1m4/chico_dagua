@@ -1,3 +1,4 @@
+import 'package:chico_dagua/ui/eto_page.dart';
 import 'package:flutter/material.dart';
 
 class WorkPage extends StatefulWidget {
@@ -48,7 +49,23 @@ class _WorkPageState extends State<WorkPage> {
           ),
           OutlineButton(
             onPressed: () {
-              Navigator.pushNamed(context, "calcETo");
+              //Navigator.pushNamed(context, "calcETo");
+              Navigator.push(context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondAnimation) => EToPage(),
+                  transitionDuration: Duration(milliseconds: 400),
+                  transitionsBuilder: (context, animation, secondAnimation, child) {
+                    var begin = Offset(1.0, 0.0);
+                    var end = Offset.zero;
+                    var tween = Tween(begin: begin, end: end);
+                    var offsetAnimation = animation.drive(tween);
+
+                    return SlideTransition(
+                      position: offsetAnimation,
+                      child: child,
+                    );
+                  },
+                ));
             },
             child: Text("Vamos lá!"),
             shape: StadiumBorder(),

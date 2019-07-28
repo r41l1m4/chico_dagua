@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -54,8 +52,11 @@ class _HistoryPageState extends State<HistoryPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 130.0),
+          padding: EdgeInsets.symmetric(horizontal: 110.0),
           child:  Text("Nada aqui ainda. :(",
+            style: TextStyle(fontFamily: "Comfortaa",
+              fontSize: 20.0,
+            ),
             textAlign: TextAlign.center,
           ),
         ),

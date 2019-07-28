@@ -78,7 +78,7 @@ class _EToPageState extends State<EToPage> {
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 25.0),
                       child: Text(
-                        "Inicialmente, precisamos das temperaturas.",
+                        "Inicialmente, precisamos das temperaturas do dia anterior.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20.0,
@@ -140,6 +140,7 @@ class _EToPageState extends State<EToPage> {
                       ),
                     ),
                     OutlineButton(
+                      // ignore: missing_return
                       onPressed: () {
                         if(_formKey.currentState.validate()) {
                           double et0 = resETo(
@@ -147,15 +148,32 @@ class _EToPageState extends State<EToPage> {
                               double.parse(tMaxController.text),
                               double.parse(tMinController.text)
                           );
-                          return Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                  new KcPage(eto: et0)
+//                          return Navigator.push(
+//                              context,
+//                              MaterialPageRoute(
+//                                  builder: (BuildContext context) =>
+//                                  new KcPage(eto: et0)
+//                              )
+//                          );
+                          return Navigator.pushReplacement(
+                              this.context,
+                              PageRouteBuilder(
+                                pageBuilder: (context, animation, secondAnimation) => KcPage(eto: et0),
+                                transitionDuration: Duration(milliseconds: 400),
+                                transitionsBuilder: (context, animation, secondAnimation, child) {
+                                  var begin = Offset(1.0, 0.0);
+                                  var end = Offset.zero;
+                                  var tween = Tween(begin: begin, end: end);
+                                  var offsetAnimation = animation.drive(tween);
+
+                                  return SlideTransition(
+                                    position: offsetAnimation,
+                                    child: child,
+                                  );
+                                },
                               )
                           );
                         }
-                        return null;
                       },
                       child: Text("Próximo"),
                       splashColor: Colors.white,

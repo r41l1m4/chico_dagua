@@ -41,7 +41,8 @@ class DataStuff {
     [0.002981, 0.617031, -3.168],
     [0.002659, 0.638314, -1.356],
     [0.003992, 0.588707, -7.339],
-    [0.003263, 0.585528, -0.435]
+    [0.003263, 0.585528, -0.435],
+    [0.0023, 0.5, 17.8] //valores padrão
   ];
 
   var _irdSolarMes = [
@@ -141,7 +142,7 @@ class DataStuff {
 
   void clearHistory() {
     history.clear();
-    saveData(isHistory: true, listHistory: history);
+    saveData(isHistory: true, listHistory: history, isReset: true);
   }
 
   int getCityId(String city) {
@@ -285,11 +286,17 @@ class DataStuff {
     return mapRoot;
   }
 
-  Future<File> saveData({bool isHistory, List listHistory}) async {
+  Future<File> saveData({bool isHistory, List listHistory, bool isReset}) async {
     if(isHistory != null && isHistory) {
       print("saveData $listHistory");
       String data = json.encode(listHistory);
-      hasHistory = true;
+
+      if(isReset != null && isReset) {
+        hasHistory = false;
+      }else {
+        hasHistory = true;
+      }
+
       final file = await getFile(isHistory: true);
       return file.writeAsString(data);
     }

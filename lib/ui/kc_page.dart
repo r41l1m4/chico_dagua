@@ -4,8 +4,8 @@ import 'package:chico_dagua/ui/result_page.dart';
 import 'package:flutter/material.dart';
 
 class KcPage extends StatefulWidget {
-
   final double eto;
+
   KcPage({this.eto});
 
   double getETo() {
@@ -22,6 +22,7 @@ class _KcPageState extends State<KcPage> {
   static String dropdownValue;
 
   double evtrs;
+
   _KcPageState({this.evtrs});
 
   static List city = [];
@@ -30,7 +31,6 @@ class _KcPageState extends State<KcPage> {
   TextEditingController kcController = TextEditingController();
 
   bool manualKc = false;
-
 
   @override
   void initState() {
@@ -84,7 +84,8 @@ class _KcPageState extends State<KcPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 25.0),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 30.0, horizontal: 25.0),
                     child: Text(
                       "Agora, selecione a fase em que se encontra a sua cultura.",
                       textAlign: TextAlign.center,
@@ -137,12 +138,13 @@ class _KcPageState extends State<KcPage> {
                     opacity: manualKc ? 1.0 : 0.0,
                     duration: Duration(milliseconds: 500),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 100.0, vertical: 20.0),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 100.0, vertical: 20.0),
                       child: TextFormField(
                         controller: kcController,
                         enabled: manualKc,
                         validator: (value) {
-                          if(value.isEmpty) {
+                          if (value.isEmpty) {
                             return "Campo obrigatório!";
                           }
                           return null;
@@ -163,63 +165,82 @@ class _KcPageState extends State<KcPage> {
                   ),
                   OutlineButton(
                     onPressed: () {
-                      if((dropdownValue == null && !manualKc) ||
+                      if ((dropdownValue == null && !manualKc) ||
                           (manualKc && kcController.text.isEmpty)) {
                         return showDialog(
-                          context: context,
-                          builder: (BuildContext context){
-                            return AlertDialog(
-                              backgroundColor: Colors.lightBlueAccent[400],
-                              title: Text("Erro!"),
-                              content: Text("Todos os campos são obrigatórios.",
-                                style: TextStyle(
-                                    color: Colors.white
-                                ),
-                              ),
-                            );
-                        }
-                        );
-                      }else if((manualKc && kcController.text.contains(","))) {
-                        return showDialog(
                             context: context,
-                            builder: (BuildContext context){
+                            builder: (BuildContext context) {
                               return AlertDialog(
                                 backgroundColor: Colors.lightBlueAccent[400],
                                 title: Text("Erro!"),
-                                content: Text("Decimais devem ser separados por \"ponto\".",
-                                  style: TextStyle(
-                                      color: Colors.white
-                                  ),
+                                content: Text(
+                                  "Todos os campos são obrigatórios.",
+                                  style: TextStyle(color: Colors.white),
                                 ),
                               );
-                            }
-                        );
-                      }else {
-                        int cultId = ds.city.elementAt(0)["\"cult\""]["\"cultId\""];
-                        String cult = ds.getCultName(cultId);
-                        double kc = manualKc ? double.parse(kcController.text) :
-                        ds.getCultKc(
-                            cultId,
-                            ds.getStageId(dropdownValue)
-                        );
+                            });
+                      } else if ((manualKc &&
+                          kcController.text.contains(","))) {
+                        return showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: Colors.lightBlueAccent[400],
+                                title: Text("Erro!"),
+                                content: Text(
+                                  "Decimais devem ser separados por \"ponto\".",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              );
+                            });
+                      } else {
+                        int cultId =
+                            ds.city.elementAt(0)["\"cult\""]["\"cultId\""];
+                        //String cult = ds.getCultName(cultId);
+                        double kc = manualKc
+                            ? double.parse(kcController.text)
+                            : ds.getCultKc(
+                                cultId, ds.getStageId(dropdownValue));
                         double etc = getETc(evtrs, kc);
-                        return Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                new ResultPage(etc: etc, stage: dropdownValue == null ? "Kc Manual" : dropdownValue,)
-                            )
-                        );
+//                        return Navigator.push(
+//                            context,
+//                            MaterialPageRoute(
+//                                builder: (BuildContext context) =>
+//                                new ResultPage(etc: etc, stage: dropdownValue == null ? "Kc Manual" : dropdownValue,)
+//                            )
+//                        );
+                        return Navigator.pushReplacement(
+                          context,
+                            PageRouteBuilder(
+                              pageBuilder:
+                                  (context, animation, secondAnimation) =>
+                                      ResultPage(
+                                etc: etc,
+                                stage: dropdownValue == null
+                                    ? "Kc Manual"
+                                    : dropdownValue,
+                              ),
+                              transitionDuration: Duration(milliseconds: 400),
+                              transitionsBuilder:
+                                  (context, animation, secondAnimation, child) {
+                                var begin = Offset(1.0, 0.0);
+                                var end = Offset.zero;
+                                var tween = Tween(begin: begin, end: end);
+                                var offsetAnimation = animation.drive(tween);
+
+                                return SlideTransition(
+                                  position: offsetAnimation,
+                                  child: child,
+                                );
+                              },
+                            ));
                       }
-                      return null;
                     },
                     child: Text("Calcular"),
                     splashColor: Colors.white,
                     highlightColor: Colors.lightBlueAccent[400],
                     shape: StadiumBorder(),
-                    borderSide: BorderSide(
-                        width: 0.2
-                    ),
+                    borderSide: BorderSide(width: 0.2),
                   ),
                 ],
               ),
@@ -235,5 +256,4 @@ class _KcPageState extends State<KcPage> {
     double etc2 = double.parse(etc.toStringAsPrecision(3));
     return etc2;
   }
-
 }

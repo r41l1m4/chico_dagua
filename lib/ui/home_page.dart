@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:chico_dagua/aux/data_stuff.dart';
-import 'package:chico_dagua/ui/eto_page.dart';
 import 'package:chico_dagua/ui/history_page.dart';
 import 'package:chico_dagua/ui/work_page.dart';
 import 'package:flutter/material.dart';
@@ -86,9 +85,6 @@ class _HomePageState extends State<HomePage> {
           body: WorkPage()
       ),
       debugShowCheckedModeBanner: false,
-      routes: <String, WidgetBuilder> {
-        "calcETo" : (BuildContext context) => EToPage(),
-      },
     );
   }
 
