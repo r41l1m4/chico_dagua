@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:chico_dagua/aux/data_stuff.dart';
+import 'package:chico_dagua/ui/city_query.dart';
 import 'package:chico_dagua/ui/history_page.dart';
 import 'package:chico_dagua/ui/work_page.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +89,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  static int ordinalDay(int year, int month, int day) {
+  static int ordinalDay(int year, int month, int day) { //retorna o dia juliano
     if (month == DateTime.january) {
       return day;
     } else if (month == DateTime.february) {
@@ -131,30 +132,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          ListTile(
-            title: Text("Mudar dados", style: TextStyle(
-              color: Colors.white,
-            ),),
-            onTap: () {
-              setState(() {
-                Navigator.pushNamed(context, "chooseCity");
-              });
-            },
-          ),
-          ListTile(
-            title: Text("Histórico", style: TextStyle(
-              color: Colors.white,
-            ),),
-            onTap: () {
-              return Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                      new HistoryPage()
-                  )
-              );
-            },
-          ),
+          _contextMenuTiles("Mudar dados", context, CityQuery()),
+          _contextMenuTiles("Histórico", context, HistoryPage()),
           Divider(
             color: Colors.white70,
             height: 2.0,
@@ -164,23 +143,43 @@ class _HomePageState extends State<HomePage> {
               color: Colors.white,
             ),),
             onTap: () {
-              showAboutDialog(
-                context: context,
-                applicationName: "Chico d'Água",
-                applicationVersion: "v1.1.2",
-                applicationIcon: Image.asset("imgs/cda.png", height: 55.0, width: 55.0,),
-                children: <Widget>[
-                  Text("Este app é parte resultante do projeto de extensão \"Chico d'Água\" "
-                      "desenvolvido na Universidade Federal de Alagoas (UFAL) - "
-                      "Campus Arapiraca.",
-                    textAlign: TextAlign.justify,
-                  ),
-                ],
-              );
-            },
+              _aboutInfo();
+            }
           ),
         ],
       ),
+    );
+  }
+
+  Widget _contextMenuTiles(String title, BuildContext context, Widget newPage) {
+    return ListTile(
+      title: Text("$title", style: TextStyle(
+        color: Colors.white,
+      ),),
+      onTap: () {
+        return Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => newPage
+            )
+        );
+      },
+    );
+  }
+
+  void _aboutInfo() {
+    return showAboutDialog(
+      context: context,
+      applicationName: "Chico d'Água",
+      applicationVersion: "v1.1.3",
+      applicationIcon: Image.asset("imgs/cda.png", height: 55.0, width: 55.0,),
+      children: <Widget>[
+        Text("Este app é parte resultante do projeto de extensão \"Chico d'Água\" "
+            "desenvolvido na Universidade Federal de Alagoas (UFAL) - "
+            "Campus Arapiraca.",
+          textAlign: TextAlign.justify,
+        ),
+      ],
     );
   }
 }

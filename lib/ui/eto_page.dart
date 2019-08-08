@@ -89,55 +89,11 @@ class _EToPageState extends State<EToPage> {
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
-                      child: TextFormField(
-                        controller: tMaxController,
-                        validator: (value) {
-                          if(value.isEmpty) {
-                            return "Campo obrigatório!";
-                          }else if(value.contains(",")) {
-                            return "Decimais devem ser separados por \"ponto\". Ex: 29.8";
-                          }
-                          return null;
-                        },
-                        textAlign: TextAlign.center,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          suffix: Text("Cº"),
-                          labelText: "Máxima",
-                          labelStyle: TextStyle(color: Colors.black),
-                          border: OutlineInputBorder(),
-                        ),
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15.0,
-                        ),
-                      ),
+                      child: _tempInputBox(tMaxController, "Máxima"),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
-                      child: TextFormField(
-                        controller: tMinController,
-                        validator: (value) {
-                          if(value.isEmpty) {
-                            return "Campo obrigatório!";
-                          }else if(value.contains(",")) {
-                            return "Decimais devem ser separados por \"ponto\"";
-                          }
-                          return null;
-                        },
-                        textAlign: TextAlign.center,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          suffix: Text("Cº"),
-                          labelText: "Mínima",
-                          labelStyle: TextStyle(color: Colors.black),
-                          border: OutlineInputBorder(),
-                        ),
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15.0,
-                        ),
-                      ),
+                      child: _tempInputBox(tMinController, "Mínima"),
                     ),
                     OutlineButton(
                       // ignore: missing_return
@@ -182,6 +138,32 @@ class _EToPageState extends State<EToPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _tempInputBox(controller, label) {
+    return TextFormField(
+      controller: controller,
+      validator: (value) {
+        if(value.isEmpty) {
+          return "Campo obrigatório!";
+        }else if(value.contains(",")) {
+          return "Decimais devem ser separados por \"ponto\"";
+        }
+        return null;
+      },
+      textAlign: TextAlign.center,
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+        suffix: Text("Cº"),
+        labelText: "$label",
+        labelStyle: TextStyle(color: Colors.black),
+        border: OutlineInputBorder(),
+      ),
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 15.0,
       ),
     );
   }
