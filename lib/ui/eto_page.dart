@@ -1,9 +1,12 @@
 import 'dart:convert';
 
 import 'package:chico_dagua/aux/data_stuff.dart';
+import 'package:chico_dagua/model/session_model.dart';
 import 'package:chico_dagua/ui/kc_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+
+import 'package:scoped_model/scoped_model.dart';
 
 class EToPage extends StatefulWidget {
   @override
@@ -38,7 +41,6 @@ class _EToPageState extends State<EToPage> {
 
   @override
   Widget build(BuildContext context) {
-    String actCityName = ds.getCityName(actCityId);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -57,7 +59,7 @@ class _EToPageState extends State<EToPage> {
                   padding: EdgeInsets.only(top: 40.0, right: 10.0),
                   alignment: Alignment.topRight,
                   child: Text(
-                    actCityName,
+                    ds.getCityName(ScopedModel.of<SessionModel>(context).cityId),
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 15.0,

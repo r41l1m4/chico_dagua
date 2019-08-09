@@ -1,6 +1,8 @@
 import 'package:chico_dagua/aux/data_stuff.dart';
+import 'package:chico_dagua/model/session_model.dart';
 import 'package:chico_dagua/ui/cult_query.dart';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class CityQuery extends StatefulWidget {
   @override
@@ -84,18 +86,20 @@ class _CityQueryState extends State<CityQuery> {
                         }
                     );
                   }else if(dropdownValue != null) {
-                    ds.setCity(dropdownValue);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                            new CultQuery()
-                        )
-                    );
+                    //ds.setCity(dropdownValue);
+                    SessionModel.of(context).setCityId(ds.getCityId(dropdownValue));
+                    SessionModel.of(context).setCityState(true);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                new CultQuery()
+                            )
+                        );
                   }
                   return null;
                 },
-              ),
+              )
             ],
           ),
         ),

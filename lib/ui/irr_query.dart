@@ -1,4 +1,5 @@
 import 'package:chico_dagua/aux/data_stuff.dart';
+import 'package:chico_dagua/model/session_model.dart';
 import 'package:flutter/material.dart';
 
 class IrrQuery extends StatefulWidget {
@@ -130,11 +131,14 @@ class _IrrQueryState extends State<IrrQuery> {
                 icon: Icon(Icons.arrow_forward_ios),
                 onPressed: () {
                   if(_formKey2.currentState.validate()) {
-                    ds.setIrrigStuff(
-                      double.parse(vazController.text),
-                      double.parse(espGotController.text),
-                      double.parse(espLinController.text),
-                    );
+//                    ds.setIrrigStuff(
+//                      double.parse(vazController.text),
+//                      double.parse(espGotController.text),
+//                      double.parse(espLinController.text),
+//                    );
+                    SessionModel.of(context).setq(double.parse(vazController.text));
+                    SessionModel.of(context).setEem(double.parse(espGotController.text));
+                    SessionModel.of(context).setEl(double.parse(espLinController.text));
                     Navigator.pushNamedAndRemoveUntil(context, "/", ModalRoute.withName("/"));
                   }
                 },

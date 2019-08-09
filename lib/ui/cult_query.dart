@@ -1,4 +1,5 @@
 import 'package:chico_dagua/aux/data_stuff.dart';
+import 'package:chico_dagua/model/session_model.dart';
 import 'package:chico_dagua/ui/irr_query.dart';
 import 'package:flutter/material.dart';
 
@@ -115,7 +116,9 @@ class _CultQueryState extends State<CultQuery> {
                       }
                   );
                 }else if(_formKey.currentState.validate()) {
-                  ds.setCultStuff(dropdownValue, double.parse(espCultController.text));
+                  //ds.setCultStuff(dropdownValue, double.parse(espCultController.text));
+                  SessionModel.of(context).setCultId(ds.getCultId(dropdownValue));
+                  SessionModel.of(context).setEp(double.parse(espCultController.text));
                   //Navigator.pop(context);
                   Navigator.push(
                       context,
