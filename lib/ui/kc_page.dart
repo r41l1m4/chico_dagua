@@ -1,54 +1,49 @@
 import 'dart:convert';
 import 'package:chico_dagua/aux/data_stuff.dart';
+import 'package:chico_dagua/model/flow_model.dart';
+import 'package:chico_dagua/model/session_model.dart';
 import 'package:chico_dagua/ui/result_page.dart';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class KcPage extends StatefulWidget {
-  final double eto;
 
-  KcPage({this.eto});
-
-  double getETo() {
-    print("Kc: $eto");
-    return eto;
-  }
+  KcPage();
 
   @override
-  _KcPageState createState() => _KcPageState(evtrs: eto);
+  _KcPageState createState() => _KcPageState();
 }
 
 class _KcPageState extends State<KcPage> {
   static DataStuff ds = DataStuff();
   static String dropdownValue;
 
-  double evtrs;
+  //double evtrs;
 
-  _KcPageState({this.evtrs});
+  _KcPageState();
 
-  static List city = [];
-  static int actCityId = 0;
+//  static List city = [];
+//  static int actCityId = 0;
 
   TextEditingController kcController = TextEditingController();
 
   bool manualKc = false;
 
-  @override
-  void initState() {
-    super.initState();
-    Map<String, dynamic> mn = Map();
-    ds.readData().then((data) {
-      setState(() {
-        city = json.decode(data);
-        mn.addAll(city[0]);
-        actCityId = mn["\"city\""]["\"cityId\""];
-      });
-    });
-  }
+//  @override
+//  void initState() {
+//    super.initState();
+//    Map<String, dynamic> mn = Map();
+//    ds.readData().then((data) {
+//      setState(() {
+//        city = json.decode(data);
+//        mn.addAll(city[0]);
+//        actCityId = mn["\"city\""]["\"cityId\""];
+//      });
+//    });
+//  }
 
   @override
   Widget build(BuildContext context) {
-    String actCityName = ds.getCityName(actCityId);
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -67,7 +62,7 @@ class _KcPageState extends State<KcPage> {
                   padding: EdgeInsets.only(top: 40.0, right: 10.0),
                   alignment: Alignment.topRight,
                   child: Text(
-                    actCityName,
+                    ds.getCityName(ScopedModel.of<SessionModel>(context).cityId),
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 15.0,
@@ -131,7 +126,7 @@ class _KcPageState extends State<KcPage> {
                           });
                         },
                       ),
-                      Text("Vou digitar o Kc da cultura.")
+                      Text("Quero digitar o Kc da cultura.")
                     ],
                   ),
                   AnimatedOpacity(
@@ -163,77 +158,83 @@ class _KcPageState extends State<KcPage> {
                       ),
                     ),
                   ),
-                  OutlineButton(
-                    onPressed: () {
-                      if ((dropdownValue == null && !manualKc) ||
-                          (manualKc && kcController.text.isEmpty)) {
-                        return showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                backgroundColor: Colors.lightBlueAccent[400],
-                                title: Text("Erro!"),
-                                content: Text(
-                                  "Todos os campos são obrigatórios.",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              );
-                            });
-                      } else if ((manualKc &&
-                          kcController.text.contains(","))) {
-                        return showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                backgroundColor: Colors.lightBlueAccent[400],
-                                title: Text("Erro!"),
-                                content: Text(
-                                  "Decimais devem ser separados por \"ponto\".",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              );
-                            });
-                      } else {
-                        int cultId =
-                            ds.city.elementAt(0)["\"cult\""]["\"cultId\""];
-                        //String cult = ds.getCultName(cultId);
-                        double kc = manualKc
-                            ? double.parse(kcController.text)
-                            : ds.getCultKc(
+                  ScopedModelDescendant<FlowModel>(
+                    builder: (context, child, model) {
+                      return OutlineButton(
+                        onPressed: () {
+                          if ((dropdownValue == null && !manualKc) ||
+                              (manualKc && kcController.text.isEmpty)) {
+                            return showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    backgroundColor: Colors.lightBlueAccent[400],
+                                    title: Text("Erro!"),
+                                    content: Text(
+                                      "Todos os campos são obrigatórios.",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  );
+                                });
+                          } else if ((manualKc &&
+                              kcController.text.contains(","))) {
+                            return showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    backgroundColor: Colors.lightBlueAccent[400],
+                                    title: Text("Erro!"),
+                                    content: Text(
+                                      "Decimais devem ser separados por \"ponto\".",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  );
+                                });
+                          } else {
+                            int cultId = ScopedModel.of<SessionModel>(context).cultId;
+                            //ds.city.elementAt(0)["\"cult\""]["\"cultId\""];
+                            //String cult = ds.getCultName(cultId);
+                            double kc = manualKc
+                                ? double.parse(kcController.text)
+                                : ds.getCultKc(
                                 cultId, ds.getStageId(dropdownValue));
-                        double etc = getETc(evtrs, kc);
-                        return Navigator.pushReplacement(
-                          context,
-                            PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation, secondAnimation) =>
+                            double etc = getETc(model.et0, kc);
+                            model.setEtc(etc);
+                            model.setStage(dropdownValue ?? "Kc Manual");
+                            return Navigator.pushReplacement(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder:
+                                      (context, animation, secondAnimation) =>
                                       ResultPage(
-                                etc: etc,
-                                stage: dropdownValue == null
-                                    ? "Kc Manual"
-                                    : dropdownValue,
-                              ),
-                              transitionDuration: Duration(milliseconds: 400),
-                              transitionsBuilder:
-                                  (context, animation, secondAnimation, child) {
-                                var begin = Offset(1.0, 0.0);
-                                var end = Offset.zero;
-                                var tween = Tween(begin: begin, end: end);
-                                var offsetAnimation = animation.drive(tween);
+                                        etc: etc,
+                                        stage: dropdownValue == null
+                                            ? "Kc Manual"
+                                            : dropdownValue,
+                                      ),
+                                  transitionDuration: Duration(milliseconds: 400),
+                                  transitionsBuilder:
+                                      (context, animation, secondAnimation, child) {
+                                    var begin = Offset(1.0, 0.0);
+                                    var end = Offset.zero;
+                                    var tween = Tween(begin: begin, end: end);
+                                    var offsetAnimation = animation.drive(tween);
 
-                                return SlideTransition(
-                                  position: offsetAnimation,
-                                  child: child,
-                                );
-                              },
-                            ));
-                      }
+                                    return SlideTransition(
+                                      position: offsetAnimation,
+                                      child: child,
+                                    );
+                                  },
+                                ));
+                          }
+                        },
+                        child: Text("Calcular"),
+                        splashColor: Colors.white,
+                        highlightColor: Colors.lightBlueAccent[400],
+                        shape: StadiumBorder(),
+                        borderSide: BorderSide(width: 0.2),
+                      );
                     },
-                    child: Text("Calcular"),
-                    splashColor: Colors.white,
-                    highlightColor: Colors.lightBlueAccent[400],
-                    shape: StadiumBorder(),
-                    borderSide: BorderSide(width: 0.2),
                   ),
                 ],
               ),

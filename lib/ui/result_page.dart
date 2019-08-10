@@ -1,5 +1,8 @@
 import 'package:chico_dagua/aux/data_stuff.dart';
+import 'package:chico_dagua/model/flow_model.dart';
+import 'package:chico_dagua/model/session_model.dart';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class ResultPage extends StatefulWidget {
   final double etc;
@@ -8,26 +11,33 @@ class ResultPage extends StatefulWidget {
   ResultPage({this.etc, this.stage});
 
   @override
-  _ResultPageState createState() => _ResultPageState(etc2: etc, stage: stage);
+  _ResultPageState createState() => _ResultPageState(etc2: etc, stage2: stage);
 }
 
 class _ResultPageState extends State<ResultPage> {
   double etc2;
-  String stage;
+  String stage2;
 
-  _ResultPageState({this.etc2, this.stage});
+  _ResultPageState({this.etc2, this.stage2});
 
   DataStuff ds = DataStuff();
 
   @override
   Widget build(BuildContext context) {
-    double q = ds.city.elementAt(0)["\"irrig\""]["\"q\""];
-    double eem = (ds.city.elementAt(0)["\"irrig\""]["\"Eem\""]) / 100;
-    double el = (ds.city.elementAt(0)["\"irrig\""]["\"El\""]) / 100;
-    double ep = (ds.city.elementAt(0)["\"cult\""]["\"Ep\""]) / 100;
-    String cult = ds.getCultName(ds.city.elementAt(0)["\"cult\""]["\"cultId\""]);
+//    double q = ds.city.elementAt(0)["\"irrig\""]["\"q\""];
+//    double eem = (ds.city.elementAt(0)["\"irrig\""]["\"Eem\""]) / 100;
+//    double el = (ds.city.elementAt(0)["\"irrig\""]["\"El\""]) / 100;
+//    double ep = (ds.city.elementAt(0)["\"cult\""]["\"Ep\""]) / 100;
+//    String cult = ds.getCultName(ds.city.elementAt(0)["\"cult\""]["\"cultId\""]);
 
-    int min = timeIrrig(etc2, el, ep, eem, q);
+    double q = ScopedModel.of<SessionModel>(context).q;
+    double eem = ScopedModel.of<SessionModel>(context).Eem / 100;
+    double el = ScopedModel.of<SessionModel>(context).El / 100;
+    double ep = ScopedModel.of<SessionModel>(context).Ep / 100;
+    String cult = ds.getCultName(ScopedModel.of<SessionModel>(context).cultId);
+    String stage = ScopedModel.of<FlowModel>(context).stage;
+
+    int min = timeIrrig(ScopedModel.of<FlowModel>(context).etc, el, ep, eem, q);
     String duration = formatTime(min);
 
     return Scaffold(

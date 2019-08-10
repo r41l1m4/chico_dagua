@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:chico_dagua/aux/data_stuff.dart';
+import 'package:chico_dagua/model/flow_model.dart';
 import 'package:chico_dagua/model/session_model.dart';
 import 'package:chico_dagua/ui/kc_page.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +18,8 @@ class _EToPageState extends State<EToPage> {
 
   static DataStuff ds = DataStuff();
 
-  static List city = [];
-  static int actCityId = 0;
+//  static List city = [];
+//  static int actCityId = 0;
 
   TextEditingController tMaxController = TextEditingController();
   TextEditingController tMinController = TextEditingController();
@@ -26,18 +27,18 @@ class _EToPageState extends State<EToPage> {
   final _formKey = GlobalKey<FormState>();
 
 
-  @override
-  void initState() {
-    super.initState();
-    Map<String, dynamic> mn = Map();
-    ds.readData().then((data) {
-      setState(() {
-        city = json.decode(data);
-        mn.addAll(city[0]);
-        actCityId = mn["\"city\""]["\"cityId\""];
-      });
-    });
-  }
+//  @override
+//  void initState() {
+//    super.initState();
+//    Map<String, dynamic> mn = Map();
+//    ds.readData().then((data) {
+//      setState(() {
+//        city = json.decode(data);
+//        mn.addAll(city[0]);
+//        actCityId = mn["\"city\""]["\"cityId\""];
+//      });
+//    });
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,42 +98,47 @@ class _EToPageState extends State<EToPage> {
                       padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
                       child: _tempInputBox(tMinController, "Mínima"),
                     ),
-                    OutlineButton(
-                      // ignore: missing_return
-                      onPressed: () {
-                        if(_formKey.currentState.validate()) {
-                          double et0 = resETo(
-                              actCityId,
-                              double.parse(tMaxController.text),
-                              double.parse(tMinController.text)
-                          );
-                          return Navigator.pushReplacement(
-                              this.context,
-                              PageRouteBuilder(
-                                pageBuilder: (context, animation, secondAnimation) => KcPage(eto: et0),
-                                transitionDuration: Duration(milliseconds: 400),
-                                transitionsBuilder: (context, animation, secondAnimation, child) {
-                                  var begin = Offset(1.0, 0.0);
-                                  var end = Offset.zero;
-                                  var tween = Tween(begin: begin, end: end);
-                                  var offsetAnimation = animation.drive(tween);
+                    ScopedModelDescendant<FlowModel>(
+                      builder: (context, child, model) {
+                        return OutlineButton(
+                          // ignore: missing_return
+                          onPressed: () {
+                            if(_formKey.currentState.validate()) {
+                              double et0 = resETo(
+                                  ScopedModel.of<SessionModel>(context).cityId,
+                                  double.parse(tMaxController.text),
+                                  double.parse(tMinController.text)
+                              );
+                              model.setEt0(et0);
+                              return Navigator.pushReplacement(
+                                  this.context,
+                                  PageRouteBuilder(
+                                    pageBuilder: (context, animation, secondAnimation) => KcPage(),
+                                    transitionDuration: Duration(milliseconds: 400),
+                                    transitionsBuilder: (context, animation, secondAnimation, child) {
+                                      var begin = Offset(1.0, 0.0);
+                                      var end = Offset.zero;
+                                      var tween = Tween(begin: begin, end: end);
+                                      var offsetAnimation = animation.drive(tween);
 
-                                  return SlideTransition(
-                                    position: offsetAnimation,
-                                    child: child,
-                                  );
-                                },
-                              )
-                          );
-                        }
+                                      return SlideTransition(
+                                        position: offsetAnimation,
+                                        child: child,
+                                      );
+                                    },
+                                  )
+                              );
+                            }
+                          },
+                          child: Text("Próximo"),
+                          splashColor: Colors.white,
+                          highlightColor: Colors.lightBlueAccent[400],
+                          shape: StadiumBorder(),
+                          borderSide: BorderSide(
+                              width: 0.2
+                          ),
+                        );
                       },
-                      child: Text("Próximo"),
-                      splashColor: Colors.white,
-                      highlightColor: Colors.lightBlueAccent[400],
-                      shape: StadiumBorder(),
-                      borderSide: BorderSide(
-                          width: 0.2
-                      ),
                     ),
                   ],
                 ),
