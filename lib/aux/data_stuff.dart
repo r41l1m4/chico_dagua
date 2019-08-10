@@ -131,14 +131,14 @@ class DataStuff {
   List history = [];
   bool hasHistory = false;
 
-  void init(List list) {
-    city = list;
-  }
+//  void init(List list) {
+//    city = list;
+//  }
 
-  void initHist(List list) {
-    history = list;
-    hasHistory = true;
-  }
+//  void initHist(List list) {
+//    history = list;
+//    hasHistory = true;
+//  }
 
   void clearHistory() {
     history.clear();

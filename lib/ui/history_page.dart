@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -9,18 +11,6 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
   static DataStuff ds = DataStuff();
-  static var hist = ds.history;
-  static Iterable hist2 = [];
-
-
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      hist = ds.history;
-      hist2 = hist.reversed;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +26,26 @@ class _HistoryPageState extends State<HistoryPage> {
               onPressed: () {
                 setState(() {
                   ds.clearHistory();
-                  build(context);
                 });
               },
           )
         ],
       ),
-      body: ds.hasHistory ? hasSome() : hasNone(),
+      body: FutureBuilder<String>(
+        future: ds.readData(isHistory: true),
+        builder: (context, snapshot) {
+          if(!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }else if(snapshot.data == null || snapshot.data.length <= 2) {
+            return hasNone();
+          }else {
+            List history = json.decode(snapshot.data);
+            return hasSome(history);
+          }
+        },
+      ),
     );
   }
 
@@ -64,17 +67,17 @@ class _HistoryPageState extends State<HistoryPage> {
     );
   }
 
-  Widget hasSome() {
+  Widget hasSome(List history) {
     return ListView.builder(
-      itemCount: hist2.length,
+      itemCount: history.length,
       itemBuilder: (context, index) {
-        return histCard(context, index);
+        return histCard(context, index, history);
       },
     );
   }
 
-  Widget histCard(BuildContext context, int index) {
-    Map act = hist2.elementAt(index);
+  Widget histCard(BuildContext context, int index, List history) {
+    Map act = history.elementAt(index);
     String tmStamp = act.values.elementAt(0); //recebe o tempo em texto
     String cult = act.values.elementAt(1);
     String stage = act.values.elementAt(2);

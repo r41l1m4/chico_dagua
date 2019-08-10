@@ -65,15 +65,15 @@ class _HomePageState extends State<HomePage> {
 //
 //    });
 
-    ds.readData(isHistory: true).then((data) {
-      if(data.isEmpty) {
-        print("Tá vazio!");
-      }else {
-        print("Não tá vazio!");
-        hist = json.decode(data);
-        ds.initHist(hist);
-      }
-    });
+//    ds.readData(isHistory: true).then((data) {
+//      if(data.isEmpty) {
+//        print("Tá vazio!");
+//      }else {
+//        print("Não tá vazio!");
+//        hist = json.decode(data);
+//        ds.initHist(hist);
+//      }
+//    });
 
   }
 

@@ -38,9 +38,7 @@ class NewOne extends StatelessWidget {
         }else if(snapshot.data.isNotEmpty || snapshot.data != null) {
 
           print("Tem Algo!");
-          Map<String, dynamic> mn = Map();
           List city = json.decode(snapshot.data);
-          mn.addAll(city[0]);
 
           return ScopedModel<SessionModel>(
             model: SessionModel.init(
