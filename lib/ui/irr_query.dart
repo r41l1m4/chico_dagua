@@ -131,14 +131,10 @@ class _IrrQueryState extends State<IrrQuery> {
                 icon: Icon(Icons.arrow_forward_ios),
                 onPressed: () {
                   if(_formKey2.currentState.validate()) {
-//                    ds.setIrrigStuff(
-//                      double.parse(vazController.text),
-//                      double.parse(espGotController.text),
-//                      double.parse(espLinController.text),
-//                    );
                     SessionModel.of(context).setq(double.parse(vazController.text));
                     SessionModel.of(context).setEem(double.parse(espGotController.text));
                     SessionModel.of(context).setEl(double.parse(espLinController.text));
+                    ds.saveData(SessionModel.of(context).toList());
                     Navigator.pushNamedAndRemoveUntil(context, "/", ModalRoute.withName("/"));
                   }
                 },

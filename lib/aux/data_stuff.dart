@@ -142,7 +142,7 @@ class DataStuff {
 
   void clearHistory() {
     history.clear();
-    saveData(isHistory: true, listHistory: history, isReset: true);
+    saveData(history, isHistory: true, listHistory: history, isReset: true);
   }
 
   int getCityId(String city) {
@@ -237,56 +237,56 @@ class DataStuff {
 
   }
 
-  void setCity(String ct) {
-      print("setCity $city");
-      int idC = getCityId(ct);
-      city.elementAt(0)["\"hasCity\""] = true;
-      city.elementAt(0)["\"city\""]["\"cityId\""] = idC;
-      print("setCity2 $city");
-      saveData();
-  }
+//  void setCity(String ct) {
+//      print("setCity $city");
+//      int idC = getCityId(ct);
+//      city.elementAt(0)["\"hasCity\""] = true;
+//      city.elementAt(0)["\"city\""]["\"cityId\""] = idC;
+//      print("setCity2 $city");
+//      saveData();
+//  }
+//
+//  void setCultStuff(String cultName, double cultEsp) {
+//    int idCult = getCultId(cultName);
+//    city.elementAt(0)["\"cult\""]["\"cultId\""] = idCult;
+//    city.elementAt(0)["\"cult\""]["\"Ep\""] = cultEsp;
+//    saveData();
+//  }
+//
+//  void setIrrigStuff(double q, double Eem, double El) {
+//    city.elementAt(0)["\"irrig\""]["\"q\""] = q;
+//    city.elementAt(0)["\"irrig\""]["\"Eem\""] = Eem;
+//    city.elementAt(0)["\"irrig\""]["\"El\""] = El;
+//    saveData();
+//  }
 
-  void setCultStuff(String cultName, double cultEsp) {
-    int idCult = getCultId(cultName);
-    city.elementAt(0)["\"cult\""]["\"cultId\""] = idCult;
-    city.elementAt(0)["\"cult\""]["\"Ep\""] = cultEsp;
-    saveData();
-  }
+//  Map populate() {
+//    Map<String, dynamic> mapRoot = Map();
+//    Map<String, dynamic> mapCity = Map();
+//    Map<String, dynamic> mapCult = Map();
+//    Map<String, dynamic> mapIrrig = Map();
+//    mapRoot["\"hasCity\""] = false;
+//
+//    mapCity["\"cityId\""] = 0;
+//    mapRoot["\"city\""]  = mapCity;
+//
+//    mapCult["\"cultId\""] = 0;
+//    mapCult["\"Ep\""] = 0.0;
+//    mapRoot["\"cult\""]  = mapCult;
+//
+//    mapIrrig["\"q\""] = 0.0;
+//    mapIrrig["\"Eem\""] = 0.0;
+//    mapIrrig["\"El\""] = 0.0;
+//    mapRoot["\"irrig\""]  = mapIrrig;
+//
+//    city.add(mapRoot);
+//
+//    //saveData();
+//
+//    return mapRoot;
+//  }
 
-  void setIrrigStuff(double q, double Eem, double El) {
-    city.elementAt(0)["\"irrig\""]["\"q\""] = q;
-    city.elementAt(0)["\"irrig\""]["\"Eem\""] = Eem;
-    city.elementAt(0)["\"irrig\""]["\"El\""] = El;
-    saveData();
-  }
-
-  Map populate() {
-    Map<String, dynamic> mapRoot = Map();
-    Map<String, dynamic> mapCity = Map();
-    Map<String, dynamic> mapCult = Map();
-    Map<String, dynamic> mapIrrig = Map();
-    mapRoot["\"hasCity\""] = false;
-
-    mapCity["\"cityId\""] = 0;
-    mapRoot["\"city\""]  = mapCity;
-
-    mapCult["\"cultId\""] = 0;
-    mapCult["\"Ep\""] = 0;
-    mapRoot["\"cult\""]  = mapCult;
-
-    mapIrrig["\"q\""] = 0;
-    mapIrrig["\"Eem\""] = 0;
-    mapIrrig["\"El\""] = 0;
-    mapRoot["\"irrig\""]  = mapIrrig;
-
-    city.add(mapRoot);
-
-    saveData();
-
-    return mapRoot;
-  }
-
-  Future<File> saveData({bool isHistory, List listHistory, bool isReset}) async {
+  Future<File> saveData(List listData, {bool isHistory, List listHistory, bool isReset}) async {
     if(isHistory != null && isHistory) {
       print("saveData $listHistory");
       String data = json.encode(listHistory);
@@ -300,8 +300,8 @@ class DataStuff {
       final file = await getFile(isHistory: true);
       return file.writeAsString(data);
     }
-    print("saveData $city");
-    String data = json.encode(city);
+    print("saveData $listData");
+    String data = json.encode(listData);
     final file = await getFile();
     return file.writeAsString(data);
 

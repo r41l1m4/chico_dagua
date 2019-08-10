@@ -116,10 +116,8 @@ class _CultQueryState extends State<CultQuery> {
                       }
                   );
                 }else if(_formKey.currentState.validate()) {
-                  //ds.setCultStuff(dropdownValue, double.parse(espCultController.text));
                   SessionModel.of(context).setCultId(ds.getCultId(dropdownValue));
                   SessionModel.of(context).setEp(double.parse(espCultController.text));
-                  //Navigator.pop(context);
                   Navigator.push(
                       context,
                       MaterialPageRoute(

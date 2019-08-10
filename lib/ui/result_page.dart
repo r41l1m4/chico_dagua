@@ -64,7 +64,7 @@ class _ResultPageState extends State<ResultPage> {
               onPressed: () {
                 Map entry = entryHistory(DateTime.now().toString(), cult, stage, min);
                 ds.history.add(entry);
-                ds.saveData(isHistory: true, listHistory: ds.history);
+                ds.saveData(ds.history, isHistory: true, listHistory: ds.history);
                 Navigator.of(context).pop();
               },
               child: Text("Voltar à página inicial", style: TextStyle(color: Colors.white),),

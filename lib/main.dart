@@ -21,7 +21,6 @@ class NewOne extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder<String>(
       future: ds.readData(),
-      // ignore: missing_return
       builder: (context, snapshot) {
         if(!snapshot.hasData) {
           print("Ainda nada");
@@ -35,20 +34,31 @@ class NewOne extends StatelessWidget {
               ),
             ),
           );
-        }else if(snapshot.data.isNotEmpty || snapshot.data != null) {
+        }else if(snapshot.data.length > 2 && (snapshot.data.isNotEmpty || snapshot.data != null)) {
 
           print("Tem Algo!");
+          print("Main: ${snapshot.data.length}");
           List city = json.decode(snapshot.data);
+
+
+//          if(!city.elementAt(0)["\"hasCity\""]) {
+//            Navigator.push(
+//                context,
+//                MaterialPageRoute(
+//                    builder: (BuildContext context) => CityQuery()
+//                )
+//            );
+//          }
 
           return ScopedModel<SessionModel>(
             model: SessionModel.init(
                         city.elementAt(0)["\"hasCity\""],
                         city.elementAt(0)["\"city\""]["\"cityId\""],
                         city.elementAt(0)["\"cult\""]["\"cultId\""],
-                        city.elementAt(0)["\"cult\""]["\"Ep\""],
-                        city.elementAt(0)["\"irrig\""]["\"q\""],
-                        city.elementAt(0)["\"irrig\""]["\"Eem\""],
-                        city.elementAt(0)["\"irrig\""]["\"El\""]
+                        double.parse(city.elementAt(0)["\"cult\""]["\"Ep\""].toString()),
+                        double.parse(city.elementAt(0)["\"irrig\""]["\"q\""].toString()),
+                        double.parse(city.elementAt(0)["\"irrig\""]["\"Eem\""].toString()),
+                        double.parse(city.elementAt(0)["\"irrig\""]["\"El\""].toString())
                     ),
             child: ScopedModelDescendant<SessionModel>(
               builder: (context, child, model) {
@@ -70,7 +80,7 @@ class NewOne extends StatelessWidget {
           );
         }else {
           print("Virgem.");
-          ScopedModel<SessionModel>(
+          return ScopedModel<SessionModel>(
             model: SessionModel(),
             child: ScopedModelDescendant<SessionModel>(
               builder: (context, child, model) {

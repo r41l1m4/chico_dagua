@@ -72,5 +72,31 @@ class SessionModel extends Model {
     notifyListeners();
   }
 
+  List toList() {
+    List dataList = List();
+
+    Map<String, dynamic> mapRoot = Map();
+    Map<String, dynamic> mapCity = Map();
+    Map<String, dynamic> mapCult = Map();
+    Map<String, dynamic> mapIrrig = Map();
+    mapRoot["\"hasCity\""] = hasCity;
+
+    mapCity["\"cityId\""] = cityId;
+    mapRoot["\"city\""]  = mapCity;
+
+    mapCult["\"cultId\""] = _cultId;
+    mapCult["\"Ep\""] = Ep;
+    mapRoot["\"cult\""]  = mapCult;
+
+    mapIrrig["\"q\""] = q;
+    mapIrrig["\"Eem\""] = Eem;
+    mapIrrig["\"El\""] = El;
+    mapRoot["\"irrig\""]  = mapIrrig;
+
+    dataList.add(mapRoot);
+
+    return dataList;
+  }
+
 
 }

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/session_model.dart';
 import 'package:chico_dagua/ui/city_query.dart';
@@ -18,7 +16,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   static final DataStuff  ds = DataStuff();
-//  static SessionModel sesMod = SessionModel();
 
   static List hist = [];
   static List city = [];
