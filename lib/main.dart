@@ -40,16 +40,6 @@ class NewOne extends StatelessWidget {
           print("Main: ${snapshot.data.length}");
           List city = json.decode(snapshot.data);
 
-
-//          if(!city.elementAt(0)["\"hasCity\""]) {
-//            Navigator.push(
-//                context,
-//                MaterialPageRoute(
-//                    builder: (BuildContext context) => CityQuery()
-//                )
-//            );
-//          }
-
           return ScopedModel<SessionModel>(
             model: SessionModel.init(
                         city.elementAt(0)["\"hasCity\""],
@@ -90,7 +80,7 @@ class NewOne extends StatelessWidget {
                     home: HomePage(),
                     title: "Chico d'Água",
                     debugShowCheckedModeBanner: false,
-                    initialRoute: "/",
+                    initialRoute: "chooseCity",
                     routes: <String, WidgetBuilder> {
                       "chooseCity": (BuildContext context) => CityQuery(),
                       "calcETo" : (BuildContext context) => EToPage(),
