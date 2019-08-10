@@ -5,30 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class ResultPage extends StatefulWidget {
-  final double etc;
-  final String stage;
-
-  ResultPage({this.etc, this.stage});
 
   @override
-  _ResultPageState createState() => _ResultPageState(etc2: etc, stage2: stage);
+  _ResultPageState createState() => _ResultPageState();
 }
 
 class _ResultPageState extends State<ResultPage> {
-  double etc2;
-  String stage2;
-
-  _ResultPageState({this.etc2, this.stage2});
 
   DataStuff ds = DataStuff();
 
   @override
   Widget build(BuildContext context) {
-//    double q = ds.city.elementAt(0)["\"irrig\""]["\"q\""];
-//    double eem = (ds.city.elementAt(0)["\"irrig\""]["\"Eem\""]) / 100;
-//    double el = (ds.city.elementAt(0)["\"irrig\""]["\"El\""]) / 100;
-//    double ep = (ds.city.elementAt(0)["\"cult\""]["\"Ep\""]) / 100;
-//    String cult = ds.getCultName(ds.city.elementAt(0)["\"cult\""]["\"cultId\""]);
 
     double q = ScopedModel.of<SessionModel>(context).q;
     double eem = ScopedModel.of<SessionModel>(context).Eem / 100;
@@ -42,7 +29,6 @@ class _ResultPageState extends State<ResultPage> {
 
     return Scaffold(
       body: Container(
-        //alignment: Alignment.center,
         color: Colors.lightBlueAccent[400],
         padding: EdgeInsets.symmetric(horizontal: 30.0),
         child: Column(

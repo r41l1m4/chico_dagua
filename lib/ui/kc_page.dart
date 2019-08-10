@@ -18,29 +18,9 @@ class _KcPageState extends State<KcPage> {
   static DataStuff ds = DataStuff();
   static String dropdownValue;
 
-  //double evtrs;
-
-  _KcPageState();
-
-//  static List city = [];
-//  static int actCityId = 0;
-
   TextEditingController kcController = TextEditingController();
 
   bool manualKc = false;
-
-//  @override
-//  void initState() {
-//    super.initState();
-//    Map<String, dynamic> mn = Map();
-//    ds.readData().then((data) {
-//      setState(() {
-//        city = json.decode(data);
-//        mn.addAll(city[0]);
-//        actCityId = mn["\"city\""]["\"cityId\""];
-//      });
-//    });
-//  }
 
   @override
   Widget build(BuildContext context) {
@@ -192,8 +172,6 @@ class _KcPageState extends State<KcPage> {
                                 });
                           } else {
                             int cultId = ScopedModel.of<SessionModel>(context).cultId;
-                            //ds.city.elementAt(0)["\"cult\""]["\"cultId\""];
-                            //String cult = ds.getCultName(cultId);
                             double kc = manualKc
                                 ? double.parse(kcController.text)
                                 : ds.getCultKc(
@@ -206,12 +184,7 @@ class _KcPageState extends State<KcPage> {
                                 PageRouteBuilder(
                                   pageBuilder:
                                       (context, animation, secondAnimation) =>
-                                      ResultPage(
-                                        etc: etc,
-                                        stage: dropdownValue == null
-                                            ? "Kc Manual"
-                                            : dropdownValue,
-                                      ),
+                                      ResultPage(),
                                   transitionDuration: Duration(milliseconds: 400),
                                   transitionsBuilder:
                                       (context, animation, secondAnimation, child) {

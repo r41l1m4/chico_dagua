@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/flow_model.dart';
 import 'package:chico_dagua/model/session_model.dart';
@@ -18,27 +16,10 @@ class _EToPageState extends State<EToPage> {
 
   static DataStuff ds = DataStuff();
 
-//  static List city = [];
-//  static int actCityId = 0;
-
   TextEditingController tMaxController = TextEditingController();
   TextEditingController tMinController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-
-
-//  @override
-//  void initState() {
-//    super.initState();
-//    Map<String, dynamic> mn = Map();
-//    ds.readData().then((data) {
-//      setState(() {
-//        city = json.decode(data);
-//        mn.addAll(city[0]);
-//        actCityId = mn["\"city\""]["\"cityId\""];
-//      });
-//    });
-//  }
 
   @override
   Widget build(BuildContext context) {
