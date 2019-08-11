@@ -230,7 +230,7 @@ class DataStuff {
 
   Future<File> saveData(List listData, {bool isHistory, bool isReset}) async {
     if(isHistory != null && isHistory) {
-      print("saveData $listData");
+      print("saveHistoryData $listData");
       String data = json.encode(listData);
 
       if(isReset != null && isReset) {

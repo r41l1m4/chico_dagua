@@ -71,7 +71,7 @@ class _HistoryPageState extends State<HistoryPage> {
     return ListView.builder(
       itemCount: history.length,
       itemBuilder: (context, index) {
-        return histCard(context, index, history.reversed);
+        return histCard(context, index, history);
       },
     );
   }
