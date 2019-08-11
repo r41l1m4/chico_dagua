@@ -71,12 +71,12 @@ class _HistoryPageState extends State<HistoryPage> {
     return ListView.builder(
       itemCount: history.length,
       itemBuilder: (context, index) {
-        return histCard(context, index, history);
+        return histCard(context, index, history.reversed);
       },
     );
   }
 
-  Widget histCard(BuildContext context, int index, List history) {
+  Widget histCard(BuildContext context, int index, Iterable history) {
     Map act = history.elementAt(index);
     String tmStamp = act.values.elementAt(0); //recebe o tempo em texto
     String cult = act.values.elementAt(1);

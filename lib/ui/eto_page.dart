@@ -72,12 +72,15 @@ class _EToPageState extends State<EToPage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+                      padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0),
                       child: _tempInputBox(tMaxController, "Máxima"),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+                      padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0),
                       child: _tempInputBox(tMinController, "Mínima"),
+                    ),
+                    SizedBox(
+                      height: 20.0,
                     ),
                     ScopedModelDescendant<FlowModel>(
                       builder: (context, child, model) {
@@ -147,8 +150,8 @@ class _EToPageState extends State<EToPage> {
       decoration: InputDecoration(
         suffix: Text("Cº"),
         labelText: "$label",
+        alignLabelWithHint: true,
         labelStyle: TextStyle(color: Colors.black),
-        border: OutlineInputBorder(),
       ),
       style: TextStyle(
         color: Colors.black,

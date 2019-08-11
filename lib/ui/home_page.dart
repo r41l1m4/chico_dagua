@@ -137,7 +137,7 @@ class _HomePageState extends State<HomePage> {
     return showAboutDialog(
       context: context,
       applicationName: "Chico d'Água",
-      applicationVersion: "v1.1.3",
+      applicationVersion: "v1.1.4",
       applicationIcon: Image.asset("imgs/cda.png", height: 55.0, width: 55.0,),
       children: <Widget>[
         Text("Este app é parte resultante do projeto de extensão \"Chico d'Água\" "

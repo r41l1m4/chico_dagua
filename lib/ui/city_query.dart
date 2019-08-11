@@ -15,9 +15,8 @@ class _CityQueryState extends State<CityQuery> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(top: 270.0),
+      body: Center(
+        child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               Container(

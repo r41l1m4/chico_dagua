@@ -110,7 +110,7 @@ class _KcPageState extends State<KcPage> {
                     duration: Duration(milliseconds: 500),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 100.0, vertical: 20.0),
+                          horizontal: 100.0),
                       child: TextFormField(
                         controller: kcController,
                         enabled: manualKc,
@@ -124,8 +124,8 @@ class _KcPageState extends State<KcPage> {
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           labelText: "Kc",
+                          alignLabelWithHint: true,
                           labelStyle: TextStyle(color: Colors.black),
-                          border: OutlineInputBorder(),
                         ),
                         style: TextStyle(
                           color: Colors.black,
@@ -133,6 +133,9 @@ class _KcPageState extends State<KcPage> {
                         ),
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 40.0,
                   ),
                   ScopedModelDescendant<FlowModel>(
                     builder: (context, child, model) {
