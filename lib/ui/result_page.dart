@@ -27,6 +27,11 @@ class _ResultPageState extends State<ResultPage> {
     int min = timeIrrig(ScopedModel.of<FlowModel>(context).etc, el, ep, eem, q);
     String duration = formatTime(min);
 
+    //cria entrada no histórico
+    Map entry = entryHistory(DateTime.now().toString(), cult, stage, min);
+    ds.history.add(entry);
+    ds.saveData(ds.history, isHistory: true);
+
     return Scaffold(
       body: Container(
         color: Colors.lightBlueAccent[400],
@@ -62,9 +67,6 @@ class _ResultPageState extends State<ResultPage> {
             ),
             OutlineButton(
               onPressed: () {
-                Map entry = entryHistory(DateTime.now().toString(), cult, stage, min);
-                ds.history.add(entry);
-                ds.saveData(ds.history, isHistory: true, listHistory: ds.history);
                 Navigator.of(context).pop();
               },
               child: Text("Voltar à página inicial", style: TextStyle(color: Colors.white),),

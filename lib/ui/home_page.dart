@@ -17,67 +17,10 @@ class _HomePageState extends State<HomePage> {
 
   static final DataStuff  ds = DataStuff();
 
-  static List hist = [];
-  static List city = [];
-  static int actCityId = 0;
-
-  @override
-  void initState() {
-    int trava = 0;
-    Map<String, dynamic> mn = Map(); //criamos um mapa <String, dynamic>, dynamic porque tera tipos variados de dados nos valores.
-    super.initState();
-//    ds.readData().then((data) { //lê os dados do arquivo, como o retorno de "readData()" é um Future, usamos o then.
-//      setState(() {
-//
-//        if(data.isEmpty) { //caso os dados venham vazio.
-//          mn = ds.populate();
-//          print(mn);
-//          mn["\"hasCity\""] = false;
-//          mn["\"city\""]["\"cityId\""] = 0;
-//
-//          actCityId = mn["\"city\""]["\"cityId\""];
-//          city.add(mn);
-//          trava = 1;
-//        }else { //caso os dados tenham vindo, faremos o tratamemto. //POG ALERT!!!
-//          city = json.decode(data); //decodificamos os dados, estruturados, e preenchemos a lista _city (é uma lista de mapas).
-//          ds.init(city);
-//          mn.addAll(city[0]); //como só temos um mapa, add quem está na posição 0 ao mapa.
-//
-//          sesMod = SessionModel.init(
-//                        city.elementAt(0)["\"hasCity\""],
-//                        city.elementAt(0)["\"city\""]["\"cityId\""],
-//                        city.elementAt(0)["\"cult\""]["\"cultId\""],
-//                        city.elementAt(0)["\"cult\""]["\"Ep\""],
-//                        city.elementAt(0)["\"irrig\""]["\"q\""],
-//                        city.elementAt(0)["\"irrig\""]["\"Eem\""],
-//                        city.elementAt(0)["\"irrig\""]["\"El\""]
-//                    );
-//        }
-//        actCityId = mn["\"city\""]["\"cityId\""]; //pegamos o segundo valor, esse é o código da cidade.
-//
-//        if(mn["\"hasCity\""] == false && trava == 1) { //caso ainda não tenha sido selecionado uma cidade
-//          Navigator.pushNamed(context, "chooseCity"); //redirecionamos a tela de seleção.
-//        }
-//      });
-//
-//    });
-
-//    ds.readData(isHistory: true).then((data) {
-//      if(data.isEmpty) {
-//        print("Tá vazio!");
-//      }else {
-//        print("Não tá vazio!");
-//        hist = json.decode(data);
-//        ds.initHist(hist);
-//      }
-//    });
-
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(fontFamily: "Comfortaa"),
+      theme: ThemeData(fontFamily: "Comfortaa",),
       home: Scaffold(
           drawer: Drawer(
             child: contextMenu(),
@@ -88,13 +31,14 @@ class _HomePageState extends State<HomePage> {
               rebuildOnChange: true,
               builder: (context, child, model) {
                 return Text(
-                  "Chico d'Água - ${model.hasCity}",
+                  "Chico d'Água",
                   style: TextStyle(
                     fontStyle: FontStyle.italic,
                   ),
                 );
               },
             ),
+            centerTitle: true,
             backgroundColor: Colors.lightBlueAccent[400],
             elevation: 50.0,
           ),

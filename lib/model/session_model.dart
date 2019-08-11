@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -14,9 +12,7 @@ class SessionModel extends Model {
   double _Eem = 0.0;
   double _El = 0.0;
 
-
   SessionModel();
-
 
   SessionModel.init(this._hasCity, this._cityId, this._cultId, this._Ep,
       this._q, this._Eem, this._El);

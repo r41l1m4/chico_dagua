@@ -23,7 +23,6 @@ class NewOne extends StatelessWidget {
       future: ds.readData(),
       builder: (context, snapshot) {
         if(!snapshot.hasData) {
-          print("Ainda nada");
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             home: Scaffold(
@@ -35,9 +34,6 @@ class NewOne extends StatelessWidget {
             ),
           );
         }else if(snapshot.data.length > 2 && (snapshot.data.isNotEmpty || snapshot.data != null)) {
-
-          print("Tem Algo!");
-          print("Main: ${snapshot.data.length}");
           List city = json.decode(snapshot.data);
 
           return ScopedModel<SessionModel>(
@@ -69,7 +65,6 @@ class NewOne extends StatelessWidget {
             ),
           );
         }else {
-          print("Virgem.");
           return ScopedModel<SessionModel>(
             model: SessionModel(),
             child: ScopedModelDescendant<SessionModel>(
