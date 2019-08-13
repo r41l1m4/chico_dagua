@@ -59,6 +59,7 @@ class _ResultPageState extends State<ResultPage> {
             Padding(
                 padding: EdgeInsets.only(bottom: 80.0),
               child: Text("$duration",
+                textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 25.0,

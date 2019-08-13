@@ -132,7 +132,8 @@ class DataStuff {
 
   void clearHistory() {
     history.clear();
-    saveData(history, isHistory: true, isReset: true);
+    saveData(history, isHistory: true);
+    print("CLEAR: $history");
   }
 
   int getCityId(String city) {
@@ -228,16 +229,10 @@ class DataStuff {
   }
 
 
-  Future<File> saveData(List listData, {bool isHistory, bool isReset}) async {
+  Future<File> saveData(List listData, {bool isHistory}) async {
     if(isHistory != null && isHistory) {
       print("saveHistoryData $listData");
       String data = json.encode(listData);
-
-      if(isReset != null && isReset) {
-        hasHistory = false;
-      }else {
-        hasHistory = true;
-      }
 
       final file = await getFile(isHistory: true);
       return file.writeAsString(data);

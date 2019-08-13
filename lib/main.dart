@@ -28,7 +28,7 @@ class NewOne extends StatelessWidget {
             home: Scaffold(
               body: Center(
                 child: CircularProgressIndicator(
-                  backgroundColor: Colors.red,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
                 ),
               ),
             ),

@@ -42,6 +42,7 @@ class _HistoryPageState extends State<HistoryPage> {
             return hasNone();
           }else {
             List history = json.decode(snapshot.data);
+            ds.history = history;
             return hasSome(history);
           }
         },
@@ -71,7 +72,7 @@ class _HistoryPageState extends State<HistoryPage> {
     return ListView.builder(
       itemCount: history.length,
       itemBuilder: (context, index) {
-        return histCard(context, index, history);
+        return histCard(context, index, history.reversed);
       },
     );
   }
