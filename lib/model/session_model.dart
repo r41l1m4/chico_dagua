@@ -5,6 +5,10 @@ class SessionModel extends Model {
   bool _hasCity = false;
   int _cityId = 0;
 
+  String _city = "";
+  String _state = "";
+  double _long = 0.0;
+
   int _cultId = 0;
   double _Ep = 0.0;
 
@@ -14,10 +18,11 @@ class SessionModel extends Model {
 
   SessionModel();
 
-  SessionModel.init(this._hasCity, this._cityId, this._cultId, this._Ep,
-      this._q, this._Eem, this._El);
+  SessionModel.init(this._hasCity, this._cityId, this._city, this._state,
+      this._long, this._cultId, this._Ep, this._q, this._Eem, this._El);
 
-  static SessionModel of(BuildContext context) => ScopedModel.of<SessionModel>(context);
+  static SessionModel of(BuildContext context) =>
+      ScopedModel.of<SessionModel>(context);
 
   bool get hasCity => _hasCity;
 
@@ -34,6 +39,27 @@ class SessionModel extends Model {
   }
 
   double get El => _El;
+
+  String get city => _city;
+
+  void setCity(String cityName) {
+    _city = cityName;
+    notifyListeners();
+  }
+
+  String get state => _state;
+
+  void setState(String stateName) {
+    _state = stateName;
+    notifyListeners();
+  }
+
+  double get long => _long;
+
+  void setLong(double long) {
+    _long = long;
+    notifyListeners();
+  }
 
   void setEl(double value) {
     _El = value;
@@ -78,21 +104,22 @@ class SessionModel extends Model {
     mapRoot["\"hasCity\""] = hasCity;
 
     mapCity["\"cityId\""] = cityId;
-    mapRoot["\"city\""]  = mapCity;
+    mapCity["\"cityName\""] = city;
+    mapCity["\"cityName\""] = state;
+    mapCity["\"longitude\""] = long;
+    mapRoot["\"city\""] = mapCity;
 
     mapCult["\"cultId\""] = _cultId;
     mapCult["\"Ep\""] = Ep;
-    mapRoot["\"cult\""]  = mapCult;
+    mapRoot["\"cult\""] = mapCult;
 
     mapIrrig["\"q\""] = q;
     mapIrrig["\"Eem\""] = Eem;
     mapIrrig["\"El\""] = El;
-    mapRoot["\"irrig\""]  = mapIrrig;
+    mapRoot["\"irrig\""] = mapIrrig;
 
     dataList.add(mapRoot);
 
     return dataList;
   }
-
-
 }
