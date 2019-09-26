@@ -40,6 +40,9 @@ class NewOne extends StatelessWidget {
             model: SessionModel.init(
                         city.elementAt(0)["\"hasCity\""],
                         city.elementAt(0)["\"city\""]["\"cityId\""],
+                        city.elementAt(0)["\"city\""]["\"cityName\""],
+                        city.elementAt(0)["\"city\""]["\"stateName\""],
+                        double.parse(city.elementAt(0)["\"city\""]["\"longitude\""].toString()),
                         city.elementAt(0)["\"cult\""]["\"cultId\""],
                         double.parse(city.elementAt(0)["\"cult\""]["\"Ep\""].toString()),
                         double.parse(city.elementAt(0)["\"irrig\""]["\"q\""].toString()),

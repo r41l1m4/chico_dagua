@@ -105,7 +105,7 @@ class SessionModel extends Model {
 
     mapCity["\"cityId\""] = cityId;
     mapCity["\"cityName\""] = city;
-    mapCity["\"cityName\""] = state;
+    mapCity["\"stateName\""] = state;
     mapCity["\"longitude\""] = long;
     mapRoot["\"city\""] = mapCity;
 
