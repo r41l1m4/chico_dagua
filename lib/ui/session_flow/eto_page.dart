@@ -1,7 +1,7 @@
 import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/flow_model.dart';
 import 'package:chico_dagua/model/session_model.dart';
-import 'package:chico_dagua/ui/kc_page.dart';
+import 'package:chico_dagua/ui/session_flow/kc_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 

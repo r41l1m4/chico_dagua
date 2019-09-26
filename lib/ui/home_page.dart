@@ -1,6 +1,6 @@
 import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/session_model.dart';
-import 'package:chico_dagua/ui/city_query.dart';
+import 'package:chico_dagua/ui/initial_flow/city_query.dart';
 import 'package:chico_dagua/ui/history_page.dart';
 import 'package:chico_dagua/ui/work_page.dart';
 import 'package:flutter/material.dart';

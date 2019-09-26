@@ -1,6 +1,6 @@
 import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/session_model.dart';
-import 'package:chico_dagua/ui/cult_query.dart';
+import 'package:chico_dagua/ui/initial_flow/cult_query.dart';
 import 'package:flutter/material.dart';
 
 class CityQuery extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:chico_dagua/ui/eto_page.dart';
+import 'package:chico_dagua/ui/session_flow/eto_page.dart';
 import 'package:flutter/material.dart';
 
 class WorkPage extends StatefulWidget {
