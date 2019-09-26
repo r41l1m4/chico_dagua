@@ -1,7 +1,7 @@
 import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/session_model.dart';
-import 'package:chico_dagua/ui/initial_flow/city_query.dart';
 import 'package:chico_dagua/ui/history_page.dart';
+import 'package:chico_dagua/ui/initial_flow/loc_perm_page.dart';
 import 'package:chico_dagua/ui/work_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              _contextMenuTiles("Mudar dados", context, CityQuery()),
+              _contextMenuTiles("Mudar dados", context, LocPermPage()),
               _contextMenuTiles("Histórico", context, HistoryPage()),
               Divider(
                 color: Colors.white70,
