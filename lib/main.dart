@@ -4,7 +4,6 @@ import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/flow_model.dart';
 import 'package:chico_dagua/model/session_model.dart';
 import 'package:chico_dagua/ui/initial_flow/first_use_page.dart';
-import 'package:chico_dagua/ui/initial_flow/loc_perm_page.dart';
 import 'package:chico_dagua/ui/session_flow/eto_page.dart';
 import 'package:chico_dagua/ui/home_page.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +81,6 @@ class NewOne extends StatelessWidget {
                     initialRoute: "firstUse",
                     routes: <String, WidgetBuilder> {
                       "firstUse": (BuildContext context) => FirstUsePage(),
-                      "locPage" : (BuildContext context) => LocPermPage(),
                       "calcETo" : (BuildContext context) => EToPage(),
                     },
                   ),

@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.only(top: 38.0, bottom: 20.0),
                     child: ScopedModelDescendant<SessionModel>(
                       builder: (context, child, model) {
-                        return Text("${ds.getCityName(model.cityId)}", style: TextStyle(
+                        return Text("${model.city}", style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18.0,
                           color: Colors.white,
