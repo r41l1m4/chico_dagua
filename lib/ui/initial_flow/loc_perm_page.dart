@@ -22,23 +22,31 @@ class LocPermPage extends StatelessWidget {
               } else {
                 return Center(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        "Olá",
-                        style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.w400),
+                      Container(
+                        alignment: Alignment.topLeft,
+                        padding: EdgeInsets.symmetric(horizontal: 30.0),
+                        child: Text(
+                          "Bem...",
+                          style: TextStyle(
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.w400),
+                        ),
                       ),
-                      Text(
-                        "Preciso da sua permissão para catar a localização",
-                        style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w300),
-                        textAlign: TextAlign.center,
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Container(
+                        alignment: Alignment.topLeft,
+                        padding: EdgeInsets.symmetric(horizontal: 30.0),
+                        child: Text(
+                          "Precisamos da sua permissão para acessar a localização e saber onde você está, para isso, é só clicar no botão abaixo.",
+                          style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w300),
+                          //textAlign: TextAlign.center,
+                        ),
                       ),
                       SizedBox(
                         height: 30.0,
@@ -49,14 +57,19 @@ class LocPermPage extends StatelessWidget {
                           Location().requestPermission().then((hasPerm) {
                             print(hasPerm);
                             if (hasPerm) {
+                              //verifica se o serviço de localização está ativado
                               Location().serviceEnabled().then((isEnabled) {
+                                //Se está ativado
                                 if(isEnabled) {
                                   Future.delayed(Duration(milliseconds: 500));
 //                                  Navigator.of(context).pushReplacement(
 //                                      MaterialPageRoute(
 //                                          builder: (context) => PageTwo()));
+                                //Se não está
                                 }else {
+                                  //Pede para que o serviço seja ativado
                                   Location().requestService().then((hasServ) {
+                                    //Se o serviço foi ativado
                                     if(hasServ) {
                                       Future.delayed(Duration(milliseconds: 500));
 //                                      Navigator.of(context).pushReplacement(
@@ -90,46 +103,6 @@ class LocPermPage extends StatelessWidget {
                       ),
                       SizedBox(
                         height: 30.0,
-                      ),
-                      RaisedButton(
-                        child: Text("Ceder Permissão"),
-                        color: Colors.lightBlueAccent[400],
-                        onPressed: () {
-                          // ignore: missing_return
-                          Location().requestPermission().then((hasPerm) {
-                            print(hasPerm);
-                            if (hasPerm) {
-                              Location().serviceEnabled().then((isEnabled) {
-                                if(isEnabled) {
-                                  Future.delayed(Duration(milliseconds: 500));
-//                                  Navigator.of(context).pushReplacement(
-//                                      MaterialPageRoute(
-//                                          builder: (context) => PageTwo()));
-                                }else {
-                                  Location().requestService().then((hasServ) {
-                                    if(hasServ) {
-                                      Future.delayed(Duration(milliseconds: 500));
-//                                      Navigator.of(context).pushReplacement(
-//                                          MaterialPageRoute(
-//                                              builder: (context) => PageTwo()));
-                                    }
-                                  });
-                                }
-                              });
-                            } else {
-                              return showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    content: Text("Bora liberar essa porra?"),
-                                    title: Text("ERRO!"),
-                                    backgroundColor: Colors.lightBlueAccent[400],
-                                  );
-                                },
-                              );
-                            }
-                          });
-                        },
                       ),
                     ],
                   ),
