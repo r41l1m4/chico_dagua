@@ -19,8 +19,8 @@ class DataStuff {
     "Inajá": 7,
     "Major Isidoro": 8,
     "Mata Grande": 9,
-    "O. d’Água das Flores": 10,
-    "O. d’Água do Casado": 11,
+    "Olho d’Água das Flores": 10,
+    "Olho d’Água do Casado": 11,
     "Pariconha": 12,
     "São Braz": 13,
     "São José da Tapera": 14
@@ -195,6 +195,18 @@ class DataStuff {
 
   String getStageName(int id) {
     return _stages.keys.elementAt(id);
+  }
+
+  ///Verifica, dado o nome de uma cidade, se ela está na lista de cidades que
+  ///tem coeficientes calibrados.
+  bool hasBetterCfts(String cityName) {
+    return _ids.containsKey(cityName);
+  }
+
+  ///Retorna uma lista com os coeficientes padrão (é o ultimo na lista de coefici
+  ///entes, e assim DEVE permanecer).
+  List getDefaultCfts() {
+    return _cfts.last;
   }
 
   //JSON manipulation

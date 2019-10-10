@@ -41,7 +41,7 @@ class _EToPageState extends State<EToPage> {
                   padding: EdgeInsets.only(top: 40.0, right: 10.0),
                   alignment: Alignment.topRight,
                   child: Text(
-                    ds.getCityName(ScopedModel.of<SessionModel>(context).cityId),
+                    SessionModel.of(context).city,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 15.0,
@@ -89,7 +89,7 @@ class _EToPageState extends State<EToPage> {
                           onPressed: () {
                             if(_formKey.currentState.validate()) {
                               double et0 = resETo(
-                                  ScopedModel.of<SessionModel>(context).cityId,
+                                  SessionModel.of(context).city,
                                   double.parse(tMaxController.text),
                                   double.parse(tMinController.text)
                               );
@@ -160,18 +160,33 @@ class _EToPageState extends State<EToPage> {
     );
   }
 
-
-  double resETo(int cityId, double tMax, double tMin) {
+  ///Dado um nome de cidade, e temperaturas máxima e mínima, retorna o ETo.
+  double resETo(String cityName, double tMax, double tMin) {
 
     List cfts = List();
-    cfts.add(ds.getAllCftsCity(cityId));
-    double a = cfts.elementAt(0)[0];
-    double b = cfts.elementAt(0)[1];
-    double c = cfts.elementAt(0)[2];
-    double tMed = (tMax + tMin) / 2;
+    double a;
+    double b;
+    double c;
+    double irrSol;
     int mes = DateTime.now().month;
-    double irrSol = ds.getIrrSolarMes(cityId, mes);
 
+    //Se há coeficientes calibrados para a cidade
+    if(ds.hasBetterCfts(cityName)) {
+      cfts.add(ds.getAllCftsCity(ds.getCityId(cityName)));
+      a = cfts.elementAt(0)[0];
+      b = cfts.elementAt(0)[1];
+      c = cfts.elementAt(0)[2];
+      irrSol = ds.getIrrSolarMes(ds.getCityId(cityName), mes);
+     //Caso não haja.
+    }else {
+      cfts.add(ds.getDefaultCfts());
+      a = cfts.elementAt(0)[0];
+      b = cfts.elementAt(0)[1];
+      c = cfts.elementAt(0)[2];
+      irrSol = ds.getIrrSolarMes(0, mes);
+    }
+
+    double tMed = (tMax + tMin) / 2;
     double eto = a * irrSol * pow((tMax - tMin), b) * (tMed + c);
     double eto2 = double.parse(eto.toStringAsPrecision(3));
     print(eto2);

@@ -38,7 +38,7 @@ class _KcPageState extends State<KcPage> {
                   padding: EdgeInsets.only(top: 40.0, right: 10.0),
                   alignment: Alignment.topRight,
                   child: Text(
-                    ds.getCityName(ScopedModel.of<SessionModel>(context).cityId),
+                    SessionModel.of(context).city,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 15.0,

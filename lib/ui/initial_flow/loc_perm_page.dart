@@ -47,7 +47,10 @@ class LocPermPage extends StatelessWidget {
                             alignment: Alignment.topLeft,
                             padding: EdgeInsets.symmetric(horizontal: 30.0),
                             child: Text(
-                              "Precisamos da sua permissão para acessar a localização e saber onde você está, para isso, é só clicar no botão abaixo.",
+                              "Precisamos da sua permissão para acessar a "
+                                  "localização e saber onde você está, "
+                                  "para isso, é só clicar no botão abaixo. \n"
+                                  "Certifique-se que o GPS do aparelho está ativo.",
                               style: TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.w300),
@@ -55,7 +58,7 @@ class LocPermPage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height: 30.0,
+                            height: 40.0,
                           ),
                           OutlineButton(
                             onPressed: () {
@@ -82,6 +85,7 @@ class LocPermPage extends StatelessWidget {
                                           Future.delayed(Duration(milliseconds: 500));
                                           model.setCity(geolocData.first.subAdminArea);
                                           model.setState(geolocData.first.adminArea);
+                                          model.setCityState(true);
                                           print("Local: ${geolocData.first.subAdminArea}, ${geolocData.first.adminArea}");
                                         });
                                       });
@@ -135,6 +139,7 @@ class LocPermPage extends StatelessWidget {
                     );
                   }
                 }
+                //Um FutureBuilder DEVE retornar algo.
                 return Container();
               });
         },
