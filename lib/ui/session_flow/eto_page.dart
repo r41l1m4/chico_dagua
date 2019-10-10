@@ -134,6 +134,8 @@ class _EToPageState extends State<EToPage> {
     );
   }
 
+  ///Retorna um campo de entrada de texto, recebendo um título e um controlador
+  ///de campo de entrada.
   Widget _tempInputBox(controller, label) {
     return TextFormField(
       controller: controller,

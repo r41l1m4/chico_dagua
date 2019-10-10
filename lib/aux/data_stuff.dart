@@ -130,21 +130,26 @@ class DataStuff {
   List history = [];
   bool hasHistory = false;
 
+  /// Apaga o histórico que está no arquivo, e consequentemente do app.
   void clearHistory() {
     history.clear();
     saveData(history, isHistory: true);
     print("CLEAR: $history");
   }
 
+  /// Retorna o ID da cidade, baseado no nome da cidade.
   int getCityId(String city) {
     return _ids[city];
   }
 
+  /// Retorna uma String com o nome da cidade, baseado no ID da cidade.
   String getCityName(int id) {
     var tr = _ids.keys;
     return tr.elementAt(id);
   }
 
+  /// Retorna o coeficiente especifico (a, b, ou c), para determinada cidade.
+  /// Baseado no ID da cidade, e qual a letra do coeficiente.
   double getCfts(int idCity, String cfts) {
     if(cfts == "a") {
       return _cfts[idCity][0];
@@ -157,42 +162,57 @@ class DataStuff {
     }
   }
 
+  /// Retorna uma lista com os coeficientes para calculo do ETo, baseado no ID
+  /// da cidade.
   List getAllCftsCity(int idCity) {
     return _cfts[idCity];
   }
 
+  /// Retorna o coeficiente de irradiação solar para a cidade, baseado no ID da
+  /// cidade e no número do mês.
   double getIrrSolarMes(int idCity, int month) {
     return _irdSolarMes[idCity][month-1];
   }
 
+  ///Retorna uma lista com todas as cidades que tem coeficientes calibrados.
   getCityKeys() {
     return _ids.keys;
   }
 
+  ///Retorna o Kc da cultura, basado no ID da cultura o o ID do estágio em que
+  ///se encontra a cultura.
   double getCultKc(int cult, int stageCult) {
     return _cultsKc[cult][stageCult];
   }
 
+  /// Retorna uma lista com todas as culturas possiveis.
   getCultKeys() {
     return _cults.keys;
   }
 
+  /// Retorna um lista com os estágios possiveis das culturas.
   getStageKeys() {
     return _stages.keys;
   }
 
+  /// Retorna o ID da cultura, baseado no nome da cultura.
   int getCultId(String cultName) {
     return _cults[cultName];
   }
 
+  /// Retorna o nome da cultura, baseado no ID da cultura.
   String getCultName(int id) {
     return _cults.keys.elementAt(id);
   }
 
+  /// Retorna um inteiro com o ID do estágio em que se encontra a cultura,
+  /// baseado no nome do estágio.
   int getStageId(String stageName) {
     return _stages[stageName];
   }
 
+  /// Retorna uma String com o nome do estágio em que se encontra a cultura,
+  /// baseado no id do estágio.
   String getStageName(int id) {
     return _stages.keys.elementAt(id);
   }
@@ -210,6 +230,10 @@ class DataStuff {
   }
 
   //JSON manipulation
+  /// Retorna o arquivo onde são guardados os dados, para escrita.
+  /// Caso o arquivo ainda não exista, ele é criado.
+  /// É usado o próprio arcabouço do flutter para definir o local onde esse
+  /// arquivo deve ser salvo.
   Future<File> getFile({bool isHistory}) async {
     final directory = await getApplicationDocumentsDirectory();
     try {
@@ -240,7 +264,9 @@ class DataStuff {
 
   }
 
-
+  ///Recebe os dados em formato de lista e escreve no arquivo JSON.
+  ///Como parametro opcional verifica se é dados de histórico, caso esse paramêtro
+  ///não seja definido, encara como sendo dados normais.
   Future<File> saveData(List listData, {bool isHistory}) async {
     if(isHistory != null && isHistory) {
       print("saveHistoryData $listData");
@@ -256,6 +282,9 @@ class DataStuff {
 
   }
 
+  ///Lê os dados do arquivo JSON.
+  ///Tem como paramêtro opcional se é para ler o histórico, caso não, encara como
+  ///sendo os dados normais.
   Future<String> readData({bool isHistory}) async {
     try {
       if(isHistory != null && isHistory) {

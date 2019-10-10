@@ -105,6 +105,7 @@ class _KcPageState extends State<KcPage> {
                       Text("Quero digitar o Kc da cultura.")
                     ],
                   ),
+                  //Define se o campo para entrada do Kc está oculto ou não.
                   AnimatedOpacity(
                     opacity: manualKc ? 1.0 : 0.0,
                     duration: Duration(milliseconds: 500),
@@ -171,6 +172,8 @@ class _KcPageState extends State<KcPage> {
                                 });
                           } else {
                             int cultId = ScopedModel.of<SessionModel>(context).cultId;
+                            //Caso seja escolhido entrar manualmente com o Kc, pega o número
+                            //do campo de texto, caso não, verifica qual o Kc padrão da cultura.
                             double kc = manualKc
                                 ? double.parse(kcController.text)
                                 : ds.getCultKc(
@@ -180,6 +183,7 @@ class _KcPageState extends State<KcPage> {
                             model.setStage(dropdownValue ?? "Kc Manual");
                             return Navigator.pushReplacement(
                                 context,
+                                //Define a animação de transição entre as telas.
                                 PageRouteBuilder(
                                   pageBuilder:
                                       (context, animation, secondAnimation) =>
@@ -217,6 +221,7 @@ class _KcPageState extends State<KcPage> {
     );
   }
 
+  ///Dado o ETo e o Kc da cultura, retorna o ETc.
   double getETc(double eto, double kc) {
     double etc = eto * kc;
     double etc2 = double.parse(etc.toStringAsPrecision(3));

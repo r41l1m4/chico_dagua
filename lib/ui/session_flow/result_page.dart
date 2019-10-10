@@ -18,6 +18,8 @@ class _ResultPageState extends State<ResultPage> {
   Widget build(BuildContext context) {
 
     double q = ScopedModel.of<SessionModel>(context).q;
+    // Divide por 100 pois o valor é dado em "cm", e precisamos de um decimal
+    // para que seja substituido na equação.
     double eem = ScopedModel.of<SessionModel>(context).Eem / 100;
     double el = ScopedModel.of<SessionModel>(context).El / 100;
     double ep = ScopedModel.of<SessionModel>(context).Ep / 100;
@@ -84,6 +86,8 @@ class _ResultPageState extends State<ResultPage> {
     );
   }
 
+  /// Dado o ETc, vazão do equipamento e os parâmetros de distância, retorna a
+  /// quantidade de minutos que o equipamento deve permanecer ligado.
   int timeIrrig(double etc, double El, double Ep, double Eem, double q) {
     double pt1 = etc * (El * Ep);
     double pt2 = q * (Ep / Eem);
@@ -91,6 +95,9 @@ class _ResultPageState extends State<ResultPage> {
     return time.round();
   }
 
+  /// Recebe a quantidade de tempo em minutos, e retorna uma String com o tempo
+  /// em formato légivel para o olho humano.
+  /// Ex: 73min => 1 hora e 13 minutos
   String formatTime(int time) {
     int h;
     int min;
@@ -115,6 +122,8 @@ class _ResultPageState extends State<ResultPage> {
     return null;
   }
 
+  ///Retorna um mapa com os dados, já organizados, para que seja salvo no histórico
+  ///em JSON.
   Map entryHistory(String data, String cult, String stage, int mins) {
     Map<String, dynamic> mp2 = Map();
 
