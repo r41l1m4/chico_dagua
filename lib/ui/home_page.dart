@@ -117,6 +117,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  ///Retorna um Widget com uma Tile para o menu de contexto, baseada em determinados
+  ///parêmetros.
   Widget _contextMenuTiles(String title, BuildContext context, Widget newPage) {
     return ListTile(
       title: Text("$title", style: TextStyle(
@@ -133,6 +135,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  ///Retorna a tela com o "Sobre" do app.
   void _aboutInfo() {
     return showAboutDialog(
       context: context,

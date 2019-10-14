@@ -68,6 +68,9 @@ class _IrrQueryState extends State<IrrQuery> {
     );
   }
 
+  ///Retorna um campo de entrada de texto baseado nos parâmetros, que são uma legenda
+  ///para a caixa de texto, um sufixo (se estiver sendo capturado uma temperatura, será
+  ///o "ºC" da visualização), e um controlador para o campo de texto.
   Widget _tempInputBox(label, suffix, controller) {
     return TextFormField(
       controller: controller,
@@ -94,6 +97,8 @@ class _IrrQueryState extends State<IrrQuery> {
     );
   }
 
+  ///Retorna um texto com a legenda (normalmente, uma pergunta)
+  ///que foi passada por parâmetro.
   Widget _tempQuestionBox(question) {
     return Container(
       alignment: Alignment.center,

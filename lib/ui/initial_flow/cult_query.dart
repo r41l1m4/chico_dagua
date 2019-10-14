@@ -122,6 +122,8 @@ class _CultQueryState extends State<CultQuery> {
     );
   }
 
+  ///Retorna um campo de entrada de texto com a legenda (normalmente, uma pergunta)
+  ///que foi passada por parâmetro.
   Widget _tempQuestionBox(question) {
     return Container(
       alignment: Alignment.center,

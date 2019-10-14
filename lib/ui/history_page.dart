@@ -50,6 +50,8 @@ class _HistoryPageState extends State<HistoryPage> {
     );
   }
 
+  ///Retorna um Widget com um texto dizendo que não tem nada, cas não haja registros
+  ///no histórico.
   Widget hasNone() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -68,6 +70,7 @@ class _HistoryPageState extends State<HistoryPage> {
     );
   }
 
+  ///Retorna um Widget com a lista de Cards de entradas do histórico.
   Widget hasSome(List history) {
     return ListView.builder(
       itemCount: history.length,
@@ -77,6 +80,9 @@ class _HistoryPageState extends State<HistoryPage> {
     );
   }
 
+  ///Retorna um Widget, um Card especificamente, dados determinados paramêtros, isso
+  ///é claro, após algumas manipulações nos dados para que seja entendível por
+  ///humanos.
   Widget histCard(BuildContext context, int index, Iterable history) {
     Map act = history.elementAt(index);
     String tmStamp = act.values.elementAt(0); //recebe o tempo em texto
@@ -125,6 +131,9 @@ class _HistoryPageState extends State<HistoryPage> {
     );
   }
 
+
+  ///Retorna um string com o tempo em formato legível para humanos.
+  ///Ex. dado 63min, irá retornar "1 hora e 3 minutos".
   String formatTime(int time) {
     int h;
     int min;
