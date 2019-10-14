@@ -36,6 +36,7 @@ class NewOne extends StatelessWidget {
         }else if(snapshot.data.length > 2 && (snapshot.data.isNotEmpty || snapshot.data != null)) {
           List city = json.decode(snapshot.data);
 
+          //:)
           return ScopedModel<SessionModel>(
             model: SessionModel.init(
                         city.elementAt(0)["\"hasCity\""],
