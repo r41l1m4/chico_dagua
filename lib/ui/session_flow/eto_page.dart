@@ -3,6 +3,8 @@ import 'package:chico_dagua/model/flow_model.dart';
 import 'package:chico_dagua/model/session_model.dart';
 import 'package:chico_dagua/ui/session_flow/kc_page.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:quiver/time.dart';
 import 'dart:math';
 
 import 'package:scoped_model/scoped_model.dart';
@@ -162,6 +164,48 @@ class _EToPageState extends State<EToPage> {
     );
   }
 
+  int ordinalDay(int year, int month, int day) { //retorna o dia juliano
+    if (month == DateTime.january) {
+      return day;
+    } else if (month == DateTime.february) {
+      return day + 31;
+    } else {
+      if (isLeapYear(year)) {
+        return ordinalDayFromMarchFirst(month, day) + 60;
+      } else {
+        return ordinalDayFromMarchFirst(month, day) + 59;
+      }
+    }
+  }
+
+  ///Recebe o dia juliano e retorna distância Terra-Sol para aquele dia do ano. (dr)
+  double calcDistanceEarthSun(int julianDay) {
+    return 1 + 0.033 * cos(2 * pi * (julianDay / 365));
+  }
+
+  ///Recebe o dia juliano e calcula a constante psicrométrica para aquele dia do ano. (d)
+  double calcPsychometricConstD(int julianDay) {
+    return 0.409 * sin((2 * pi * (julianDay / 365)) - 1.39);
+  }
+
+  ///Recebe o dia juliano e calcula a constante psicrométrica para aquele dia do ano,
+  ///naquela exata localização (latitude). (j)
+  double calcPsychometricConstJ(int julianDay) {
+    return (pi / 180) * SessionModel.of(context).lat;
+  }
+
+  ///Retorna o ângulo do pôr do sol para determinado dia, baseado nas constantes
+  ///psicrométricas "d" e "j". (ws)
+  double calcSunsetAngle(double d, double j) {
+    return acos((-tan(j)) * tan(d));
+  }
+
+  ///Retorna a radiação solar extraterrestre, baseado na distância terra-sol,
+  ///ângulo do pôr do sol e constantes psicrométricas "d" e "j".
+  double calcSolarRadExt(double dr, double d, double j, double ws) {
+    return (24 * 60 * 0.082 * (dr / pi)) * (ws * sin(j) * sin(d) + cos(j) * cos(d) * sin(ws));
+  }
+
   ///Dado um nome de cidade, e temperaturas máxima e mínima, retorna o ETo.
   double resETo(String cityName, double tMax, double tMin) {
 
@@ -169,8 +213,12 @@ class _EToPageState extends State<EToPage> {
     double a;
     double b;
     double c;
-    double irrSol;
-    int mes = DateTime.now().month;
+
+    int julianDay = ordinalDay(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    double d = calcPsychometricConstD(julianDay);
+    double j = calcPsychometricConstJ(julianDay);
+    double dr = calcDistanceEarthSun(julianDay);
+    double ws = calcSunsetAngle(d, j);
 
     //Se há coeficientes calibrados para a cidade
     if(ds.hasBetterCfts(cityName)) {
@@ -178,18 +226,16 @@ class _EToPageState extends State<EToPage> {
       a = cfts.elementAt(0)[0];
       b = cfts.elementAt(0)[1];
       c = cfts.elementAt(0)[2];
-      irrSol = ds.getIrrSolarMes(ds.getCityId(cityName), mes);
      //Caso não haja.
     }else {
       cfts.add(ds.getDefaultCfts());
       a = cfts.elementAt(0)[0];
       b = cfts.elementAt(0)[1];
       c = cfts.elementAt(0)[2];
-      irrSol = ds.getIrrSolarMes(0, mes);
     }
 
     double tMed = (tMax + tMin) / 2;
-    double eto = a * irrSol * pow((tMax - tMin), b) * (tMed + c);
+    double eto = a * calcSolarRadExt(dr, d, j, ws) * pow((tMax - tMin), b) * (tMed + c);
     double eto2 = double.parse(eto.toStringAsPrecision(3));
     print(eto2);
     return eto2;

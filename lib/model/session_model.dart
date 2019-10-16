@@ -10,7 +10,7 @@ class SessionModel extends Model {
 
   String _city = "";
   String _state = "";
-  double _long = 0.0;
+  double _lat = 0.0;
 
   int _cultId = 0;
   double _Ep = 0.0;
@@ -24,7 +24,7 @@ class SessionModel extends Model {
   ///Responsável por preencher os dados que o usuário inseriu no primeiro uso, e
   ///que estão salvos no arquivo no aparelho.
   SessionModel.init(this._hasCity, this._cityId, this._city, this._state,
-      this._long, this._cultId, this._Ep, this._q, this._Eem, this._El);
+      this._lat, this._cultId, this._Ep, this._q, this._Eem, this._El);
 
   ///Necessário para que consigamos acessar o modelo a partir do contexto.
   static SessionModel of(BuildContext context) =>
@@ -70,12 +70,12 @@ class SessionModel extends Model {
     notifyListeners();
   }
 
-  ///Retorna um double com a longitude da localização do usuário.
-  double get long => _long;
+  ///Retorna um double com a latitude da localização do usuário.
+  double get lat => _lat;
 
-  ///Define a longitude da localização do usuário.
-  void setLong(double long) {
-    _long = long;
+  ///Define a latitude da localização do usuário.
+  void setLat(double lat) {
+    _lat = lat;
     notifyListeners();
   }
 
@@ -135,7 +135,7 @@ class SessionModel extends Model {
     mapCity["\"cityId\""] = cityId;
     mapCity["\"cityName\""] = city;
     mapCity["\"stateName\""] = state;
-    mapCity["\"longitude\""] = long;
+    mapCity["\"latitude\""] = lat;
     mapRoot["\"city\""] = mapCity;
 
     mapCult["\"cultId\""] = _cultId;

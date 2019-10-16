@@ -4,8 +4,6 @@ import 'package:chico_dagua/ui/history_page.dart';
 import 'package:chico_dagua/ui/initial_flow/loc_perm_page.dart';
 import 'package:chico_dagua/ui/work_page.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:quiver/time.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class HomePage extends StatefulWidget {
@@ -46,20 +44,6 @@ class _HomePageState extends State<HomePage> {
       ),
       debugShowCheckedModeBanner: false,
     );
-  }
-
-  static int ordinalDay(int year, int month, int day) { //retorna o dia juliano
-    if (month == DateTime.january) {
-      return day;
-    } else if (month == DateTime.february) {
-      return day + 31;
-    } else {
-      if (isLeapYear(year)) {
-        return ordinalDayFromMarchFirst(month, day) + 60;
-      } else {
-        return ordinalDayFromMarchFirst(month, day) + 59;
-      }
-    }
   }
 
   Widget contextMenu() {
