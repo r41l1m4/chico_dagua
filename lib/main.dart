@@ -36,14 +36,13 @@ class NewOne extends StatelessWidget {
         }else if(snapshot.data.length > 2 && (snapshot.data.isNotEmpty || snapshot.data != null)) {
           List city = json.decode(snapshot.data);
 
-          //:)
           return ScopedModel<SessionModel>(
             model: SessionModel.init(
                         city.elementAt(0)["\"hasCity\""],
                         city.elementAt(0)["\"city\""]["\"cityId\""],
                         city.elementAt(0)["\"city\""]["\"cityName\""],
                         city.elementAt(0)["\"city\""]["\"stateName\""],
-                        double.parse(city.elementAt(0)["\"city\""]["\"longitude\""].toString()),
+                        double.parse(city.elementAt(0)["\"city\""]["\"latitude\""].toString()),
                         city.elementAt(0)["\"cult\""]["\"cultId\""],
                         double.parse(city.elementAt(0)["\"cult\""]["\"Ep\""].toString()),
                         double.parse(city.elementAt(0)["\"irrig\""]["\"q\""].toString()),
