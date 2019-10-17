@@ -75,27 +75,20 @@ class _HistoryPageState extends State<HistoryPage> {
     return ListView.builder(
       itemCount: history.length,
       itemBuilder: (context, index) {
-        return histCard(context, index, history.reversed);
+        return histCard(index, history.reversed.elementAt(index));
       },
     );
   }
 
-  ///Retorna um Widget, um Card especificamente, dados determinados paramêtros, isso
+  ///Retorna um Widget, um Card especificamente, dados determinados parâmetros, isso
   ///é claro, após algumas manipulações nos dados para que seja entendível por
   ///humanos.
-  Widget histCard(BuildContext context, int index, Iterable history) {
-    Map act = history.elementAt(index);
-    String tmStamp = act.values.elementAt(0); //recebe o tempo em texto
-    String cult = act.values.elementAt(1);
-    String stage = act.values.elementAt(2);
-    int mins = act.values.elementAt(3);
-
-    DateTime dt = DateTime.parse(tmStamp); //converte o tempo em texto para uma
-                                            //instancia de DateTime
-
-    String timf = DateFormat("dd-MM-yyyy hh:mm aa").format(dt); //formata a instancia de DateTime
-    String minsStr = formatTime(mins); //deixa os minutos legiveis
-
+  Widget histCard(int index, Map histEntry) {
+    //histEntry => {timeStamp, cult, stage, mins, et0}
+    DateTime dt = DateTime
+        .parse(histEntry.values.elementAt(0)); //converte o tempo em texto para uma
+                                              //instancia de DateTime
+    String timeFormated = DateFormat("dd-MM-yyyy hh:mm aa").format(dt); //formata a instancia de DateTime
 
     return Card(
       elevation: 13.0,
@@ -105,23 +98,32 @@ class _HistoryPageState extends State<HistoryPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text(timf,
+            Text(timeFormated,
               style: TextStyle(fontFamily: "Comfortaa"),
               textAlign: TextAlign.right,
             ),
             Padding(
-                padding: EdgeInsets.only(bottom: 3.0),
-              child: Text("$cult - $stage",
+                padding: EdgeInsets.only(bottom: 5.0),
+              child: Text("${histEntry.values.elementAt(1)} "
+                  "- ${histEntry.values.elementAt(2)}",
                 style: TextStyle(fontSize: 16.0,
                   fontFamily: "Comfortaa",
                 ),
               ),
             ),
-            Text("$minsStr",
+            Text("${formatTime(histEntry.values.elementAt(3))}",
               style: TextStyle(color: Colors.white,
-                fontSize: 22.0,
+                fontSize: 24.0,
                 fontWeight: FontWeight.bold,
                 fontFamily: "Comfortaa"
+              ),
+              textAlign: TextAlign.left,
+            ),
+            Text("ETo: ${histEntry.values.elementAt(4)}",
+              style: TextStyle(color: Colors.white,
+                  fontSize: 17.0,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Comfortaa"
               ),
               textAlign: TextAlign.left,
             ),

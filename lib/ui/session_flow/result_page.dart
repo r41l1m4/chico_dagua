@@ -30,7 +30,12 @@ class _ResultPageState extends State<ResultPage> {
     String duration = formatTime(min);
 
     //cria entrada no histórico
-    Map entry = entryHistory(DateTime.now().toString(), cult, stage, min);
+    Map entry = entryHistory(DateTime.now().toString(),
+        cult,
+        stage,
+        min,
+        FlowModel.of(context).et0
+    );
     ds.history.add(entry);
     ds.saveData(ds.history, isHistory: true);
 
@@ -59,12 +64,22 @@ class _ResultPageState extends State<ResultPage> {
               ),
             ),
             Padding(
-                padding: EdgeInsets.only(bottom: 80.0),
+              padding: EdgeInsets.only(bottom: 80.0),
               child: Text("$duration",
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25.0,
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 20.0),
+              child: Text("ETo -> ${FlowModel.of(context).et0}",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18.0,
                 ),
               ),
             ),
@@ -124,13 +139,14 @@ class _ResultPageState extends State<ResultPage> {
 
   ///Retorna um mapa com os dados, já organizados, para que seja salvo no histórico
   ///em JSON.
-  Map entryHistory(String data, String cult, String stage, int mins) {
+  Map entryHistory(String data, String cult, String stage, int mins, double et0) {
     Map<String, dynamic> mp2 = Map();
 
     mp2["\"tmStamp\""] = data;
     mp2["\"cult\""] = cult;
     mp2["\"stage\""] = stage;
     mp2["\"mins\""] = mins;
+    mp2["\"ETo\""] = et0;
 
     return mp2;
   }
