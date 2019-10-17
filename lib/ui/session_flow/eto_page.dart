@@ -233,9 +233,8 @@ class _EToPageState extends State<EToPage> {
       b = cfts.elementAt(0)[1];
       c = cfts.elementAt(0)[2];
     }
-
     double tMed = (tMax + tMin) / 2;
-    double eto = a * calcSolarRadExt(dr, d, j, ws) * pow((tMax - tMin), b) * (tMed + c);
+    double eto = a * (calcSolarRadExt(dr, d, j, ws) / 2.45) * pow((tMax - tMin), b) * (tMed + c);
     double eto2 = double.parse(eto.toStringAsPrecision(3));
     print(eto2);
     return eto2;
