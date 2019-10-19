@@ -1,5 +1,6 @@
 import 'package:chico_dagua/model/session_model.dart';
 import 'package:chico_dagua/ui/initial_flow/cult_query.dart';
+import 'package:chico_dagua/ui/initial_flow/pos_loc_pre_cult.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:location/location.dart';
@@ -87,7 +88,7 @@ class LocPermPage extends StatelessWidget {
                                     Future.delayed(Duration(milliseconds: 500));
                                     Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
-                                            builder: (BuildContext context) => CultQuery()
+                                            builder: (BuildContext context) => PosLocPreCult()
                                         ));
                                     //Se não está
                                   }else {
