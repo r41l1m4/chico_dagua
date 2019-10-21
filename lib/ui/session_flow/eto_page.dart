@@ -2,6 +2,7 @@ import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/flow_model.dart';
 import 'package:chico_dagua/model/session_model.dart';
 import 'package:chico_dagua/ui/session_flow/kc_page.dart';
+import 'package:chico_dagua/ui/session_flow/kc_page_alt.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:quiver/time.dart';
@@ -99,7 +100,8 @@ class _EToPageState extends State<EToPage> {
                               return Navigator.pushReplacement(
                                   this.context,
                                   PageRouteBuilder(
-                                    pageBuilder: (context, animation, secondAnimation) => KcPage(),
+                                    pageBuilder: (context, animation, secondAnimation)
+                                    => SessionModel.of(context).cultId == 25 ? KcPageAlt() : KcPage(),
                                     transitionDuration: Duration(milliseconds: 400),
                                     transitionsBuilder: (context, animation, secondAnimation, child) {
                                       var begin = Offset(1.0, 0.0);
