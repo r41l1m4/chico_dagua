@@ -17,22 +17,21 @@ class _ResultPageState extends State<ResultPage> {
   @override
   Widget build(BuildContext context) {
 
-    double q = ScopedModel.of<SessionModel>(context).q;
-    // Divide por 100 pois o valor é dado em "cm", e precisamos de um decimal
-    // para que seja substituido na equação.
-    double eem = ScopedModel.of<SessionModel>(context).Eem / 100;
-    double el = ScopedModel.of<SessionModel>(context).El / 100;
-    double ep = ScopedModel.of<SessionModel>(context).Ep / 100;
-    String cult = ds.getCultName(ScopedModel.of<SessionModel>(context).cultId);
-    String stage = ScopedModel.of<FlowModel>(context).stage;
-
-    int min = timeIrrig(ScopedModel.of<FlowModel>(context).etc, el, ep, eem, q);
+    int min = timeIrrig(
+        ScopedModel.of<FlowModel>(context).etc,
+        // Divide por 100 pois o valor é dado em "cm", e precisamos de um decimal
+        // para que seja substituido na equação.
+        ScopedModel.of<SessionModel>(context).El / 100,
+        ScopedModel.of<SessionModel>(context).Ep / 100,
+        ScopedModel.of<SessionModel>(context).Eem / 100,
+        ScopedModel.of<SessionModel>(context).q
+    );
     String duration = formatTime(min);
 
     //cria entrada no histórico
     Map entry = entryHistory(DateTime.now().toString(),
-        cult,
-        stage,
+        ScopedModel.of<SessionModel>(context).cultName,
+        ScopedModel.of<FlowModel>(context).stage,
         min,
         FlowModel.of(context).et0
     );

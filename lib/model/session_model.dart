@@ -13,6 +13,7 @@ class SessionModel extends Model {
   double _lat = 0.0;
 
   int _cultId = 0;
+  String _cultName = "";
   double _Ep = 0.0;
 
   double _q = 0.0;
@@ -24,7 +25,7 @@ class SessionModel extends Model {
   ///Responsável por preencher os dados que o usuário inseriu no primeiro uso, e
   ///que estão salvos no arquivo no aparelho.
   SessionModel.init(this._hasCity, this._cityId, this._city, this._state,
-      this._lat, this._cultId, this._Ep, this._q, this._Eem, this._El);
+      this._lat, this._cultId, this._cultName, this._Ep, this._q, this._Eem, this._El);
 
   ///Necessário para que consigamos acessar o modelo a partir do contexto.
   static SessionModel of(BuildContext context) =>
@@ -121,6 +122,15 @@ class SessionModel extends Model {
     notifyListeners();
   }
 
+  ///Retorna uma String com o nome da cultura.
+  String get cultName => _cultName;
+
+  ///Define o Id da cultura.
+  void setCultName(String value) {
+    _cultName = value;
+    notifyListeners();
+  }
+
   ///Retorna um lista com os dados estruturados em formato de mapa, para que possam
   ///ser armazenados em JSON no aparelho.
   List toList() {
@@ -139,6 +149,7 @@ class SessionModel extends Model {
     mapRoot["\"city\""] = mapCity;
 
     mapCult["\"cultId\""] = _cultId;
+    mapCult["\"cultName\""] = _cultName;
     mapCult["\"Ep\""] = Ep;
     mapRoot["\"cult\""] = mapCult;
 

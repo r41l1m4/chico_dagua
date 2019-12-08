@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  /// Responsável pelo menu de contexto na página inicial do app.
   Widget contextMenu() {
     return ScopedModelDescendant<SessionModel>(
       builder: (context, child, model) {
@@ -93,6 +94,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),),
                   onTap: () {
+                    Navigator.pop(context);
                     _aboutInfo();
                   }
               ),
@@ -111,6 +113,7 @@ class _HomePageState extends State<HomePage> {
         color: Colors.white,
       ),),
       onTap: () {
+        Navigator.pop(context);
         return Navigator.push(
             context,
             MaterialPageRoute(

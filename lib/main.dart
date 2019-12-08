@@ -45,6 +45,7 @@ class NewOne extends StatelessWidget {
                         city.elementAt(0)["\"city\""]["\"stateName\""],
                         city.elementAt(0)["\"city\""]["\"latitude\""],
                         city.elementAt(0)["\"cult\""]["\"cultId\""],
+                        city.elementAt(0)["\"cult\""]["\"cultName\""],
                         double.parse(city.elementAt(0)["\"cult\""]["\"Ep\""].toString()),
                         double.parse(city.elementAt(0)["\"irrig\""]["\"q\""].toString()),
                         double.parse(city.elementAt(0)["\"irrig\""]["\"Eem\""].toString()),

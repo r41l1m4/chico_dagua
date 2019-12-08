@@ -13,6 +13,7 @@ class _CultQueryState extends State<CultQuery> {
   static final DataStuff ds = DataStuff();
 
   TextEditingController espCultController = TextEditingController();
+  TextEditingController otherCultController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -46,7 +47,38 @@ class _CultQueryState extends State<CultQuery> {
                 ),
               ),
               SizedBox(
-                height: 20.0,
+                height: 10.0,
+              ),
+              AnimatedOpacity(
+                opacity: dropdownValue == "Outra" ? 1.0 : 0.0,
+                duration: Duration(milliseconds: 500),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 100.0),
+                  child: TextFormField(
+                    controller: otherCultController,
+                    enabled: dropdownValue == "Outra",
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "Campo obrigatório!";
+                      }
+                      return null;
+                    },
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                      labelText: "Nome da cultura",
+                      alignLabelWithHint: true,
+                      labelStyle: TextStyle(color: Colors.black),
+                    ),
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15.0,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
               ),
               _tempQuestionBox("Qual é o espaçamento entre as plantas?"),
               Padding(
@@ -102,7 +134,13 @@ class _CultQueryState extends State<CultQuery> {
                         }
                     );
                   }else if(_formKey.currentState.validate()) {
-                    SessionModel.of(context).setCultId(ds.getCultId(dropdownValue));
+                    if(dropdownValue == "Outra") {
+                      SessionModel.of(context).setCultName(otherCultController.text);
+                      SessionModel.of(context).setCultId(25);
+                    } else {
+                      SessionModel.of(context).setCultName(dropdownValue);
+                      SessionModel.of(context).setCultId(ds.getCultId(dropdownValue));
+                    }
                     SessionModel.of(context).setEp(double.parse(espCultController.text));
                     Navigator.push(
                         context,

@@ -2,6 +2,7 @@ import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/session_model.dart';
 import 'package:flutter/material.dart';
 
+/// Responsável pela tela de informação da cultura atual.
 class CultInfoPage extends StatelessWidget {
 
   static final ds = DataStuff();
@@ -23,7 +24,7 @@ class CultInfoPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               _infoTitle("Cultura", 40.0),
-              _infoContent(ds.getCultName(SessionModel.of(context).cultId), 50.0),
+              _infoContent(SessionModel.of(context).cultName, 50.0),
               SizedBox(
                 height: 20.0,
               ),
@@ -63,6 +64,8 @@ class CultInfoPage extends StatelessWidget {
     );
   }
 
+  /// Retorna um Widget "Text" com o titulo da informação, numa determinada
+  ///  formatação.
   Widget _infoTitle(title, fontSize) {
     return Text(
       "$title:",
@@ -74,6 +77,8 @@ class CultInfoPage extends StatelessWidget {
     );
   }
 
+  /// Retorna um Widget "Text" com o conteudo da informação, numa determinada
+  ///   formatação.
   Widget _infoContent(title, fontSize) {
     return Text(
       "$title",
