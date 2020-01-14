@@ -260,6 +260,7 @@ class DataStuff {
 
   }
 
+
   ///Lê os dados do arquivo JSON.
   ///Tem como paramêtro opcional se é para ler o histórico, caso não, encara como
   ///sendo os dados normais.

@@ -8,6 +8,8 @@ class FlowModel extends Model {
   double _et0 = 0.0;
   double _etc = 0.0;
   String _stage = "";
+  double _tempMax = 0.0;
+  double _tempMin = 0.0;
 
   FlowModel();
 
@@ -41,5 +43,20 @@ class FlowModel extends Model {
     notifyListeners();
   }
 
+  double get tempMax => _tempMax;
+
+  ///Define a temperatura máxima informada pelo usuário, e notifica aos listeners da mudança.
+  void setTempMax(double value) {
+    _tempMax = value;
+    notifyListeners();
+  }
+
+  double get tempMin => _tempMin;
+
+  ///Define a temperatura miníma informada pelo usuário, e notifica aos listeners da mudança.
+  void setTempMin(double value) {
+    _tempMin = value;
+    notifyListeners();
+  }
 
 }

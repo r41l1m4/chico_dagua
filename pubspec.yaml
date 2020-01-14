@@ -29,6 +29,7 @@ dependencies:
   location: ^2.3.5
   geocoder: ^0.2.1
   dartdoc: ^0.28.7
+  cloud_firestore: ^0.13.0+1
 
 dev_dependencies:
   flutter_test:

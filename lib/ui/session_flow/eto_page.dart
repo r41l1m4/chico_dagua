@@ -96,6 +96,8 @@ class _EToPageState extends State<EToPage> {
                                   double.parse(tMaxController.text),
                                   double.parse(tMinController.text)
                               );
+                              model.setTempMax(double.parse(tMaxController.text));
+                              model.setTempMin(double.parse(tMinController.text));
                               model.setEt0(et0);
                               return Navigator.pushReplacement(
                                   this.context,

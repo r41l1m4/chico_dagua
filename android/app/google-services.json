@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1091530527603",
+    "firebase_url": "https://chicodagua-8e174.firebaseio.com",
+    "project_id": "chicodagua-8e174",
+    "storage_bucket": "chicodagua-8e174.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1091530527603:android:c422769a141cd769776b06",
+        "android_client_info": {
+          "package_name": "com.ironia.chico_dagua"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1091530527603-gb48kacgi853673e5cltc0bqssq04obk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPwUfULVzofrFoZfAJgp3iFg0hekEXH9M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1091530527603-gb48kacgi853673e5cltc0bqssq04obk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

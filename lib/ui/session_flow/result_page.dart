@@ -1,6 +1,7 @@
 import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/flow_model.dart';
 import 'package:chico_dagua/model/session_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -37,6 +38,7 @@ class _ResultPageState extends State<ResultPage> {
     );
     ds.history.add(entry);
     ds.saveData(ds.history, isHistory: true);
+
 
     return Scaffold(
       body: Container(
