@@ -178,7 +178,8 @@ class _KcPageState extends State<KcPage> {
                                 ? double.parse(kcController.text)
                                 : ds.getCultKc(
                                 cultId, ds.getStageId(dropdownValue));
-                            double etc = getETc(model.et0, kc);
+                            model.setKc(kc);
+                            double etc = getETc(model.et0, model.kc);
                             model.setEtc(etc);
                             model.setStage(dropdownValue ?? "Kc Manual");
                             return Navigator.pushReplacement(

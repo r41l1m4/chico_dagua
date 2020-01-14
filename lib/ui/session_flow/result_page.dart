@@ -47,6 +47,7 @@ class _ResultPageState extends State<ResultPage> {
           'tempMax':FlowModel.of(context).tempMax,
           'tempMin':FlowModel.of(context).tempMin,
           'ETo':FlowModel.of(context).et0,
+          'Kc':FlowModel.of(context).kc
         }
     );
 
