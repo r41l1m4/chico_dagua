@@ -3,6 +3,7 @@ import 'package:chico_dagua/model/flow_model.dart';
 import 'package:chico_dagua/model/session_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class ResultPage extends StatefulWidget {
@@ -47,7 +48,9 @@ class _ResultPageState extends State<ResultPage> {
           'tempMax':FlowModel.of(context).tempMax,
           'tempMin':FlowModel.of(context).tempMin,
           'ETo':FlowModel.of(context).et0,
-          'Kc':FlowModel.of(context).kc
+          'Kc':FlowModel.of(context).kc,
+          'date':DateFormat("dd-MM-yyyy").format(DateTime.now()),
+          'time':DateFormat("HH:mm").format(DateTime.now())
         }
     );
 
