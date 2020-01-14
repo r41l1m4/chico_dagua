@@ -40,6 +40,16 @@ class _ResultPageState extends State<ResultPage> {
     ds.saveData(ds.history, isHistory: true);
 
 
+    Firestore.instance.collection("stats").document().setData(
+        {
+          'state':SessionModel.of(context).state,
+          'city':SessionModel.of(context).city,
+          'tempMax':FlowModel.of(context).tempMax,
+          'tempMin':FlowModel.of(context).tempMin,
+          'ETo':FlowModel.of(context).et0,
+        }
+    );
+
     return Scaffold(
       body: Container(
         color: Colors.lightBlueAccent[400],

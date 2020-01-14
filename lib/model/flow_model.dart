@@ -10,6 +10,7 @@ class FlowModel extends Model {
   String _stage = "";
   double _tempMax = 0.0;
   double _tempMin = 0.0;
+  double _kc = 1.0;
 
   FlowModel();
 
@@ -56,6 +57,15 @@ class FlowModel extends Model {
   ///Define a temperatura miníma informada pelo usuário, e notifica aos listeners da mudança.
   void setTempMin(double value) {
     _tempMin = value;
+    notifyListeners();
+  }
+
+  ///Retorna um double com o kc da cultura.
+  double get kc => _kc;
+
+  ///Define o kc da cultura, e notifica aos listeners da mudança.
+  void setKc(double value) {
+    _kc = value;
     notifyListeners();
   }
 
