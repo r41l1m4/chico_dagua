@@ -1,5 +1,5 @@
+import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/session_model.dart';
-import 'package:chico_dagua/ui/initial_flow/cult_query.dart';
 import 'package:chico_dagua/ui/initial_flow/pos_loc_pre_cult.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoder/geocoder.dart';
@@ -7,6 +7,9 @@ import 'package:location/location.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class LocPermPage extends StatelessWidget {
+
+  DataStuff ds = DataStuff();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,6 +82,17 @@ class LocPermPage extends StatelessWidget {
                                         print("COODS: ${coods.latitude}, ${coods.longitude}");
                                         Future.delayed(Duration(milliseconds: 500));
                                         model.setCity(geolocData.first.subAdminArea);
+
+                                        //verifica se a cidade relatada pelo GPS já existe como
+                                        //cidade com o coeficiente calibrado
+                                        if(ds.getCityKeys().contains(geolocData.first.subAdminArea)) {
+                                          //Se já existe, pega o Id da cidade e seta no Model
+                                          model.setCityId(ds.getCityId(geolocData.first.subAdminArea));
+                                        }else {
+                                          //Caso não, seta o valor para 15, assim ele vai pegar os coeficientes padrão
+                                          model.setCityId(15);
+                                        }
+
                                         model.setState(geolocData.first.adminArea);
                                         model.setCityState(true);
                                         print("Local: ${geolocData.first.subAdminArea}, ${geolocData.first.adminArea}");

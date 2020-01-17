@@ -78,7 +78,7 @@ class _CultSelectPageState extends State<CultSelectPage> {
     );
   }
 
-  ///Retorna um Widget com a lista de Cards de entradas do histórico.
+  ///Retorna um Widget com a lista de Cards de entradas de culturas.
   Widget hasSome(List cults) {
     return ListView.builder(
       itemCount: cults.length,
@@ -88,9 +88,7 @@ class _CultSelectPageState extends State<CultSelectPage> {
     );
   }
 
-  ///Retorna um Widget, um Card especificamente, dados determinados parâmetros, isso
-  ///é claro, após algumas manipulações nos dados para que seja entendível por
-  ///humanos.
+  ///Retorna um Widget, um Card especificamente, dados determinados parâmetros
   Widget cultCard(int index, Map cultEntry) {
 
     return InkWell(
