@@ -1,6 +1,7 @@
 import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/session_model.dart';
 import 'package:chico_dagua/ui/cult_info_page.dart';
+import 'package:chico_dagua/ui/cult_select_page.dart';
 import 'package:chico_dagua/ui/history_page.dart';
 import 'package:chico_dagua/ui/initial_flow/loc_perm_page.dart';
 import 'package:chico_dagua/ui/work_page.dart';
@@ -82,7 +83,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              _contextMenuTiles("Mudar dados", context, LocPermPage()),
+              _contextMenuTiles("Adicionar Cultura", context, LocPermPage()),
+              _contextMenuTiles("Culturas", context, CultSelectPage()),
               _contextMenuTiles("Histórico", context, HistoryPage()),
               _contextMenuTiles("Info. da Cultura", context, CultInfoPage()),
               Divider(
@@ -129,7 +131,7 @@ class _HomePageState extends State<HomePage> {
     return showAboutDialog(
       context: context,
       applicationName: "Chico d'Água",
-      applicationVersion: "v1.2.2",
+      applicationVersion: "v1.3.0",
       applicationIcon: Image.asset("imgs/cda.png", height: 55.0, width: 55.0,),
       children: <Widget>[
         Text("Este app é parte resultante do projeto de extensão \"Chico d'Água\" "

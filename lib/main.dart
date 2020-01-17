@@ -23,6 +23,7 @@ class NewOne extends StatelessWidget {
       future: ds.readData(),
       builder: (context, snapshot) {
         if(!snapshot.hasData) {
+          print(snapshot.data);
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             home: Scaffold(

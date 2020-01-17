@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/session_model.dart';
 import 'package:flutter/material.dart';
@@ -19,52 +21,72 @@ class _IrrQueryState extends State<IrrQuery> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          //padding: EdgeInsets.symmetric(horizontal: 50.0,vertical: 150.0),
-          child: Form(
-            key: _formKey2,
-            child: Column(
-              children: <Widget>[
-                _tempQuestionBox("Qual é vazão do seu gotejador?"),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
-                  child: _tempInputBox("Digite aqui", "l/h", vazController),
+
+    return FutureBuilder(
+      future: ds.readData(),
+      builder: (context, snapshot) {
+        return Scaffold(
+          body: Center(
+            child: SingleChildScrollView(
+              //padding: EdgeInsets.symmetric(horizontal: 50.0,vertical: 150.0),
+              child: Form(
+                key: _formKey2,
+                child: Column(
+                  children: <Widget>[
+                    _tempQuestionBox("Qual é vazão do seu gotejador?"),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
+                      child: _tempInputBox("Digite aqui", "l/h", vazController),
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    _tempQuestionBox("Qual é o espaçamento:"),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 10.0),
+                      child: _tempInputBox("Entre os gotejadores?", "cm", espGotController),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 10.0),
+                      child: _tempInputBox("Entre as linhas?", "cm", espLinController),
+                    ),
+                    SizedBox(
+                      height: 30.0,
+                    ),
+                    IconButton(
+                      highlightColor: Colors.lightBlueAccent[400],
+                      icon: Icon(Icons.arrow_forward_ios),
+                      onPressed: () {
+                        if(_formKey2.currentState.validate()) {
+                          SessionModel.of(context).setq(double.parse(vazController.text));
+                          SessionModel.of(context).setEem(double.parse(espGotController.text));
+                          SessionModel.of(context).setEl(double.parse(espLinController.text));
+
+                          //Se há culturas já cadastradas no JSON
+                          if(snapshot.data.length > 2 && (snapshot.data.isNotEmpty || snapshot.data != null)) {
+                            //Transforma o arquivo já existente em um lista
+                            List cult = json.decode(snapshot.data);
+                            //Adiciona os dados da nova cultura, que está em formato de lista
+                            //ao fim da lista geral
+                            cult.addAll(SessionModel.of(context).toList());
+                            //E por fim salva a lista completa coma a nova adição
+                            ds.saveData(cult);
+                          }else {
+                            //Se não há culturas já cadastradas, simplesmente salva a
+                            //lista com a cultura no arquivo principal.
+                            ds.saveData(SessionModel.of(context).toList());
+                          }
+                          Navigator.pushNamedAndRemoveUntil(context, "/", ModalRoute.withName("/"));
+                        }
+                      },
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                _tempQuestionBox("Qual é o espaçamento:"),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 10.0),
-                  child: _tempInputBox("Entre os gotejadores?", "cm", espGotController),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 10.0),
-                  child: _tempInputBox("Entre as linhas?", "cm", espLinController),
-                ),
-                SizedBox(
-                  height: 30.0,
-                ),
-                IconButton(
-                  highlightColor: Colors.lightBlueAccent[400],
-                  icon: Icon(Icons.arrow_forward_ios),
-                  onPressed: () {
-                    if(_formKey2.currentState.validate()) {
-                      SessionModel.of(context).setq(double.parse(vazController.text));
-                      SessionModel.of(context).setEem(double.parse(espGotController.text));
-                      SessionModel.of(context).setEl(double.parse(espLinController.text));
-                      ds.saveData(SessionModel.of(context).toList());
-                      Navigator.pushNamedAndRemoveUntil(context, "/", ModalRoute.withName("/"));
-                    }
-                  },
-                ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
