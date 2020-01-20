@@ -109,6 +109,19 @@ class _CultSelectPageState extends State<CultSelectPage> {
 
         Navigator.pop(context);
       },
+      onLongPress: () {
+        setState(() {
+          //Para mostrar as culturas mais recentes no topo, usamos uma lista reversa
+          //e por usarmos ela, não podemos simplesmente usar o index da cultura na lista original,
+          //temos que refazer o indice original, para garantir que removeremos o item certo.
+          //O raciocinio é simples, pegamos o tamanho da lista original, e diminuimos 1
+          //(porque as listas comecam em 0), e depois pegamos esse valor e subtraimos
+          //o index reverso, assim obtemos o index original, e consequentemente,
+          //removemos o item correto.
+          allCults.removeAt((allCults.length - 1) - index);
+          ds.saveData(allCults);
+        });
+      },
       child: Card(
         elevation: 13.0,
         color: Colors.lightBlueAccent[400],
