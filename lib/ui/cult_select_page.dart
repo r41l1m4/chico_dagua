@@ -127,22 +127,8 @@ class _CultSelectPageState extends State<CultSelectPage> {
                 Row(
                   mainAxisAlignment:MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Text(
-                        "Vazão: ${cultEntry.values.elementAt(3)["\"q\""].toString()} l/h",
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        color: Colors.black,
-                          fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    Text(
-                        "Esp. plantas: ${cultEntry.values.elementAt(2)["\"Ep\""].toString()} cm",
-                      style: TextStyle(
-                          fontSize: 15.0,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold
-                      ),
-                    ),
+                    infoCel("Vazão", cultEntry.values.elementAt(3)["\"q\""], "l/h"),
+                    infoCel("Esp. plantas", cultEntry.values.elementAt(2)["\"Ep\""], "cm"),
                   ],
                 ),
                 SizedBox(
@@ -151,28 +137,27 @@ class _CultSelectPageState extends State<CultSelectPage> {
                 Row(
                   mainAxisAlignment:MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Text(
-                        "Esp. gotejadores: ${cultEntry.values.elementAt(3)["\"Eem\""].toString()} cm",
-                      style: TextStyle(
-                          fontSize: 15.0,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    Text(
-                        "Esp. linhas: ${cultEntry.values.elementAt(3)["\"El\""].toString()} cm",
-                      style: TextStyle(
-                          fontSize: 15.0,
-                          color: Colors.black,
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
+                    infoCel("Esp. gotejadores", cultEntry.values.elementAt(3)["\"Eem\""], "cm"),
+                    infoCel("Esp. linhas", cultEntry.values.elementAt(3)["\"El\""], "cm"),
                   ],
                 ),
               ],
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  ///Retorna um Widget (Text) com as informações da cultura, estas sendo passadas
+  ///por parâmetro
+  Widget infoCel(String info, double value, String measure) {
+    return Text(
+      "$info: $value $measure",
+      style: TextStyle(
+          fontSize: 15.0,
+          color: Colors.black,
+          fontWeight: FontWeight.bold
       ),
     );
   }
