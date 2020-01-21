@@ -69,7 +69,7 @@ class _IrrQueryState extends State<IrrQuery> {
                             //Adiciona os dados da nova cultura, que está em formato de lista
                             //ao fim da lista geral
                             cult.addAll(SessionModel.of(context).toList());
-                            //E por fim salva a lista completa coma a nova adição
+                            //E por fim salva a lista completa com a a nova adição
                             ds.saveData(cult);
                           }else {
                             //Se não há culturas já cadastradas, simplesmente salva a

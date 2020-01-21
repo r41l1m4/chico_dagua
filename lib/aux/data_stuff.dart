@@ -112,7 +112,6 @@ class DataStuff {
   ];
 
   List history = [];
-  bool hasHistory = false;
 
   /// Apaga o histórico que está no arquivo, e consequentemente do app.
   void clearHistory() {
