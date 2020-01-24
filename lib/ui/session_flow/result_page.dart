@@ -1,7 +1,6 @@
 import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/flow_model.dart';
 import 'package:chico_dagua/model/session_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -41,19 +40,6 @@ class _ResultPageState extends State<ResultPage> {
     ds.history.add(entry);
     ds.saveData(ds.history, isHistory: true);
 
-    //Cloud Firestore
-    Firestore.instance.collection("stats").document().setData(
-        {
-          'state':SessionModel.of(context).state,
-          'city':SessionModel.of(context).city,
-          'tempMax':FlowModel.of(context).tempMax,
-          'tempMin':FlowModel.of(context).tempMin,
-          'ETo':FlowModel.of(context).et0,
-          'Kc':FlowModel.of(context).kc,
-          'date':DateFormat("dd-MM-yyyy").format(DateTime.now()),
-          'time':DateFormat("HH:mm").format(DateTime.now())
-        }
-    );
     //Realtime database
     FirebaseDatabase.instance.reference().push().set(
       {
@@ -63,6 +49,7 @@ class _ResultPageState extends State<ResultPage> {
         'tempMin':FlowModel.of(context).tempMin,
         'ETo':FlowModel.of(context).et0,
         'Kc':FlowModel.of(context).kc,
+        'culture':SessionModel.of(context).cultName,
         'date':DateFormat("dd-MM-yyyy").format(DateTime.now()),
         'time':DateFormat("HH:mm").format(DateTime.now())
       }
