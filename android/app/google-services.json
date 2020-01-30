@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "1091530527603",
-    "firebase_url": "https://chicodagua-8e174.firebaseio.com",
-    "project_id": "chicodagua-8e174",
-    "storage_bucket": "chicodagua-8e174.appspot.com"
+    "project_number": "610865689867",
+    "firebase_url": "https://chico-d-agua.firebaseio.com",
+    "project_id": "chico-d-agua",
+    "storage_bucket": "chico-d-agua.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1091530527603:android:c422769a141cd769776b06",
+        "mobilesdk_app_id": "1:610865689867:android:3445902e4d1d8ec95e9e0e",
         "android_client_info": {
           "package_name": "com.ironia.chico_dagua"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1091530527603-gb48kacgi853673e5cltc0bqssq04obk.apps.googleusercontent.com",
+          "client_id": "610865689867-6nh6nek6ssb9kgj9bk11hf58m9hjvts4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCPwUfULVzofrFoZfAJgp3iFg0hekEXH9M"
+          "current_key": "AIzaSyD8zTg04J44Mmn2Ar0BKukKnqjiTSH9eVM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1091530527603-gb48kacgi853673e5cltc0bqssq04obk.apps.googleusercontent.com",
+              "client_id": "610865689867-6nh6nek6ssb9kgj9bk11hf58m9hjvts4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
