@@ -114,6 +114,7 @@ class _KcPageAltState extends State<KcPageAlt> {
                                 });
                           } else {
                             double kc = double.parse(altKcController.text);
+                            model.setKc(kc);
                             double etc = getETc(model.et0, kc);
                             model.setEtc(etc);
                             model.setStage("Kc Manual");
