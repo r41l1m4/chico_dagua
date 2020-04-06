@@ -4,11 +4,13 @@ import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/session_model.dart';
 import 'package:flutter/material.dart';
 
+/// Responsável pela coleta dos dados da irrigação do usuário.
 class IrrQuery extends StatefulWidget {
   @override
   _IrrQueryState createState() => _IrrQueryState();
 }
 
+/// Responsável pela coleta dos dados da irrigação do usuário.
 class _IrrQueryState extends State<IrrQuery> {
   static String dropdownValue;
   static final DataStuff ds = DataStuff();

@@ -5,11 +5,13 @@ import 'package:chico_dagua/ui/session_flow/result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+/// Responsável pela tela de seleção de Kc da cultura e efetua o cálculo de ETc.
 class KcPage extends StatefulWidget {
   @override
   _KcPageState createState() => _KcPageState();
 }
 
+/// Responsável pela tela de seleção de Kc da cultura e efetua o cálculo de ETc.
 class _KcPageState extends State<KcPage> {
   static DataStuff ds = DataStuff();
   static String dropdownValue;

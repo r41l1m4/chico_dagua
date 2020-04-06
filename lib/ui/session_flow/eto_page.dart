@@ -10,11 +10,13 @@ import 'dart:math';
 
 import 'package:scoped_model/scoped_model.dart';
 
+/// Responsável pela tela de entrada de temperaturas e também pelo calculo de ETo.
 class EToPage extends StatefulWidget {
   @override
   _EToPageState createState() => _EToPageState();
 }
 
+/// Responsável pela tela de entrada de temperaturas e também pelo calculo de ETo.
 class _EToPageState extends State<EToPage> {
 
   static DataStuff ds = DataStuff();
@@ -168,6 +170,8 @@ class _EToPageState extends State<EToPage> {
     );
   }
 
+  /// Retorna o numero sequencial do dia do ano, vulgo dia juliano, baseados no
+  /// ano, mês e dia.
   int ordinalDay(int year, int month, int day) { //retorna o dia juliano
     if (month == DateTime.january) {
       return day;

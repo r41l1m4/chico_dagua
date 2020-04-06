@@ -8,11 +8,13 @@ import 'package:chico_dagua/ui/work_page.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+/// Arcabouço da página principal/inicial do aplicativo, e abrigo do drawer.
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
+/// Arcabouço da página principal/inicial do aplicativo, e abrigo do drawer.
 class _HomePageState extends State<HomePage> {
 
   static final DataStuff  ds = DataStuff();

@@ -1,8 +1,8 @@
-
-
 import 'package:chico_dagua/ui/initial_flow/cult_query.dart';
 import 'package:flutter/material.dart';
 
+/// Responsável por confirmar a coleta da localização para o usuário, e introduzir
+/// os próximos passos.
 class PosLocPreCult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -6,6 +6,7 @@ import 'package:geocoder/geocoder.dart';
 import 'package:location/location.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+/// Responsável por colher a localização do usuário via GPS.
 class LocPermPage extends StatelessWidget {
 
   DataStuff ds = DataStuff();

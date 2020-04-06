@@ -2,12 +2,15 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
+/// Classe que abriga os dados das cidades e culturas já calibradas, além de
+/// conter os métodos de manipulação de dados e afins do aplicativo.
 class DataStuff {
 
   static final DataStuff dt = DataStuff.internal();
   factory DataStuff() => dt;
   DataStuff.internal();
 
+  /// Associa os nomes das cidades com coeficientes calibradas a ids númericos.
   var _ids = {
     "Arapiraca": 0,
     "Belo Monte": 1,
@@ -26,6 +29,7 @@ class DataStuff {
     "São José da Tapera": 14
   };
 
+  /// Armazena os coeficientes das cidades, sua ordem segue os ids definidos em $_ids
   var _cfts = [
     [0.003992, 0.588707, -7.339],
     [0.003202, 0.609479, -4.382],
@@ -111,6 +115,7 @@ class DataStuff {
     [1.00, 1.00, 1.00, 1.00, 1.00]
   ];
 
+  /// Lista com as entradas do histórico.
   List history = [];
 
   /// Apaga o histórico que está no arquivo, e consequentemente do app.

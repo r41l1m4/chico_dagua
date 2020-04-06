@@ -1,11 +1,13 @@
 import 'package:chico_dagua/ui/session_flow/eto_page.dart';
 import 'package:flutter/material.dart';
 
+/// Responsável pelo conteúdo da tela principal do aplicativo.
 class WorkPage extends StatefulWidget {
   @override
   _WorkPageState createState() => _WorkPageState();
 }
 
+/// Responsável pelo conteúdo da tela principal do aplicativo.
 class _WorkPageState extends State<WorkPage> {
   @override
   Widget build(BuildContext context) {

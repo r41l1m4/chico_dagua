@@ -44,6 +44,7 @@ class FlowModel extends Model {
     notifyListeners();
   }
 
+  /// Retorna um double com a temperatura máxima.
   double get tempMax => _tempMax;
 
   ///Define a temperatura máxima informada pelo usuário, e notifica aos listeners da mudança.
@@ -52,6 +53,7 @@ class FlowModel extends Model {
     notifyListeners();
   }
 
+  /// Retorna um double com a temperatura mínima.
   double get tempMin => _tempMin;
 
   ///Define a temperatura miníma informada pelo usuário, e notifica aos listeners da mudança.

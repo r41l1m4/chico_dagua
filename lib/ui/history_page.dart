@@ -4,11 +4,14 @@ import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+
+/// Classe reponsável pela exibição do histórico do aplicativo.
 class HistoryPage extends StatefulWidget {
   @override
   _HistoryPageState createState() => _HistoryPageState();
 }
 
+/// Classe reponsável pela exibição do histórico do aplicativo.
 class _HistoryPageState extends State<HistoryPage> {
   static DataStuff ds = DataStuff();
 

@@ -5,13 +5,14 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
-
+/// Descreve a página de resultados do app.
 class ResultPage extends StatefulWidget {
 
   @override
   _ResultPageState createState() => _ResultPageState();
 }
 
+/// Descreve a página de resultados do app.
 class _ResultPageState extends State<ResultPage> {
 
   DataStuff ds = DataStuff();

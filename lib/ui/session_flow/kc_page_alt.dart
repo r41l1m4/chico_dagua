@@ -13,6 +13,9 @@ class KcPageAlt extends StatefulWidget {
   _KcPageAltState createState() => _KcPageAltState();
 }
 
+/// Classe alternativa para o cálculo do Kc, acionada quando a cultura é definida
+/// como sendo "Outra", aqui não há opção de seleção para fase da cultura, só há a
+/// entrada de um velho e seco Kc.
 class _KcPageAltState extends State<KcPageAlt> {
   static DataStuff ds = DataStuff();
   static String dropdownValue;

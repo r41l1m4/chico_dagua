@@ -3,11 +3,13 @@ import 'package:chico_dagua/model/session_model.dart';
 import 'package:chico_dagua/ui/initial_flow/irr_query.dart';
 import 'package:flutter/material.dart';
 
+/// Responsável por coletar os dados da cultura.
 class CultQuery extends StatefulWidget {
   @override
   _CultQueryState createState() => _CultQueryState();
 }
 
+/// Responsável por coletar os dados da cultura.
 class _CultQueryState extends State<CultQuery> {
   static String dropdownValue;
   static final DataStuff ds = DataStuff();

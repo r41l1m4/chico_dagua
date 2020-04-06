@@ -1,6 +1,7 @@
 import 'package:chico_dagua/ui/initial_flow/loc_perm_page.dart';
 import 'package:flutter/material.dart';
 
+/// Responsável pela primeira tela do aplicativo na coleta de dados da cultura.
 class FirstUsePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

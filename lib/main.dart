@@ -13,6 +13,9 @@ void main() {
   runApp(NewOne());
 }
 
+/// Classe executada antes de tudo para verificar a existência, e em caso positivo,
+/// carregar dos dados no contexto do app, caso não exista ainda, direcionará o
+/// usuário a tela de primeiro uso para coleta inicial de dados.
 class NewOne extends StatelessWidget {
 
   static DataStuff ds = DataStuff();
@@ -20,8 +23,10 @@ class NewOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<String>(
+      // Lê os dados do JSON
       future: ds.readData(),
       builder: (context, snapshot) {
+        // Se não tem dados ainda, mostra uma tela de carregamento
         if(!snapshot.hasData) {
           print(snapshot.data);
           return MaterialApp(
@@ -34,6 +39,8 @@ class NewOne extends StatelessWidget {
               ),
             ),
           );
+          // Se o JSON tem dados previamente salvos, decodifica-os e carrega as váriaveis do
+          // ScopedModel com os dados provenientes do JSON.
         }else if(snapshot.data.length > 2 && (snapshot.data.isNotEmpty || snapshot.data != null)) {
           print(snapshot.data);
           List city = json.decode(snapshot.data);
@@ -70,6 +77,8 @@ class NewOne extends StatelessWidget {
               },
             ),
           );
+          // Se o JSON está vazio, normalmente no primeiro uso, o usuário é encaminhado
+          // a tela de primeiro uso onde iremos reunir os dados da cultura e afins.
         }else {
           return ScopedModel<SessionModel>(
             model: SessionModel(),

@@ -5,11 +5,13 @@ import 'package:chico_dagua/model/session_model.dart';
 import 'package:chico_dagua/ui/initial_flow/loc_perm_page.dart';
 import 'package:flutter/material.dart';
 
+/// Responsável pela tela de seleção de culturas.
 class CultSelectPage extends StatefulWidget {
   @override
   _CultSelectPageState createState() => _CultSelectPageState();
 }
 
+/// Responsável pela tela de seleção de cultura
 class _CultSelectPageState extends State<CultSelectPage> {
   static DataStuff ds = DataStuff();
 
