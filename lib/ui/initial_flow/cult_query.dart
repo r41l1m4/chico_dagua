@@ -12,7 +12,6 @@ class CultQuery extends StatefulWidget {
 /// Responsável por coletar os dados da cultura.
 class _CultQueryState extends State<CultQuery> {
   static String dropdownValue;
-  static final DataStuff ds = DataStuff();
 
   TextEditingController espCultController = TextEditingController();
   TextEditingController otherCultController = TextEditingController();
@@ -38,7 +37,7 @@ class _CultQueryState extends State<CultQuery> {
                       dropdownValue = newValue;
                     });
                   },
-                  items: ds
+                  items: DataStuff()
                       .getCultKeys()
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
@@ -141,7 +140,7 @@ class _CultQueryState extends State<CultQuery> {
                       SessionModel.of(context).setCultId(25);
                     } else {
                       SessionModel.of(context).setCultName(dropdownValue);
-                      SessionModel.of(context).setCultId(ds.getCultId(dropdownValue));
+                      SessionModel.of(context).setCultId(DataStuff().getCultId(dropdownValue));
                     }
                     SessionModel.of(context).setEp(double.parse(espCultController.text));
                     Navigator.push(

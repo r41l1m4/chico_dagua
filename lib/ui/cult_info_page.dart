@@ -1,11 +1,8 @@
-import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/session_model.dart';
 import 'package:flutter/material.dart';
 
 /// Responsável pela tela de informação da cultura atual.
 class CultInfoPage extends StatelessWidget {
-
-  static final ds = DataStuff();
 
   @override
   Widget build(BuildContext context) {

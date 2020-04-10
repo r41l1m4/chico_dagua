@@ -1,4 +1,3 @@
-import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/flow_model.dart';
 import 'package:chico_dagua/model/session_model.dart';
 import 'package:chico_dagua/ui/session_flow/result_page.dart';
@@ -17,7 +16,6 @@ class KcPageAlt extends StatefulWidget {
 /// como sendo "Outra", aqui não há opção de seleção para fase da cultura, só há a
 /// entrada de um velho e seco Kc.
 class _KcPageAltState extends State<KcPageAlt> {
-  static DataStuff ds = DataStuff();
   static String dropdownValue;
 
   TextEditingController altKcController = TextEditingController();

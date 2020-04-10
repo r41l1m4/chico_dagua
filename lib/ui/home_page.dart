@@ -1,4 +1,3 @@
-import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/session_model.dart';
 import 'package:chico_dagua/ui/cult_info_page.dart';
 import 'package:chico_dagua/ui/cult_select_page.dart';
@@ -16,8 +15,6 @@ class HomePage extends StatefulWidget {
 
 /// Arcabouço da página principal/inicial do aplicativo, e abrigo do drawer.
 class _HomePageState extends State<HomePage> {
-
-  static final DataStuff  ds = DataStuff();
 
   @override
   Widget build(BuildContext context) {

@@ -9,7 +9,7 @@ import 'package:scoped_model/scoped_model.dart';
 /// Responsável por colher a localização do usuário via GPS.
 class LocPermPage extends StatelessWidget {
 
-  DataStuff ds = DataStuff();
+  final DataStuff ds = DataStuff();
 
   @override
   Widget build(BuildContext context) {

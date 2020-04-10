@@ -13,7 +13,6 @@ class CultSelectPage extends StatefulWidget {
 
 /// Responsável pela tela de seleção de cultura
 class _CultSelectPageState extends State<CultSelectPage> {
-  static DataStuff ds = DataStuff();
 
   List allCults = [];
 
@@ -31,7 +30,7 @@ class _CultSelectPageState extends State<CultSelectPage> {
             onPressed: () {
               setState(() {
                 Navigator.pop(context);
-                Navigator.push(context,
+                Navigator.pushReplacement(context,
                     MaterialPageRoute(
                         builder: (context) => LocPermPage()
                     )
@@ -42,7 +41,7 @@ class _CultSelectPageState extends State<CultSelectPage> {
         ],
       ),
       body: FutureBuilder<String>(
-        future: ds.readData(),
+        future: DataStuff().readData(),
         builder: (context, snapshot) {
           if(!snapshot.hasData) {
             return Center(
@@ -121,7 +120,7 @@ class _CultSelectPageState extends State<CultSelectPage> {
           //o index reverso, assim obtemos o index original, e consequentemente,
           //removemos o item correto.
           allCults.removeAt((allCults.length - 1) - index);
-          ds.saveData(allCults);
+          DataStuff().saveData(allCults);
         });
       },
       child: Card(

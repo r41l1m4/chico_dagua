@@ -13,7 +13,6 @@ class IrrQuery extends StatefulWidget {
 /// Responsável pela coleta dos dados da irrigação do usuário.
 class _IrrQueryState extends State<IrrQuery> {
   static String dropdownValue;
-  static final DataStuff ds = DataStuff();
 
   TextEditingController vazController = TextEditingController();
   TextEditingController espGotController = TextEditingController();
@@ -25,7 +24,7 @@ class _IrrQueryState extends State<IrrQuery> {
   Widget build(BuildContext context) {
 
     return FutureBuilder(
-      future: ds.readData(),
+      future: DataStuff().readData(),
       builder: (context, snapshot) {
         return Scaffold(
           body: Center(
@@ -72,11 +71,11 @@ class _IrrQueryState extends State<IrrQuery> {
                             //ao fim da lista geral
                             cult.addAll(SessionModel.of(context).toList());
                             //E por fim salva a lista completa com a a nova adição
-                            ds.saveData(cult);
+                            DataStuff().saveData(cult);
                           }else {
                             //Se não há culturas já cadastradas, simplesmente salva a
                             //lista com a cultura no arquivo principal.
-                            ds.saveData(SessionModel.of(context).toList());
+                            DataStuff().saveData(SessionModel.of(context).toList());
                           }
                           Navigator.pushNamedAndRemoveUntil(context, "/", ModalRoute.withName("/"));
                         }

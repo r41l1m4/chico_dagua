@@ -18,13 +18,11 @@ void main() {
 /// usuário a tela de primeiro uso para coleta inicial de dados.
 class NewOne extends StatelessWidget {
 
-  static DataStuff ds = DataStuff();
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<String>(
       // Lê os dados do JSON
-      future: ds.readData(),
+      future: DataStuff().readData(),
       builder: (context, snapshot) {
         // Se não tem dados ainda, mostra uma tela de carregamento
         if(!snapshot.hasData) {
