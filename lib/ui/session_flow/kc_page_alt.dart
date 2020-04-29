@@ -42,7 +42,7 @@ class _KcPageAltState extends State<KcPageAlt> {
                   child: Text(
                     SessionModel.of(context).city,
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Theme.of(context).accentColor,
                       fontSize: 15.0,
                     ),
                     textAlign: TextAlign.right,
@@ -65,7 +65,7 @@ class _KcPageAltState extends State<KcPageAlt> {
                       style: TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: Theme.of(context).accentColor,
                       ),
                     ),
                   ),
@@ -85,10 +85,10 @@ class _KcPageAltState extends State<KcPageAlt> {
                       decoration: InputDecoration(
                         labelText: "Kc",
                         alignLabelWithHint: true,
-                        labelStyle: TextStyle(color: Colors.black),
+                        labelStyle: TextStyle(color: Theme.of(context).accentColor),
                       ),
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Theme.of(context).accentColor,
                         fontSize: 15.0,
                       ),
                     ),
@@ -105,7 +105,7 @@ class _KcPageAltState extends State<KcPageAlt> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    backgroundColor: Colors.lightBlueAccent[400],
+                                    backgroundColor: Theme.of(context).primaryColor,
                                     title: Text("Erro!"),
                                     content: Text(
                                       "Decimais devem ser separados por \"ponto\".",
@@ -144,9 +144,12 @@ class _KcPageAltState extends State<KcPageAlt> {
                         },
                         child: Text("Calcular"),
                         splashColor: Colors.white,
-                        highlightColor: Colors.lightBlueAccent[400],
+                        highlightColor: Theme.of(context).primaryColor,
                         shape: StadiumBorder(),
-                        borderSide: BorderSide(width: 0.2),
+                        borderSide: BorderSide(
+                            width: 0.2,
+                            color: Theme.of(context).accentColor,
+                        ),
                       );
                     },
                   ),

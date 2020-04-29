@@ -64,7 +64,7 @@ class FirstUsePage extends StatelessWidget {
                 height: 40.0,
               ),
               IconButton(
-                highlightColor: Colors.lightBlueAccent[400],
+                highlightColor: Theme.of(context).primaryColor,
                 icon: Icon(Icons.arrow_forward_ios),
                 onPressed: () {
                   Navigator.of(context).push(

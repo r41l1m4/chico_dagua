@@ -48,7 +48,7 @@ class _EToPageState extends State<EToPage> {
                   child: Text(
                     SessionModel.of(context).city,
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Theme.of(context).accentColor,
                       fontSize: 15.0,
                     ),
                     textAlign: TextAlign.right,
@@ -72,7 +72,7 @@ class _EToPageState extends State<EToPage> {
                         style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Theme.of(context).accentColor,
                         ),
                       ),
                     ),
@@ -124,10 +124,11 @@ class _EToPageState extends State<EToPage> {
                           },
                           child: Text("Próximo"),
                           splashColor: Colors.white,
-                          highlightColor: Colors.lightBlueAccent[400],
+                          highlightColor: Theme.of(context).primaryColor,
                           shape: StadiumBorder(),
                           borderSide: BorderSide(
-                              width: 0.2
+                              width: 0.2,
+                              color: Theme.of(context).accentColor,
                           ),
                         );
                       },
@@ -161,10 +162,10 @@ class _EToPageState extends State<EToPage> {
         suffix: Text("Cº"),
         labelText: "$label",
         alignLabelWithHint: true,
-        labelStyle: TextStyle(color: Colors.black),
+        labelStyle: TextStyle(color: Theme.of(context).accentColor),
       ),
       style: TextStyle(
-        color: Colors.black,
+        color: Theme.of(context).accentColor,
         fontSize: 15.0,
       ),
     );

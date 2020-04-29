@@ -69,10 +69,10 @@ class _CultQueryState extends State<CultQuery> {
                     decoration: InputDecoration(
                       labelText: "Nome da cultura",
                       alignLabelWithHint: true,
-                      labelStyle: TextStyle(color: Colors.black),
+                      labelStyle: TextStyle(color: Theme.of(context).accentColor),
                     ),
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Theme.of(context).accentColor,
                       fontSize: 15.0,
                     ),
                   ),
@@ -102,11 +102,11 @@ class _CultQueryState extends State<CultQuery> {
                         suffix: Text("cm"),
                         labelText: "Digite aqui",
                         alignLabelWithHint: true,
-                        labelStyle: TextStyle(color: Colors.black),
+                        labelStyle: TextStyle(color: Theme.of(context).accentColor),
                         //border: OutlineInputBorder(),
                       ),
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Theme.of(context).accentColor,
                         fontSize: 15.0,
                       ),
                     ),
@@ -116,7 +116,7 @@ class _CultQueryState extends State<CultQuery> {
                 height: 50.0,
               ),
               IconButton(
-                highlightColor: Colors.lightBlueAccent[400],
+                highlightColor: Theme.of(context).primaryColor,
                 icon: Icon(Icons.arrow_forward_ios),
                 onPressed: () {
                   if(dropdownValue == null) {
@@ -124,7 +124,7 @@ class _CultQueryState extends State<CultQuery> {
                         context: context,
                         builder: (BuildContext context){
                           return AlertDialog(
-                            backgroundColor: Colors.lightBlueAccent[400],
+                            backgroundColor: Theme.of(context).primaryColor,
                             title: Text("Erro!"),
                             content: Text("Selecione a sua cultura.",
                               style: TextStyle(

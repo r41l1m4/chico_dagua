@@ -46,6 +46,7 @@ class _WorkPageState extends State<WorkPage> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20.0,
+                color: Theme.of(context).accentColor,
               ),
             ),
           ),
@@ -68,12 +69,18 @@ class _WorkPageState extends State<WorkPage> {
                   },
                 ));
             },
-            child: Text("Vamos lá!"),
+            child: Text(
+                "Vamos lá!",
+              style: TextStyle(
+                color: Theme.of(context).accentColor,
+              ),
+            ),
             shape: StadiumBorder(),
             splashColor: Colors.white,
             highlightColor: Colors.lightBlueAccent[400],
             borderSide: BorderSide(
-                width: 0.2
+                width: 0.2,
+                color: Theme.of(context).accentColor,
             ),
           ),
         ],

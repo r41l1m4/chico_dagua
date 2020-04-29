@@ -23,7 +23,7 @@ class _CultSelectPageState extends State<CultSelectPage> {
         title: Text("Culturas",
           style: TextStyle(fontFamily: "Comfortaa"),
         ),
-        backgroundColor: Colors.lightBlueAccent[400],
+        backgroundColor: Theme.of(context).primaryColor,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
@@ -125,7 +125,7 @@ class _CultSelectPageState extends State<CultSelectPage> {
       },
       child: Card(
         elevation: 13.0,
-        color: Colors.lightBlueAccent[400],
+        color: Theme.of(context).primaryColor,
         child: ExpansionTile(
           title: Text("${cultEntry.values.elementAt(2)["\"cultName\""]}",
             style: TextStyle(fontSize: 32.0,

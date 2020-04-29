@@ -128,7 +128,7 @@ class LocPermPage extends StatelessWidget {
                                           " realmente necessário para que "
                                           "possamos prosseguir."),
                                       title: Text("ERRO!"),
-                                      backgroundColor: Colors.lightBlueAccent[400],
+                                      backgroundColor: Theme.of(context).primaryColor,
                                     );
                                   },
                                 );
@@ -138,9 +138,10 @@ class LocPermPage extends StatelessWidget {
                           child: Text("Ceder Permissão"),
                           shape: StadiumBorder(),
                           splashColor: Colors.white,
-                          highlightColor: Colors.lightBlueAccent[400],
+                          highlightColor: Theme.of(context).primaryColor,
                           borderSide: BorderSide(
-                              width: 0.2
+                              width: 0.2,
+                              color: Theme.of(context).accentColor
                           ),
                         ),
                         SizedBox(

@@ -8,10 +8,9 @@ class CultInfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Informação da Cultura",
-          style: TextStyle(fontFamily: "Comfortaa"),
+        title: Text("Informação da Cultura"
         ),
-        backgroundColor: Colors.lightBlueAccent[400],
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       body: Container(
         alignment: Alignment.topCenter,
@@ -20,37 +19,37 @@ class CultInfoPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              _infoTitle("Cultura", 40.0),
-              _infoContent(SessionModel.of(context).cultName, 50.0),
+              _infoTitle("Cultura", 40.0, context),
+              _infoContent(SessionModel.of(context).cultName, 50.0, context),
               SizedBox(
                 height: 20.0,
               ),
-              _infoTitle("Local", 30.0),
-              _infoContent("${SessionModel.of(context).city} - ${SessionModel.of(context).state}", 20.0),
+              _infoTitle("Local", 30.0, context),
+              _infoContent("${SessionModel.of(context).city} - ${SessionModel.of(context).state}", 20.0, context),
               SizedBox(
                 height: 15.0,
               ),
-              _infoTitle("Vazão do Equipamento", 30.0),
-              _infoContent("${SessionModel.of(context).q} l/h", 20.0),
+              _infoTitle("Vazão do Equipamento", 30.0, context),
+              _infoContent("${SessionModel.of(context).q} l/h", 20.0, context),
               SizedBox(
                 height: 15.0,
               ),
-              _infoTitle("Espaçamentos", 30.0),
+              _infoTitle("Espaçamentos", 30.0, context),
               SizedBox(
                 height: 10.0,
               ),
-              _infoTitle("Entre Plantas", 20.0),
-              _infoContent("${SessionModel.of(context).Ep} cm", 20.0),
+              _infoTitle("Entre Plantas", 20.0, context),
+              _infoContent("${SessionModel.of(context).Ep} cm", 20.0, context),
               SizedBox(
                 height: 10.0,
               ),
-              _infoTitle("Entre Gotejadores", 20.0),
-              _infoContent("${SessionModel.of(context).Eem} cm", 20.0),
+              _infoTitle("Entre Gotejadores", 20.0, context),
+              _infoContent("${SessionModel.of(context).Eem} cm", 20.0, context),
               SizedBox(
                 height: 10.0,
               ),
-              _infoTitle("Entre Linhas", 20.0),
-              _infoContent("${SessionModel.of(context).El} cm", 20.0),
+              _infoTitle("Entre Linhas", 20.0, context),
+              _infoContent("${SessionModel.of(context).El} cm", 20.0, context),
               SizedBox(
                 height: 10.0,
               ),
@@ -63,11 +62,11 @@ class CultInfoPage extends StatelessWidget {
 
   /// Retorna um Widget "Text" com o titulo da informação, numa determinada
   ///  formatação.
-  Widget _infoTitle(title, fontSize) {
+  Widget _infoTitle(title, fontSize, context) {
     return Text(
       "$title:",
       style: TextStyle(
-          color: Colors.lightBlueAccent[400],
+          color: Theme.of(context).primaryColor,
           fontSize: fontSize,
           fontWeight: FontWeight.bold
       ),
@@ -76,11 +75,11 @@ class CultInfoPage extends StatelessWidget {
 
   /// Retorna um Widget "Text" com o conteudo da informação, numa determinada
   ///   formatação.
-  Widget _infoContent(title, fontSize) {
+  Widget _infoContent(title, fontSize, context) {
     return Text(
       "$title",
       style: TextStyle(
-          color: Colors.black,
+          color: Theme.of(context).accentColor,
           fontSize: fontSize,
           fontWeight: FontWeight.w700
       ),

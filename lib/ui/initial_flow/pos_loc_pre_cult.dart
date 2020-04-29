@@ -48,9 +48,10 @@ class PosLocPreCult extends StatelessWidget {
             child: Text("Avançar"),
             shape: StadiumBorder(),
             splashColor: Colors.white,
-            highlightColor: Colors.lightBlueAccent[400],
+            highlightColor: Theme.of(context).primaryColor,
             borderSide: BorderSide(
-                width: 0.2
+                width: 0.2,
+                color: Theme.of(context).accentColor
             ),
           ),
           SizedBox(

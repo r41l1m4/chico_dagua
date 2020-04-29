@@ -58,7 +58,7 @@ class _ResultPageState extends State<ResultPage> {
 
     return Scaffold(
       body: Container(
-        color: Colors.lightBlueAccent[400],
+        color: Theme.of(context).primaryColor,
         padding: EdgeInsets.symmetric(horizontal: 30.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

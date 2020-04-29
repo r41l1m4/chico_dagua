@@ -29,6 +29,18 @@ class NewOne extends StatelessWidget {
           print(snapshot.data);
           return MaterialApp(
             debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+                brightness: Brightness.light,
+                primaryColor: Colors.lightBlueAccent[400],
+                fontFamily: "Comfortaa",
+                accentColor: Colors.black,
+            ),
+            darkTheme: ThemeData(
+              brightness: Brightness.dark,
+              primaryColor: Colors.lightBlueAccent[400],
+              fontFamily: "Comfortaa",
+              accentColor: Colors.white,
+            ),
             home: Scaffold(
               body: Center(
                 child: CircularProgressIndicator(
@@ -65,6 +77,18 @@ class NewOne extends StatelessWidget {
                     home: HomePage(),
                     title: "Chico d'Água",
                     debugShowCheckedModeBanner: false,
+                    theme: ThemeData(
+                        brightness: Brightness.light,
+                        primaryColor: Colors.lightBlueAccent[400],
+                        fontFamily: "Comfortaa",
+                        accentColor: Colors.black,
+                    ),
+                    darkTheme: ThemeData(
+                        brightness: Brightness.dark,
+                        primaryColor: Colors.lightBlueAccent[400],
+                        fontFamily: "Comfortaa",
+                        accentColor: Colors.white,
+                    ),
                     initialRoute: "/",
                     routes: <String, WidgetBuilder> {
                       "firstUse": (BuildContext context) => FirstUsePage(),
@@ -88,6 +112,18 @@ class NewOne extends StatelessWidget {
                     home: HomePage(),
                     title: "Chico d'Água",
                     debugShowCheckedModeBanner: false,
+                    theme: ThemeData(
+                        brightness: Brightness.light,
+                        primaryColor: Colors.lightBlueAccent[400],
+                        fontFamily: "Comfortaa",
+                        accentColor: Colors.black,
+                    ),
+                    darkTheme: ThemeData(
+                        brightness: Brightness.dark,
+                        primaryColor: Colors.lightBlueAccent[400],
+                        fontFamily: "Comfortaa",
+                        accentColor: Colors.white,
+                    ),
                     initialRoute: "firstUse",
                     routes: <String, WidgetBuilder> {
                       "firstUse": (BuildContext context) => FirstUsePage(),

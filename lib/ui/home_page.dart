@@ -18,32 +18,29 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(fontFamily: "Comfortaa",),
-      home: Scaffold(
-          drawer: Drawer(
-            child: contextMenu(),
-            elevation: 30.0,
-          ),
-          appBar: AppBar(
-            title: ScopedModelDescendant<SessionModel>(
-              rebuildOnChange: true,
-              builder: (context, child, model) {
-                return Text(
-                  "Chico d'Água",
-                  style: TextStyle(
-                    fontStyle: FontStyle.italic,
-                  ),
-                );
-              },
-            ),
-            centerTitle: true,
-            backgroundColor: Colors.lightBlueAccent[400],
-            elevation: 50.0,
-          ),
-          body: WorkPage(),
+    return Scaffold(
+      drawer: Drawer(
+        child: contextMenu(),
+        elevation: 30.0,
       ),
-      debugShowCheckedModeBanner: false,
+      appBar: AppBar(
+        title: ScopedModelDescendant<SessionModel>(
+          rebuildOnChange: true,
+          builder: (context, child, model) {
+            return Text(
+              "Chico d'Água",
+              style: TextStyle(
+                fontStyle: FontStyle.italic,
+                color: Theme.of(context).accentColor,
+              ),
+            );
+          },
+        ),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).primaryColor,
+        elevation: 50.0,
+      ),
+      body: WorkPage(),
     );
   }
 
@@ -52,7 +49,7 @@ class _HomePageState extends State<HomePage> {
     return ScopedModelDescendant<SessionModel>(
       builder: (context, child, model) {
         return Container(
-          color: Colors.lightBlueAccent[400],
+          color: Theme.of(context).primaryColor,
           alignment: Alignment.topLeft,
           child: Column(
             children: <Widget>[

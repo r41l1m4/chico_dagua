@@ -55,7 +55,7 @@ class _IrrQueryState extends State<IrrQuery> {
                       height: 30.0,
                     ),
                     IconButton(
-                      highlightColor: Colors.lightBlueAccent[400],
+                      highlightColor: Theme.of(context).primaryColor,
                       icon: Icon(Icons.arrow_forward_ios),
                       onPressed: () {
                         if(_formKey2.currentState.validate()) {
@@ -111,10 +111,10 @@ class _IrrQueryState extends State<IrrQuery> {
         suffix: Text("$suffix"),
         labelText: "$label",
         alignLabelWithHint: true,
-        labelStyle: TextStyle(color: Colors.black),
+        labelStyle: TextStyle(color: Theme.of(context).accentColor),
       ),
       style: TextStyle(
-        color: Colors.black,
+        color: Theme.of(context).accentColor,
         fontSize: 15.0,
       ),
     );
