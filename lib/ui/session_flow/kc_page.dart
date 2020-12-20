@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 /// Responsável pela tela de seleção de Kc da cultura e efetua o cálculo de ETc.
-class KcPage extends StatefulWidget {
+class   KcPage extends StatefulWidget {
   @override
   _KcPageState createState() => _KcPageState();
 }
