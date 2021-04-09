@@ -5,6 +5,7 @@ import 'package:chico_dagua/ui/history_page.dart';
 import 'package:chico_dagua/ui/initial_flow/loc_perm_page.dart';
 import 'package:chico_dagua/ui/work_page.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 /// Arcabouço da página principal/inicial do aplicativo, e abrigo do drawer.
@@ -123,11 +124,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   ///Retorna a tela com o "Sobre" do app.
-  void _aboutInfo() {
+  void _aboutInfo() async{
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
     return showAboutDialog(
       context: context,
       applicationName: "Chico d'Água",
-      applicationVersion: "v1.3.0",
+      applicationVersion: "v" + packageInfo.version,
       applicationIcon: Image.asset("imgs/cda.png", height: 55.0, width: 55.0,),
       children: <Widget>[
         Text("Este app é parte resultante do projeto de extensão \"Chico d'Água\" "

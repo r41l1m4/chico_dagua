@@ -89,7 +89,7 @@ class _EToPageState extends State<EToPage> {
                     ),
                     ScopedModelDescendant<FlowModel>(
                       builder: (context, child, model) {
-                        return OutlineButton(
+                        return OutlinedButton(
                           // ignore: missing_return
                           onPressed: () {
                             if(_formKey.currentState.validate()) {
@@ -122,13 +122,18 @@ class _EToPageState extends State<EToPage> {
                               );
                             }
                           },
-                          child: Text("Próximo"),
-                          splashColor: Colors.white,
-                          highlightColor: Theme.of(context).primaryColor,
-                          shape: StadiumBorder(),
-                          borderSide: BorderSide(
+                          child: Text(
+                            "Próximo",
+                            style: TextStyle(
+                              color: Theme.of(context).accentColor,
+                            ),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            shape: StadiumBorder(),
+                            side: BorderSide(
                               width: 0.2,
                               color: Theme.of(context).accentColor,
+                            ),
                           ),
                         );
                       },

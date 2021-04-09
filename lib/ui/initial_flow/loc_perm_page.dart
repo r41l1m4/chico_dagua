@@ -59,7 +59,7 @@ class LocPermPage extends StatelessWidget {
                         SizedBox(
                           height: 40.0,
                         ),
-                        OutlineButton(
+                        OutlinedButton(
                           onPressed: () {
                             // ignore: missing_return
                             Location().requestPermission().then((hasPerm) {
@@ -135,13 +135,18 @@ class LocPermPage extends StatelessWidget {
                               }
                             });
                           },
-                          child: Text("Ceder Permissão"),
-                          shape: StadiumBorder(),
-                          splashColor: Colors.white,
-                          highlightColor: Theme.of(context).primaryColor,
-                          borderSide: BorderSide(
+                          child: Text(
+                            "Ceder Permissão",
+                            style: TextStyle(
+                              color: Theme.of(context).accentColor,
+                            ),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            shape: StadiumBorder(),
+                            side: BorderSide(
                               width: 0.2,
-                              color: Theme.of(context).accentColor
+                              color: Theme.of(context).accentColor,
+                            ),
                           ),
                         ),
                         SizedBox(

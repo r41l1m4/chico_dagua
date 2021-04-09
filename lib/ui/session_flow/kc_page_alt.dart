@@ -98,7 +98,7 @@ class _KcPageAltState extends State<KcPageAlt> {
                   ),
                   ScopedModelDescendant<FlowModel>(
                     builder: (context, child, model) {
-                      return OutlineButton(
+                      return OutlinedButton(
                         onPressed: () {
                           if (altKcController.text.contains(",")) {
                             return showDialog(
@@ -142,13 +142,18 @@ class _KcPageAltState extends State<KcPageAlt> {
                                 ));
                           }
                         },
-                        child: Text("Calcular"),
-                        splashColor: Colors.white,
-                        highlightColor: Theme.of(context).primaryColor,
-                        shape: StadiumBorder(),
-                        borderSide: BorderSide(
-                            width: 0.2,
+                        child: Text(
+                          "Calcular",
+                          style: TextStyle(
                             color: Theme.of(context).accentColor,
+                          ),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          shape: StadiumBorder(),
+                          side: BorderSide(
+                              width: 0.2,
+                              color: Theme.of(context).accentColor
+                          ),
                         ),
                       );
                     },

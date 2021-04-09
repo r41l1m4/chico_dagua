@@ -142,7 +142,7 @@ class _KcPageState extends State<KcPage> {
                   ),
                   ScopedModelDescendant<FlowModel>(
                     builder: (context, child, model) {
-                      return OutlineButton(
+                      return OutlinedButton(
                         onPressed: () {
                           if ((dropdownValue == null && !manualKc) ||
                               (manualKc && kcController.text.isEmpty)) {
@@ -207,13 +207,18 @@ class _KcPageState extends State<KcPage> {
                                 ));
                           }
                         },
-                        child: Text("Calcular"),
-                        splashColor: Colors.white,
-                        highlightColor: Theme.of(context).primaryColor,
-                        shape: StadiumBorder(),
-                        borderSide: BorderSide(
-                            width: 0.2,
-                          color: Theme.of(context).accentColor
+                        child: Text(
+                          "Calcular",
+                          style: TextStyle(
+                            color: Theme.of(context).accentColor,
+                          ),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          shape: StadiumBorder(),
+                          side: BorderSide(
+                              width: 0.2,
+                              color: Theme.of(context).accentColor
+                          ),
                         ),
                       );
                     },

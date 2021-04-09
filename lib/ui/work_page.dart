@@ -50,7 +50,7 @@ class _WorkPageState extends State<WorkPage> {
               ),
             ),
           ),
-          OutlineButton(
+          OutlinedButton(
             onPressed: () {
               Navigator.push(context,
                 PageRouteBuilder(
@@ -75,12 +75,12 @@ class _WorkPageState extends State<WorkPage> {
                 color: Theme.of(context).accentColor,
               ),
             ),
-            shape: StadiumBorder(),
-            splashColor: Colors.white,
-            highlightColor: Colors.lightBlueAccent[400],
-            borderSide: BorderSide(
+            style: OutlinedButton.styleFrom(
+              shape: StadiumBorder(),
+              side: BorderSide(
                 width: 0.2,
                 color: Theme.of(context).accentColor,
+              ),
             ),
           ),
         ],

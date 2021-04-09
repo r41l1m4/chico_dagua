@@ -100,16 +100,22 @@ class _ResultPageState extends State<ResultPage> {
                 ),
               ),
             ),
-            OutlineButton(
+            OutlinedButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text("Voltar à página inicial", style: TextStyle(color: Colors.white),),
-              shape: StadiumBorder(),
-              color: Color(255),
-              borderSide: BorderSide(
-                  width: 0.7,
-                color: Colors.white
+              child: Text(
+                "Voltar à página inicial",
+                style: TextStyle(
+                    color: Colors.white
+                ),
+              ),
+              style: OutlinedButton.styleFrom(
+                shape: StadiumBorder(),
+                side: BorderSide(
+                    width: 0.7,
+                    color: Colors.white
+                ),
               ),
             ),
           ],

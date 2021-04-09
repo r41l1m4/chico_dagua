@@ -38,20 +38,25 @@ class PosLocPreCult extends StatelessWidget {
           SizedBox(
             height: 40.0,
           ),
-          OutlineButton(
+          OutlinedButton(
             onPressed: () {
               Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                       builder: (BuildContext context) => CultQuery()
                   ));
             },
-            child: Text("Avançar"),
-            shape: StadiumBorder(),
-            splashColor: Colors.white,
-            highlightColor: Theme.of(context).primaryColor,
-            borderSide: BorderSide(
+            child: Text(
+              "Avançar",
+              style: TextStyle(
+                color: Theme.of(context).accentColor,
+              ),
+            ),
+            style: OutlinedButton.styleFrom(
+              shape: StadiumBorder(),
+              side: BorderSide(
                 width: 0.2,
-                color: Theme.of(context).accentColor
+                color: Theme.of(context).accentColor,
+              ),
             ),
           ),
           SizedBox(
