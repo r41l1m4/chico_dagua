@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// Classe que abriga os dados das cidades e culturas já calibradas, além de
@@ -212,29 +213,41 @@ class DataStuff {
   }
 
   //JSON manipulation
+
+  ///Retorna uma String com o diretório no dispositivo onde os arquivos de configuração
+  ///devem ser salvos.
+  Future<String> getDirectory() async{
+    try{
+      Directory directory = await getApplicationDocumentsDirectory();
+      return directory.path;
+    }catch (MissingPluginException) {
+      PackageInfo packageInfo = await PackageInfo.fromPlatform();
+      return "/data/data/${packageInfo.packageName}/conf";
+    }
+  }
+
   /// Retorna o arquivo onde são guardados os dados, para escrita.
   /// Caso o arquivo ainda não exista, ele é criado.
   /// É usado o próprio arcabouço do flutter para definir o local onde esse
   /// arquivo deve ser salvo.
-  Future<File> getFile({bool isHistory}) async {
-    final directory = await getApplicationDocumentsDirectory();
+  Future<File> getFile(String directory, {bool isHistory}) async {
     try {
       if(isHistory != null && isHistory) {
         print("history - GF");
-        return File("${directory.path}/chicoHistory.json").create(recursive: true);
+        return File("$directory/chicoHistory.json").create(recursive: true);
       }
-      return File("${directory.path}/chicoData.json").create(recursive: true);
+      return File("$directory/chicoData.json").create(recursive: true);
     }on FileSystemException {
       File file;
       if(isHistory != null && isHistory) {
-        file = File("${directory.path}/chicoHistory.json");
+        file = File("$directory/chicoHistory.json");
         file.create(recursive: true).then((File fl) {
           file = fl;
         });
         file.open(mode: FileMode.write);
         return file;
       }
-      file = File("${directory.path}/chicoData.json");
+      file = File("$directory/chicoData.json");
       file.create(recursive: true).then((File fl) {
         file = fl;
       });
@@ -254,12 +267,12 @@ class DataStuff {
       print("saveHistoryData $listData");
       String data = json.encode(listData);
 
-      final file = await getFile(isHistory: true);
+      final file = await getFile(await getDirectory(), isHistory: true);
       return file.writeAsString(data);
     }
     print("saveData $listData");
     String data = json.encode(listData);
-    final file = await getFile();
+    final file = await getFile(await getDirectory());
     return file.writeAsString(data);
 
   }
@@ -272,10 +285,10 @@ class DataStuff {
     try {
       if(isHistory != null && isHistory) {
         print("history - RD");
-        final file = await getFile(isHistory: true);
+        final file = await getFile(await getDirectory(), isHistory: true);
         return file.readAsString();
       }
-      final file = await getFile();
+      final file = await getFile(await getDirectory());
       return file.readAsString();
     } catch (e) {
       return null;
