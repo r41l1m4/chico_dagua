@@ -233,7 +233,6 @@ class DataStuff {
   Future<File> getFile(String directory, {bool isHistory}) async {
     try {
       if(isHistory != null && isHistory) {
-        print("history - GF");
         return File("$directory/chicoHistory.json").create(recursive: true);
       }
       return File("$directory/chicoData.json").create(recursive: true);
@@ -264,13 +263,11 @@ class DataStuff {
   ///não seja definido, encara como sendo dados normais.
   Future<File> saveData(List listData, {bool isHistory}) async {
     if(isHistory != null && isHistory) {
-      print("saveHistoryData $listData");
       String data = json.encode(listData);
 
       final file = await getFile(await getDirectory(), isHistory: true);
       return file.writeAsString(data);
     }
-    print("saveData $listData");
     String data = json.encode(listData);
     final file = await getFile(await getDirectory());
     return file.writeAsString(data);
