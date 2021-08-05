@@ -45,7 +45,7 @@ class NewOne extends StatelessWidget {
           print(snapshot.data);
           List city = json.decode(snapshot.data);
 
-          return ScopedModel<SessionModel>(
+          return ScopedModel<SessionModel> (
             model: SessionModel.init(
                         city.elementAt(0)["\"hasCity\""],
                         city.elementAt(0)["\"city\""]["\"cityId\""],

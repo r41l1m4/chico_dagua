@@ -28,6 +28,7 @@ class _CultQueryState extends State<CultQuery> {
               _tempQuestionBox("Qual é a sua cultura?"),
               Container(
                 child: DropdownButton<String>(
+                  key: const Key("dropdownCult"),
                   iconEnabledColor: Colors.grey,
                   hint: Text("Selecione"),
                   iconSize: 30.0,
@@ -42,7 +43,9 @@ class _CultQueryState extends State<CultQuery> {
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
-                      child: Text(value),
+                      child: Text(value,
+                                  key: Key("dropItem_${value}_text"),
+                      ),
                     );
                   }).toList(),
                 ),
@@ -57,10 +60,11 @@ class _CultQueryState extends State<CultQuery> {
                   padding: EdgeInsets.symmetric(
                       horizontal: 100.0),
                   child: TextFormField(
+                    key: const Key("outraCult"),
                     controller: otherCultController,
                     enabled: dropdownValue == "Outra",
                     validator: (value) {
-                      if (value.isEmpty) {
+                      if (value.isEmpty || value == null) {
                         return "Campo obrigatório!";
                       }
                       return null;
@@ -87,6 +91,7 @@ class _CultQueryState extends State<CultQuery> {
                 child: Form(
                   key: _formKey,
                     child: TextFormField(
+                      key: const Key("espPlantas"),
                       controller: espCultController,
                       validator: (value) {
                         if(value.isEmpty) {
@@ -116,6 +121,7 @@ class _CultQueryState extends State<CultQuery> {
                 height: 50.0,
               ),
               IconButton(
+                key: const Key("cultNameEnter"),
                 highlightColor: Theme.of(context).primaryColor,
                 icon: Icon(Icons.arrow_forward_ios),
                 onPressed: () {

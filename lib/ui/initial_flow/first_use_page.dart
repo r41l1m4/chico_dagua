@@ -64,6 +64,7 @@ class FirstUsePage extends StatelessWidget {
                 height: 40.0,
               ),
               IconButton(
+                key: const Key('start'),
                 highlightColor: Theme.of(context).primaryColor,
                 icon: Icon(Icons.arrow_forward_ios),
                 onPressed: () {

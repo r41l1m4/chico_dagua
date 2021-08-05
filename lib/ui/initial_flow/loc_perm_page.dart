@@ -43,6 +43,7 @@ class LocPermPage extends StatelessWidget {
                           height: 10.0,
                         ),
                         Container(
+                          key: const Key('textLocPerm'),
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.symmetric(horizontal: 30.0),
                           child: Text(
@@ -60,6 +61,7 @@ class LocPermPage extends StatelessWidget {
                           height: 40.0,
                         ),
                         OutlinedButton(
+                          key: const Key('ackLocPerm'),
                           onPressed: () {
                             // ignore: missing_return
                             Location().requestPermission().then((hasPerm) {
@@ -122,12 +124,25 @@ class LocPermPage extends StatelessWidget {
                               } else {
                                 return showDialog(
                                   context: context,
+                                  barrierDismissible: false,
                                   builder: (context) {
                                     return AlertDialog(
                                       content: Text("O acesso a localização é"
                                           " realmente necessário para que "
                                           "possamos prosseguir."),
                                       title: Text("ERRO!"),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('Okay',
+                                            style: TextStyle(
+                                              color: Colors.black
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
                                       backgroundColor: Theme.of(context).primaryColor,
                                     );
                                   },

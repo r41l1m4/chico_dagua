@@ -10,8 +10,8 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^0.1.2
   intl: ^0.15.8
-  path_provider: ^1.1.0
-  package_info_plus: ^1.0.0
+  path_provider: ^2.0.2
+  package_info_plus: ^1.0.4
   scoped_model: ^1.0.1
   location: ^2.3.5
   geocoder: ^0.2.1
@@ -19,9 +19,9 @@ dependencies:
   firebase_database: ^3.1.1
 
 dev_dependencies:
-  test:
-  flutter_test:
+  flutter_driver:
     sdk: flutter
+  test: any
 
 flutter:
   uses-material-design: true

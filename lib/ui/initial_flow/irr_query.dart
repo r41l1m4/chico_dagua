@@ -36,6 +36,7 @@ class _IrrQueryState extends State<IrrQuery> {
                   children: <Widget>[
                     _tempQuestionBox("Qual é vazão do seu gotejador?"),
                     Padding(
+                      key: const Key("irr_vazController"),
                       padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
                       child: _tempInputBox("Digite aqui", "l/h", vazController),
                     ),
@@ -44,10 +45,12 @@ class _IrrQueryState extends State<IrrQuery> {
                     ),
                     _tempQuestionBox("Qual é o espaçamento:"),
                     Padding(
+                      key: const Key("irr_espGotController"),
                       padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 10.0),
                       child: _tempInputBox("Entre os gotejadores?", "cm", espGotController),
                     ),
                     Padding(
+                      key: const Key("irr_espLinController"),
                       padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 10.0),
                       child: _tempInputBox("Entre as linhas?", "cm", espLinController),
                     ),
@@ -55,6 +58,7 @@ class _IrrQueryState extends State<IrrQuery> {
                       height: 30.0,
                     ),
                     IconButton(
+                      key: const Key("irrDataButton"),
                       highlightColor: Theme.of(context).primaryColor,
                       icon: Icon(Icons.arrow_forward_ios),
                       onPressed: () {

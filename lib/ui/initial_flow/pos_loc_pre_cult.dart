@@ -39,6 +39,7 @@ class PosLocPreCult extends StatelessWidget {
             height: 40.0,
           ),
           OutlinedButton(
+            key: const Key('posLocPerm'),
             onPressed: () {
               Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
