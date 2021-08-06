@@ -77,10 +77,12 @@ class _EToPageState extends State<EToPage> {
                       ),
                     ),
                     Padding(
+                      key: const Key("maxTemp"),
                       padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0),
                       child: _tempInputBox(tMaxController, "Máxima"),
                     ),
                     Padding(
+                      key: const Key("minTemp"),
                       padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0),
                       child: _tempInputBox(tMinController, "Mínima"),
                     ),
@@ -91,6 +93,7 @@ class _EToPageState extends State<EToPage> {
                       builder: (context, child, model) {
                         return OutlinedButton(
                           // ignore: missing_return
+                          key: const Key("tempFormButton"),
                           onPressed: () {
                             if(_formKey.currentState.validate()) {
                               double et0 = resETo(

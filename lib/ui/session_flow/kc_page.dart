@@ -72,6 +72,7 @@ class _KcPageState extends State<KcPage> {
                   Container(
                     padding: EdgeInsets.only(bottom: 30.0),
                     child: DropdownButton<String>(
+                      key: const Key("dropdownKc"),
                       iconEnabledColor: Colors.grey,
                       hint: Text("Selecione"),
                       iconSize: 30.0,
@@ -86,7 +87,8 @@ class _KcPageState extends State<KcPage> {
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value),
+                          child: Text(value,
+                                    key: Key("dropItem_${value}_text"),),
                         );
                       }).toList(),
                     ),
@@ -95,6 +97,7 @@ class _KcPageState extends State<KcPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Checkbox(
+                        key: const Key("manualKcCheck"),
                         value: manualKc,
                         checkColor: Theme.of(context).primaryColor,
                         activeColor: Theme.of(context).accentColor,
@@ -115,6 +118,7 @@ class _KcPageState extends State<KcPage> {
                       padding: EdgeInsets.symmetric(
                           horizontal: 100.0),
                       child: TextFormField(
+                        key: const Key("manualKcForm"),
                         controller: kcController,
                         enabled: manualKc,
                         validator: (value) {
@@ -143,6 +147,7 @@ class _KcPageState extends State<KcPage> {
                   ScopedModelDescendant<FlowModel>(
                     builder: (context, child, model) {
                       return OutlinedButton(
+                        key: const Key("kcFormButton"),
                         onPressed: () {
                           if ((dropdownValue == null && !manualKc) ||
                               (manualKc && kcController.text.isEmpty)) {
@@ -152,6 +157,18 @@ class _KcPageState extends State<KcPage> {
                                   return AlertDialog(
                                     backgroundColor: Theme.of(context).primaryColor,
                                     title: Text("Erro!"),
+                                    actions: [
+                                      TextButton(
+                                        child: const Text('Okay',
+                                          style: TextStyle(
+                                              color: Colors.black
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
                                     content: Text(
                                       "Todos os campos são obrigatórios.",
                                       style: TextStyle(color: Colors.white),
@@ -166,6 +183,18 @@ class _KcPageState extends State<KcPage> {
                                   return AlertDialog(
                                     backgroundColor: Theme.of(context).primaryColor,
                                     title: Text("Erro!"),
+                                    actions: [
+                                      TextButton(
+                                        child: const Text('Okay',
+                                          style: TextStyle(
+                                              color: Colors.black
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
                                     content: Text(
                                       "Decimais devem ser separados por \"ponto\".",
                                       style: TextStyle(color: Colors.white),

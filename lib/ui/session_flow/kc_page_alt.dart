@@ -73,6 +73,7 @@ class _KcPageAltState extends State<KcPageAlt> {
                     padding: EdgeInsets.symmetric(
                         horizontal: 100.0),
                     child: TextFormField(
+                      key: const Key("manualKcForm"),
                       controller: altKcController,
                       validator: (value) {
                         if (value.isEmpty) {
@@ -99,6 +100,7 @@ class _KcPageAltState extends State<KcPageAlt> {
                   ScopedModelDescendant<FlowModel>(
                     builder: (context, child, model) {
                       return OutlinedButton(
+                        key: const Key("kcFormButton"),
                         onPressed: () {
                           if (altKcController.text.contains(",")) {
                             return showDialog(
@@ -107,6 +109,18 @@ class _KcPageAltState extends State<KcPageAlt> {
                                   return AlertDialog(
                                     backgroundColor: Theme.of(context).primaryColor,
                                     title: Text("Erro!"),
+                                    actions: [
+                                      TextButton(
+                                        child: const Text('Okay',
+                                          style: TextStyle(
+                                              color: Colors.black
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
                                     content: Text(
                                       "Decimais devem ser separados por \"ponto\".",
                                       style: TextStyle(color: Colors.white),

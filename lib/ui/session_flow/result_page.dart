@@ -42,19 +42,19 @@ class _ResultPageState extends State<ResultPage> {
     ds.saveData(ds.history, isHistory: true);
 
     //Realtime database
-    FirebaseDatabase.instance.reference().push().set(
-      {
-        'state':SessionModel.of(context).state,
-        'city':SessionModel.of(context).city,
-        'tempMax':FlowModel.of(context).tempMax,
-        'tempMin':FlowModel.of(context).tempMin,
-        'ETo':FlowModel.of(context).et0,
-        'Kc':FlowModel.of(context).kc,
-        'culture':SessionModel.of(context).cultName,
-        'date':DateFormat("dd-MM-yyyy").format(DateTime.now()),
-        'time':DateFormat("HH:mm").format(DateTime.now())
-      }
-    );
+    // FirebaseDatabase.instance.reference().push().set(
+    //   {
+    //     'state':SessionModel.of(context).state,
+    //     'city':SessionModel.of(context).city,
+    //     'tempMax':FlowModel.of(context).tempMax,
+    //     'tempMin':FlowModel.of(context).tempMin,
+    //     'ETo':FlowModel.of(context).et0,
+    //     'Kc':FlowModel.of(context).kc,
+    //     'culture':SessionModel.of(context).cultName,
+    //     'date':DateFormat("dd-MM-yyyy").format(DateTime.now()),
+    //     'time':DateFormat("HH:mm").format(DateTime.now())
+    //   }
+    // );
 
     return Scaffold(
       body: Container(
@@ -101,6 +101,7 @@ class _ResultPageState extends State<ResultPage> {
               ),
             ),
             OutlinedButton(
+              key: const Key("finalResultButton"),
               onPressed: () {
                 Navigator.of(context).pop();
               },

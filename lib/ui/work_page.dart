@@ -51,6 +51,7 @@ class _WorkPageState extends State<WorkPage> {
             ),
           ),
           OutlinedButton(
+            key: const Key("startButton"),
             onPressed: () {
               Navigator.push(context,
                 PageRouteBuilder(
