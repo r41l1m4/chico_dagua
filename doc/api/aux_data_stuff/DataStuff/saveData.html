@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the saveData method from the DataStuff class, for the Dart programming language.">
+  <title>saveData method - DataStuff class - data_stuff library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">chico_dagua</a></li>
+    <li><a href="../../aux_data_stuff/aux_data_stuff-library.html">data_stuff</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff-class.html">DataStuff</a></li>
+    <li class="self-crumb">saveData method</li>
+  </ol>
+  <div class="self-name">saveData</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div>
+<h1><span class="kind-method">saveData</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+
+<span class="returntype"><a href="https://api.dart.dev/stable/2.15.1/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/2.15.1/dart-io/File-class.html">File</a></span>&gt;</span></span>
+<span class="name ">saveData</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="saveData-param-listData"><span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/List-class.html">List</a></span> <span class="parameter-name">listData</span>, </span></li>
+<li><span class="parameter" id="saveData-param-isHistory">{<span class="type-annotation"><a href="https://api.dart.dev/stable/2.15.1/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isHistory</span>}</span></li>
+</ol>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Recebe os dados em formato de lista e escreve no arquivo JSON.
+Como parametro opcional verifica se é dados de histórico, caso esse paramêtro
+não seja definido, encara como sendo dados normais.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">Future&lt;File&gt; saveData(List listData, {bool isHistory}) async {
+  if(isHistory != null &amp;&amp; isHistory) {
+    String data = json.encode(listData);
+
+    final file = await getFile(await getDirectory(), isHistory: true);
+    return file.writeAsString(data);
+  }
+  String data = json.encode(listData);
+  final file = await getFile(await getDirectory());
+  return file.writeAsString(data);
+
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li><a href="../../index.html">chico_dagua</a></li>
+  <li><a href="../../aux_data_stuff/aux_data_stuff-library.html">data_stuff</a></li>
+  <li><a href="../../aux_data_stuff/DataStuff-class.html">DataStuff</a></li>
+  <li class="self-crumb">saveData method</li>
+</ol>
+
+
+    <h5>DataStuff class</h5>
+    <ol>
+
+    <li class="section-title"><a href="../../aux_data_stuff/DataStuff-class.html#constructors">Constructors</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/DataStuff.html">DataStuff</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/DataStuff.internal.html">internal</a></li>
+
+
+    <li class="section-title">
+      <a href="../../aux_data_stuff/DataStuff-class.html#instance-properties">Properties</a>
+    </li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/history.html">history</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/runtimeType.html">runtimeType</a></li>
+
+    <li class="section-title"><a href="../../aux_data_stuff/DataStuff-class.html#instance-methods">Methods</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/clearHistory.html">clearHistory</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/getAllCftsCity.html">getAllCftsCity</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/getCfts.html">getCfts</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/getCityId.html">getCityId</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/getCityKeys.html">getCityKeys</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/getCityName.html">getCityName</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/getCultId.html">getCultId</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/getCultKc.html">getCultKc</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/getCultKeys.html">getCultKeys</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/getCultName.html">getCultName</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/getDefaultCfts.html">getDefaultCfts</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/getDirectory.html">getDirectory</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/getFile.html">getFile</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/getStageId.html">getStageId</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/getStageKeys.html">getStageKeys</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/getStageName.html">getStageName</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/hasBetterCfts.html">hasBetterCfts</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/readData.html">readData</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/saveData.html">saveData</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/toString.html">toString</a></li>
+
+    <li class="section-title inherited"><a href="../../aux_data_stuff/DataStuff-class.html#operators">Operators</a></li>
+    <li class="inherited"><a href="https://api.dart.dev/stable/2.15.1/dart-core/Object/operator_equals.html">operator ==</a></li>
+
+
+    <li class="section-title"><a href="../../aux_data_stuff/DataStuff-class.html#static-properties">Static properties</a></li>
+    <li><a href="../../aux_data_stuff/DataStuff/dt.html">dt</a></li>
+
+
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    chico_dagua
+      1.3.0+2
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/script.js?v1"></script>
+
+
+
+</body>
+
+</html>
+
