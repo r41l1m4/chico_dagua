@@ -4,7 +4,7 @@ import 'package:chico_dagua/ui/session_flow/eto_page.dart';
 import 'package:chico_dagua/ui/session_flow/kc_page.dart';
 import 'package:chico_dagua/ui/session_flow/kc_page_alt.dart';
 import 'package:chico_dagua/ui/session_flow/result_page.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 final etoPage = EToPage().createState();
 final kcPage = KcPage().createState();
