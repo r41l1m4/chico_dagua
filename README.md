@@ -1,16 +1,8 @@
-# chico_dagua
+# Chico d'Água
 
-App para determinar a quantidade de agua necessaria para irrigacoes.
+App para determinar a quantidade de tempo necessária para manter equipamentos de irrigação ligados.
+Utiliza-se do método de Hargreaves-Samani para estimar a evepotranspiração de referência (ETo).
 
-## Getting Started
+### Documentação
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+A documentação das classes e métodos pode ser encontrada [aqui](https://r41l1m4.github.io/chico_dagua/doc/api/index.html).
