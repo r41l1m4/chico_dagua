@@ -42,7 +42,7 @@ class _ResultPageState extends State<ResultPage> {
     ds.saveData(ds.history, isHistory: true);
 
     //Realtime database
-    FirebaseDatabase.instance.reference().push().set(
+    FirebaseDatabase.instance.ref().push().set(
       {
         'state':SessionModel.of(context).state,
         'city':SessionModel.of(context).city,

@@ -30,6 +30,13 @@
             {
               "client_id": "610865689867-6nh6nek6ssb9kgj9bk11hf58m9hjvts4.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "610865689867-7mncco3cbaj6h8ke43riv7g5h4lcnv3g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ironia.chicoDagua"
+              }
             }
           ]
         }

@@ -8,6 +8,9 @@ import 'package:chico_dagua/ui/session_flow/eto_page.dart';
 import 'package:chico_dagua/ui/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
 
 void main() {
   runApp(NewOne());
@@ -20,6 +23,11 @@ class NewOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+        .then((value) => value);
+
+
     return FutureBuilder<String>(
       // Lê os dados do JSON
       future: DataStuff().readData(),

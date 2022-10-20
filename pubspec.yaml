@@ -16,7 +16,9 @@ dependencies:
   location: ^4.4.0
   geocoder: ^0.2.1
   dartdoc: any
-  firebase_database: ^3.1.1
+  firebase_database: ^10.0.1
+  quiver: ^3.1.0
+  firebase_core: ^2.0.0
 
 dev_dependencies:
   flutter_driver:
