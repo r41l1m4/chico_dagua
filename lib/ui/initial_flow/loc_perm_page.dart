@@ -2,7 +2,7 @@ import 'package:chico_dagua/aux/data_stuff.dart';
 import 'package:chico_dagua/model/session_model.dart';
 import 'package:chico_dagua/ui/initial_flow/pos_loc_pre_cult.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoder/geocoder.dart';
+import 'package:geocoding/geocoding.dart' hide Location;
 import 'package:location/location.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -70,35 +70,40 @@ class LocPermPage extends StatelessWidget {
                                 Location().serviceEnabled().then((isEnabled) {
                                   //Se está ativado
                                   if(isEnabled) {
-                                    Coordinates coods;
+                                    double latitude;
+                                    double longitude;
 
                                     Location().getLocation().then((locData) {
-
                                       model.setLat(locData.latitude);
                                       print("Lat: ${locData.latitude}");
-                                      coods = Coordinates(locData.latitude, locData.longitude);
-                                    }).whenComplete(() {
+                                      latitude = locData.latitude;
+                                      longitude = locData.longitude;
 
+                                    }).whenComplete(() {
                                       Future.delayed(Duration(milliseconds: 500));
-                                      Geocoder.local.findAddressesFromCoordinates(coods)
-                                          .then((geolocData) {
-                                        print("COODS: ${coods.latitude}, ${coods.longitude}");
+
+                                      placemarkFromCoordinates(latitude, longitude, localeIdentifier: "pt_BR").then((geoLocData) {
+                                        print("COODS GEOCODING: $latitude, $longitude");
+                                        print("Local GEOCODING: ${geoLocData.first.subAdministrativeArea}, ${geoLocData.first.administrativeArea}");
+
                                         Future.delayed(Duration(milliseconds: 500));
-                                        model.setCity(geolocData.first.subAdminArea);
+                                        String cityName = geoLocData.first.subAdministrativeArea;
+                                        String stateName = geoLocData.first.administrativeArea;
+
+                                        model.setCity(cityName);
 
                                         //verifica se a cidade relatada pelo GPS já existe como
                                         //cidade com o coeficiente calibrado
-                                        if(ds.getCityKeys().contains(geolocData.first.subAdminArea)) {
+                                        if(ds.getCityKeys().contains(cityName)) {
                                           //Se já existe, pega o Id da cidade e seta no Model
-                                          model.setCityId(ds.getCityId(geolocData.first.subAdminArea));
+                                          model.setCityId(ds.getCityId(cityName));
                                         }else {
                                           //Caso não, seta o valor para 15, assim ele vai pegar os coeficientes padrão
                                           model.setCityId(15);
                                         }
 
-                                        model.setState(geolocData.first.adminArea);
+                                        model.setState(stateName);
                                         model.setCityState(true);
-                                        print("Local: ${geolocData.first.subAdminArea}, ${geolocData.first.adminArea}");
                                       });
                                     });
 
