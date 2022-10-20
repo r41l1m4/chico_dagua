@@ -13,7 +13,7 @@ dependencies:
   path_provider: ^2.0.2
   package_info_plus: ^1.0.4
   scoped_model: ^2.0.0
-  location: ^2.3.5
+  location: ^4.4.0
   geocoder: ^0.2.1
   dartdoc: any
   firebase_database: ^3.1.1

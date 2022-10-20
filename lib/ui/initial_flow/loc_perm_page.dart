@@ -65,7 +65,7 @@ class LocPermPage extends StatelessWidget {
                           onPressed: () {
                             // ignore: missing_return
                             Location().requestPermission().then((hasPerm) {
-                              if (hasPerm == PermissionStatus.GRANTED) {
+                              if (hasPerm == PermissionStatus.granted) {
                                 //verifica se o serviço de localização está ativado
                                 Location().serviceEnabled().then((isEnabled) {
                                   //Se está ativado
