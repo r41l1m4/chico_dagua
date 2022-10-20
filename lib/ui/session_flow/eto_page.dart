@@ -4,7 +4,6 @@ import 'package:chico_dagua/model/session_model.dart';
 import 'package:chico_dagua/ui/session_flow/kc_page.dart';
 import 'package:chico_dagua/ui/session_flow/kc_page_alt.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:quiver/time.dart';
 import 'dart:math';
 
@@ -256,5 +255,8 @@ class _EToPageState extends State<EToPage> {
     print(eto2);
     return eto2;
   }
+
+  int ordinalDayFromMarchFirst(int month, int day) =>
+      ((30.6 * month) - 91.4).floor() + day;
 
 }
