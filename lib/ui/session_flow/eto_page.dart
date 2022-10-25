@@ -34,7 +34,7 @@ class _EToPageState extends State<EToPage> {
             Row(
               children: <Widget>[
                 IconButton(
-                  padding: EdgeInsets.only(top: 40.0, left: 15.0),
+                  padding: EdgeInsets.only(top: 45.0, left: 15.0),
                   icon: Icon(Icons.arrow_back),
                   onPressed: () {
                     Navigator.pop(context);
@@ -42,15 +42,26 @@ class _EToPageState extends State<EToPage> {
                   alignment: Alignment.topLeft,
                 ),
                 Container(
-                  padding: EdgeInsets.only(top: 40.0, right: 10.0),
-                  alignment: Alignment.topRight,
-                  child: Text(
-                    SessionModel.of(context).city,
-                    style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                      fontSize: 15.0,
-                    ),
-                    textAlign: TextAlign.right,
+                  padding: EdgeInsets.only(top: 50.0),
+                  alignment: Alignment.bottomLeft,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        SessionModel.of(context).cultName,
+                        style: TextStyle(
+                          color: Theme.of(context).accentColor,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      Text(
+                        SessionModel.of(context).city,
+                        style: TextStyle(
+                          color: Theme.of(context).accentColor,
+                          fontSize: 12.0,
+                        ),
+                      ),
+                    ],
                   ),
                 )
               ],
