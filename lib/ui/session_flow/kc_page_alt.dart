@@ -16,7 +16,6 @@ class KcPageAlt extends StatefulWidget {
 /// como sendo "Outra", aqui não há opção de seleção para fase da cultura, só há a
 /// entrada de um velho e seco Kc.
 class _KcPageAltState extends State<KcPageAlt> {
-  static String dropdownValue;
 
   TextEditingController altKcController = TextEditingController();
 
@@ -76,7 +75,7 @@ class _KcPageAltState extends State<KcPageAlt> {
                       key: const Key("manualKcForm"),
                       controller: altKcController,
                       validator: (value) {
-                        if (value.isEmpty) {
+                        if (value!.isEmpty) {
                           return "Campo obrigatório!";
                         }
                         return null;
@@ -103,7 +102,8 @@ class _KcPageAltState extends State<KcPageAlt> {
                         key: const Key("kcFormButton"),
                         onPressed: () {
                           if (altKcController.text.contains(",")) {
-                            return showDialog(
+                            //TODO: verificar se a retirada do return demonstra problemas
+                            showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
@@ -127,13 +127,15 @@ class _KcPageAltState extends State<KcPageAlt> {
                                     ),
                                   );
                                 });
+                            return null;
                           } else {
                             double kc = double.parse(altKcController.text);
                             model.setKc(kc);
                             double etc = getETc(model.et0, kc);
                             model.setEtc(etc);
                             model.setStage("Kc Manual");
-                            return Navigator.pushReplacement(
+                            //TODO: verificar se a retirada do return demonstra problemas
+                            Navigator.pushReplacement(
                                 context,
                                 //Define a animação de transição entre as telas.
                                 PageRouteBuilder(
@@ -154,6 +156,7 @@ class _KcPageAltState extends State<KcPageAlt> {
                                     );
                                   },
                                 ));
+                            return null;
                           }
                         },
                         child: Text(

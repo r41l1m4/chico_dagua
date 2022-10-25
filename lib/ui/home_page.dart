@@ -112,13 +112,15 @@ class _HomePageState extends State<HomePage> {
         color: Colors.white,
       ),),
       onTap: () {
+        //TODO: verificar se a retirada do return demonstra problemas
         Navigator.pop(context);
-        return Navigator.push(
+        Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (BuildContext context) => newPage
             )
         );
+        return null;
       },
     );
   }

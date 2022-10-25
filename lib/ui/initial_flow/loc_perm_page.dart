@@ -70,14 +70,14 @@ class LocPermPage extends StatelessWidget {
                                 Location().serviceEnabled().then((isEnabled) {
                                   //Se está ativado
                                   if(isEnabled) {
-                                    double latitude;
-                                    double longitude;
+                                    double latitude = 0;
+                                    double longitude = 0;
 
                                     Location().getLocation().then((locData) {
-                                      model.setLat(locData.latitude);
+                                      model.setLat(locData.latitude!);
                                       print("Lat: ${locData.latitude}");
-                                      latitude = locData.latitude;
-                                      longitude = locData.longitude;
+                                      latitude = locData.latitude!;
+                                      longitude = locData.longitude!;
 
                                     }).whenComplete(() {
                                       Future.delayed(Duration(milliseconds: 500));
@@ -87,8 +87,8 @@ class LocPermPage extends StatelessWidget {
                                         print("Local GEOCODING: ${geoLocData.first.subAdministrativeArea}, ${geoLocData.first.administrativeArea}");
 
                                         Future.delayed(Duration(milliseconds: 500));
-                                        String cityName = geoLocData.first.subAdministrativeArea;
-                                        String stateName = geoLocData.first.administrativeArea;
+                                        String cityName = geoLocData.first.subAdministrativeArea!;
+                                        String stateName = geoLocData.first.administrativeArea!;
 
                                         model.setCity(cityName);
 
@@ -96,7 +96,7 @@ class LocPermPage extends StatelessWidget {
                                         //cidade com o coeficiente calibrado
                                         if(ds.getCityKeys().contains(cityName)) {
                                           //Se já existe, pega o Id da cidade e seta no Model
-                                          model.setCityId(ds.getCityId(cityName));
+                                          model.setCityId(ds.getCityId(cityName)!);
                                         }else {
                                           //Caso não, seta o valor para 15, assim ele vai pegar os coeficientes padrão
                                           model.setCityId(15);

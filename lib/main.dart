@@ -49,9 +49,9 @@ class NewOne extends StatelessWidget {
           );
           // Se o JSON tem dados previamente salvos, decodifica-os e carrega as váriaveis do
           // ScopedModel com os dados provenientes do JSON.
-        }else if(snapshot.data.length > 2 && (snapshot.data.isNotEmpty || snapshot.data != null)) {
+        }else if(snapshot.data!.length > 2 && (snapshot.data!.isNotEmpty || snapshot.data != null)) {
           print(snapshot.data);
-          List city = json.decode(snapshot.data);
+          List city = json.decode(snapshot.data!);
 
           return ScopedModel<SessionModel> (
             model: SessionModel.init(

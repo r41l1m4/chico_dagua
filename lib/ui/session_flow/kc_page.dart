@@ -14,7 +14,7 @@ class   KcPage extends StatefulWidget {
 /// Responsável pela tela de seleção de Kc da cultura e efetua o cálculo de ETc.
 class _KcPageState extends State<KcPage> {
   static DataStuff ds = DataStuff();
-  static String dropdownValue;
+  static String dropdownValue = "Inicial";
 
   TextEditingController kcController = TextEditingController();
 
@@ -77,9 +77,9 @@ class _KcPageState extends State<KcPage> {
                       hint: Text("Selecione"),
                       iconSize: 30.0,
                       value: dropdownValue,
-                      onChanged: (String newValue) {
+                      onChanged: (String? newValue) {
                         setState(() {
-                          dropdownValue = newValue;
+                          dropdownValue = newValue!;
                         });
                       },
                       items: ds
@@ -103,7 +103,7 @@ class _KcPageState extends State<KcPage> {
                         activeColor: Theme.of(context).accentColor,
                         onChanged: (value) {
                           setState(() {
-                            manualKc = value;
+                            manualKc = value!;
                           });
                         },
                       ),
@@ -122,7 +122,7 @@ class _KcPageState extends State<KcPage> {
                         controller: kcController,
                         enabled: manualKc,
                         validator: (value) {
-                          if (value.isEmpty) {
+                          if (value!.isEmpty) {
                             return "Campo obrigatório!";
                           }
                           return null;
@@ -151,7 +151,8 @@ class _KcPageState extends State<KcPage> {
                         onPressed: () {
                           if ((dropdownValue == null && !manualKc) ||
                               (manualKc && kcController.text.isEmpty)) {
-                            return showDialog(
+                            //TODO: verificar se a retirada do return demonstra problemas
+                            showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
@@ -175,9 +176,11 @@ class _KcPageState extends State<KcPage> {
                                     ),
                                   );
                                 });
+                            return null;
                           } else if ((manualKc &&
                               kcController.text.contains(","))) {
-                            return showDialog(
+                            //TODO: verificar se a retirada do return demonstra problemas
+                            showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
@@ -201,6 +204,7 @@ class _KcPageState extends State<KcPage> {
                                     ),
                                   );
                                 });
+                            return null;
                           } else {
                             int cultId = ScopedModel.of<SessionModel>(context).cultId;
                             //Caso seja escolhido entrar manualmente com o Kc, pega o número
@@ -208,12 +212,13 @@ class _KcPageState extends State<KcPage> {
                             double kc = manualKc
                                 ? double.parse(kcController.text)
                                 : ds.getCultKc(
-                                cultId, ds.getStageId(dropdownValue));
+                                cultId, ds.getStageId(dropdownValue)!);
                             model.setKc(kc);
                             double etc = getETc(model.et0, model.kc);
                             model.setEtc(etc);
                             model.setStage(dropdownValue ?? "Kc Manual");
-                            return Navigator.pushReplacement(
+                            //TODO: verificar se a retirada do return demonstra problemas
+                            Navigator.pushReplacement(
                                 context,
                                 //Define a animação de transição entre as telas.
                                 PageRouteBuilder(
@@ -234,6 +239,7 @@ class _KcPageState extends State<KcPage> {
                                     );
                                   },
                                 ));
+                            return null;
                           }
                         },
                         child: Text(

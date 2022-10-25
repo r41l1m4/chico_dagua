@@ -94,7 +94,7 @@ class _EToPageState extends State<EToPage> {
                           // ignore: missing_return
                           key: const Key("tempFormButton"),
                           onPressed: () {
-                            if(_formKey.currentState.validate()) {
+                            if(_formKey.currentState!.validate()) {
                               double et0 = resETo(
                                   SessionModel.of(context).city,
                                   double.parse(tMaxController.text),
@@ -103,7 +103,8 @@ class _EToPageState extends State<EToPage> {
                               model.setTempMax(double.parse(tMaxController.text));
                               model.setTempMin(double.parse(tMinController.text));
                               model.setEt0(et0);
-                              return Navigator.pushReplacement(
+                              //TODO: verificar se a retirada do return demonstra problemas
+                              Navigator.pushReplacement(
                                   this.context,
                                   PageRouteBuilder(
                                     pageBuilder: (context, animation, secondAnimation)
@@ -122,6 +123,7 @@ class _EToPageState extends State<EToPage> {
                                     },
                                   )
                               );
+                              return null;
                             }
                           },
                           child: Text(
@@ -156,7 +158,7 @@ class _EToPageState extends State<EToPage> {
     return TextFormField(
       controller: controller,
       validator: (value) {
-        if(value.isEmpty) {
+        if(value!.isEmpty) {
           return "Campo obrigatório!";
         }else if(value.contains(",")) {
           return "Decimais devem ser separados por \"ponto\"";
@@ -225,7 +227,7 @@ class _EToPageState extends State<EToPage> {
   ///Dado um nome de cidade, e temperaturas máxima e mínima, retorna o ETo.
   double resETo(String cityName, double tMax, double tMin) {
 
-    List cfts = List();
+    List cfts = List.empty(growable: true);
     double a;
     double b;
     double c;
@@ -238,7 +240,7 @@ class _EToPageState extends State<EToPage> {
 
     //Se há coeficientes calibrados para a cidade
     if(ds.hasBetterCfts(cityName)) {
-      cfts.add(ds.getAllCftsCity(ds.getCityId(cityName)));
+      cfts.add(ds.getAllCftsCity(ds.getCityId(cityName)!));
       a = cfts.elementAt(0)[0];
       b = cfts.elementAt(0)[1];
       c = cfts.elementAt(0)[2];

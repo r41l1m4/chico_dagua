@@ -47,10 +47,10 @@ class _CultSelectPageState extends State<CultSelectPage> {
             return Center(
               child: CircularProgressIndicator(),
             );
-          }else if(snapshot.data == null || snapshot.data.length <= 2) {
+          }else if(snapshot.data == null || snapshot.data!.length <= 2) {
             return hasNone();
           }else {
-            List cults = json.decode(snapshot.data);
+            List cults = json.decode(snapshot.data!);
             allCults = cults;
             return hasSome(cults);
           }

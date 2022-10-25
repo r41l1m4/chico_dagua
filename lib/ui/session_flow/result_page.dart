@@ -158,7 +158,8 @@ class _ResultPageState extends State<ResultPage> {
         return "$h horas e $min minutos";
       }
     }
-    return null;
+
+    return "";
   }
 
   ///Retorna um mapa com os dados, já organizados, para que seja salvo no histórico

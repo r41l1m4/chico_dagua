@@ -11,7 +11,7 @@ class CultQuery extends StatefulWidget {
 
 /// Responsável por coletar os dados da cultura.
 class _CultQueryState extends State<CultQuery> {
-  static String dropdownValue;
+  static String dropdownValue = "Abacaxi";
 
   TextEditingController espCultController = TextEditingController();
   TextEditingController otherCultController = TextEditingController();
@@ -33,9 +33,9 @@ class _CultQueryState extends State<CultQuery> {
                   hint: Text("Selecione"),
                   iconSize: 30.0,
                   value: dropdownValue,
-                  onChanged: (String newValue) {
+                  onChanged: (String? newValue) {
                     setState(() {
-                      dropdownValue = newValue;
+                      dropdownValue = newValue!;
                     });
                   },
                   items: DataStuff()
@@ -64,7 +64,7 @@ class _CultQueryState extends State<CultQuery> {
                     controller: otherCultController,
                     enabled: dropdownValue == "Outra",
                     validator: (value) {
-                      if (value.isEmpty || value == null) {
+                      if (value == null || value.isEmpty) {
                         return "Campo obrigatório!";
                       }
                       return null;
@@ -94,7 +94,7 @@ class _CultQueryState extends State<CultQuery> {
                       key: const Key("espPlantas"),
                       controller: espCultController,
                       validator: (value) {
-                        if(value.isEmpty) {
+                        if(value == null || value.isEmpty) {
                           return "Campo obrigatório!";
                         }else if(value.contains(",")) {
                           return "Decimais com \"ponto\"!";
@@ -125,22 +125,23 @@ class _CultQueryState extends State<CultQuery> {
                 highlightColor: Theme.of(context).primaryColor,
                 icon: Icon(Icons.arrow_forward_ios),
                 onPressed: () {
-                  if(dropdownValue == null) {
-                    return showDialog(
-                        context: context,
-                        builder: (BuildContext context){
-                          return AlertDialog(
-                            backgroundColor: Theme.of(context).primaryColor,
-                            title: Text("Erro!"),
-                            content: Text("Selecione a sua cultura.",
-                              style: TextStyle(
-                                  color: Colors.white
-                              ),
-                            ),
-                          );
-                        }
-                    );
-                  }else if(_formKey.currentState.validate()) {
+                  // if(dropdownValue == null) {
+                  //   return showDialog(
+                  //       context: context,
+                  //       builder: (BuildContext context){
+                  //         return AlertDialog(
+                  //           backgroundColor: Theme.of(context).primaryColor,
+                  //           title: Text("Erro!"),
+                  //           content: Text("Selecione a sua cultura.",
+                  //             style: TextStyle(
+                  //                 color: Colors.white
+                  //             ),
+                  //           ),
+                  //         );
+                  //       }
+                  //   );
+                  // }else
+                  if(_formKey.currentState!.validate()) {
                     if(dropdownValue == "Outra") {
                       SessionModel.of(context).setCultName(otherCultController.text);
                       SessionModel.of(context).setCultId(25);

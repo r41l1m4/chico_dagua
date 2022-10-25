@@ -134,7 +134,7 @@ class SessionModel extends Model {
   ///Retorna um lista com os dados estruturados em formato de mapa, para que possam
   ///ser armazenados em JSON no aparelho.
   List toList() {
-    List dataList = List();
+    List dataList = List.empty(growable: true);
 
     Map<String, dynamic> mapRoot = Map();
     Map<String, dynamic> mapCity = Map();

@@ -41,10 +41,10 @@ class _HistoryPageState extends State<HistoryPage> {
             return Center(
               child: CircularProgressIndicator(),
             );
-          }else if(snapshot.data == null || snapshot.data.length <= 2) {
+          }else if(snapshot.data == null || snapshot.data!.length <= 2) {
             return hasNone();
           }else {
-            List history = json.decode(snapshot.data);
+            List history = json.decode(snapshot.data!);
             ds.history = history;
             return hasSome(history);
           }
@@ -160,6 +160,6 @@ class _HistoryPageState extends State<HistoryPage> {
         return "$h horas e $min minutos";
       }
     }
-    return null;
+    return "";
   }
 }

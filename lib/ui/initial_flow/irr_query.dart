@@ -12,7 +12,6 @@ class IrrQuery extends StatefulWidget {
 
 /// Responsável pela coleta dos dados da irrigação do usuário.
 class _IrrQueryState extends State<IrrQuery> {
-  static String dropdownValue;
 
   TextEditingController vazController = TextEditingController();
   TextEditingController espGotController = TextEditingController();
@@ -62,15 +61,15 @@ class _IrrQueryState extends State<IrrQuery> {
                       highlightColor: Theme.of(context).primaryColor,
                       icon: Icon(Icons.arrow_forward_ios),
                       onPressed: () {
-                        if(_formKey2.currentState.validate()) {
+                        if(_formKey2.currentState!.validate()) {
                           SessionModel.of(context).setq(double.parse(vazController.text));
                           SessionModel.of(context).setEem(double.parse(espGotController.text));
                           SessionModel.of(context).setEl(double.parse(espLinController.text));
 
                           //Se há culturas já cadastradas no JSON
-                          if(snapshot.data.length > 2 && (snapshot.data.isNotEmpty || snapshot.data != null)) {
+                          if((snapshot.data != null || snapshot.data.toString().isNotEmpty) && snapshot.data.toString().length > 2) {
                             //Transforma o arquivo já existente em um lista
-                            List cult = json.decode(snapshot.data);
+                            List cult = json.decode(snapshot.data.toString());
                             //Adiciona os dados da nova cultura, que está em formato de lista
                             //ao fim da lista geral
                             cult.addAll(SessionModel.of(context).toList());
@@ -102,7 +101,7 @@ class _IrrQueryState extends State<IrrQuery> {
     return TextFormField(
       controller: controller,
       validator: (value) {
-        if(value.isEmpty) {
+        if(value!.isEmpty) {
           return "Campo obrigatório!";
         }else if(value.contains(",")) {
           return "Decimais com \"ponto\"!";

@@ -127,7 +127,7 @@ class DataStuff {
   }
 
   /// Retorna o ID da cidade, baseado no nome da cidade.
-  int getCityId(String city) {
+  int? getCityId(String city) {
     return _ids[city];
   }
 
@@ -139,7 +139,7 @@ class DataStuff {
 
   /// Retorna o coeficiente especifico (a, b, ou c), para determinada cidade.
   /// Baseado no ID da cidade, e qual a letra do coeficiente.
-  double getCfts(int idCity, String cfts) {
+  double? getCfts(int idCity, String cfts) {
     if(cfts == "a") {
       return _cfts[idCity][0];
     }else if(cfts == "b") {
@@ -180,7 +180,7 @@ class DataStuff {
 
   /// Retorna o ID da cultura, baseado no nome da cultura.
   int getCultId(String cultName) {
-    return _cults[cultName];
+    return _cults[cultName]!;
   }
 
   /// Retorna o nome da cultura, baseado no ID da cultura.
@@ -190,7 +190,7 @@ class DataStuff {
 
   /// Retorna um inteiro com o ID do estágio em que se encontra a cultura,
   /// baseado no nome do estágio.
-  int getStageId(String stageName) {
+  int? getStageId(String stageName) {
     return _stages[stageName];
   }
 
@@ -230,15 +230,15 @@ class DataStuff {
   /// Caso o arquivo ainda não exista, ele é criado.
   /// É usado o próprio arcabouço do flutter para definir o local onde esse
   /// arquivo deve ser salvo.
-  Future<File> getFile(String directory, {bool isHistory}) async {
+  Future<File> getFile(String directory, {bool isHistory = false}) async {
     try {
-      if(isHistory != null && isHistory) {
+      if(isHistory) {
         return File("$directory/chicoHistory.json").create(recursive: true);
       }
       return File("$directory/chicoData.json").create(recursive: true);
     }on FileSystemException {
       File file;
-      if(isHistory != null && isHistory) {
+      if(isHistory) {
         file = File("$directory/chicoHistory.json");
         file.create(recursive: true).then((File fl) {
           file = fl;
@@ -252,17 +252,14 @@ class DataStuff {
       });
       file.open(mode: FileMode.write);
       return file;
-    } catch (e) {
-      return null;
     }
-
   }
 
   ///Recebe os dados em formato de lista e escreve no arquivo JSON.
   ///Como parametro opcional verifica se é dados de histórico, caso esse paramêtro
   ///não seja definido, encara como sendo dados normais.
-  Future<File> saveData(List listData, {bool isHistory}) async {
-    if(isHistory != null && isHistory) {
+  Future<File> saveData(List listData, {bool isHistory = false}) async {
+    if(isHistory) {
       String data = json.encode(listData);
 
       final file = await getFile(await getDirectory(), isHistory: true);
@@ -278,18 +275,14 @@ class DataStuff {
   ///Lê os dados do arquivo JSON.
   ///Tem como paramêtro opcional se é para ler o histórico, caso não, encara como
   ///sendo os dados normais.
-  Future<String> readData({bool isHistory}) async {
-    try {
-      if(isHistory != null && isHistory) {
-        print("history - RD");
-        final file = await getFile(await getDirectory(), isHistory: true);
-        return file.readAsString();
-      }
-      final file = await getFile(await getDirectory());
+  Future<String> readData({bool isHistory = false}) async {
+    if(isHistory) {
+      print("history - RD");
+      final file = await getFile(await getDirectory(), isHistory: true);
       return file.readAsString();
-    } catch (e) {
-      return null;
     }
+    final file = await getFile(await getDirectory());
+    return file.readAsString();
   }
 
 }
